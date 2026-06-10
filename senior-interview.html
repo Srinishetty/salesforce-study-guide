@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -311,7 +311,7 @@ async saveToServer(record) {
 }</code></pre>
 <p><strong>For partial failures:</strong> Use <code>Database.update(records, false)</code> (allOrNone=false) on server, return SaveResult[] to client. Client marks failed rows with error state and only refreshes those rows.</p>
 <div class="must-mention"><h5>Must mention</h5><ul><li>Deep clone to avoid reference mutation</li><li>Custom events for child→parent communication</li><li>Single source of truth pattern</li><li>Optimistic UI with rollback strategy</li><li>refreshApex() for re-fetching wire data</li></ul></div>
-<div class="bonus"><h5>Bonus</h5><ul><li>Mentions tracking draft state per row</li><li>Error boundary (errorCallback) in parent</li><li>Accessibility: focus management when modal opens/closes</li></ul></div>`
+<div class="bonus"><h5>Bonus</h5><ul><li>Mentions tracking draft state per row</li><li>Error boundary (errorCallback) in parent</li><li>Accessibility: focus management when modal opens/closes</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (thinking out loud, drawing on experience):</span>
 <span class="speech">"So I've actually built this exact pattern in a recent project. The key principle I follow is single source of truth â€” the parent component owns the data. Always."</span>
 <span class="speech">"Here's how I'd structure it: the parent holds the full data array, renders the lightning-datatable or a custom table. When a user clicks a row, I capture that row's data, make a deep copy using JSON.parse(JSON.stringify()) â€” super important, you never want the modal mutating the parent's data directly â€” and pass that clone to the modal via an @api property."</span>
@@ -350,7 +350,7 @@ async saveToServer(record) {
 <li>Monitoring: <code>Limits.getQueries()</code> logging, Event Monitoring (Shield)</li>
 <li>Governor limit custom alerts via Platform Events</li>
 </ul>
-<div class="must-mention"><h5>Signals of experience</h5><ul><li>Mentions debug log analysis technique</li><li>Understands automation stacking problem</li><li>Has a prevention strategy (not just reactive fixes)</li><li>Discusses team-level practices (code review, testing standards)</li></ul></div>`
+<div class="must-mention"><h5>Signals of experience</h5><ul><li>Mentions debug log analysis technique</li><li>Understands automation stacking problem</li><li>Has a prevention strategy (not just reactive fixes)</li><li>Discusses team-level practices (code review, testing standards)</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (drawing from real experience):</span>
 <span class="speech">"Yeah, I've dealt with this multiple times unfortunately. Let me tell you about a specific one. We had users intermittently getting the SOQL 101 error when converting Leads â€” but only certain users and only when they converted leads with many activities."</span>
 <span class="pause">*settling into the story*</span>
@@ -404,7 +404,7 @@ public class OrderCalloutService {
 <li>Custom retry queue (custom object storing pending callouts, batch job processes them)</li>
 </ul>
 <div class="must-mention"><h5>Must mention</h5><ul><li>No callouts in trigger directly (DML/callout mix)</li><li>Named Credentials (never hardcode endpoints)</li><li>Timeout handling</li><li>Retry strategy for unreliable systems</li></ul></div>
-<div class="bonus"><h5>Bonus</h5><ul><li>Platform Events for guaranteed delivery</li><li>Circuit breaker pattern</li><li>Idempotency (safe to retry)</li><li>Monitoring/alerting on callout failures</li></ul></div>`
+<div class="bonus"><h5>Bonus</h5><ul><li>Platform Events for guaranteed delivery</li><li>Circuit breaker pattern</li><li>Idempotency (safe to retry)</li><li>Monitoring/alerting on callout failures</li></ul></div>`,
 
                     naturalAnswer: `<span class="speaker">You (systematic, acknowledging the constraint):</span>
 <span class="speech">"Right, so the first thing to establish here â€” you cannot make a callout directly from trigger context. Salesforce doesn't allow mixing DML operations with HTTP callouts in the same transaction. The trigger has already performed DML just by being in the after context."</span>
@@ -445,7 +445,7 @@ get canViewSensitive() { return HAS_PERMISSION; }
 // Template: &lt;template lwc:if={canViewSensitive}&gt; ... &lt;/template&gt;</code></pre>
 <p><strong>Critical point:</strong> Client-side checks (lwc:if, JS conditionals) are for UX only. A user CAN open DevTools and see the component structure. <strong>True security must be server-side</strong> &mdash; Apex should never return sensitive data to unauthorized users. The Apex method is the security boundary.</p>
 <div class="must-mention"><h5>Must mention (critical for senior)</h5><ul><li>Security is enforced SERVER-SIDE (Apex), not client-side</li><li>Custom Permissions for feature-level access control</li><li>WITH USER_MODE or explicit FLS checks in Apex</li><li>Client-side checks are UX convenience only</li><li>Never trust the client</li></ul></div>
-<div class="bonus"><h5>Bonus</h5><ul><li>Mentions LWS vs old Locker Service differences</li><li>Data masking patterns (show last 4 of SSN)</li><li>Field Set usage for dynamic field visibility</li></ul></div>`
+<div class="bonus"><h5>Bonus</h5><ul><li>Mentions LWS vs old Locker Service differences</li><li>Data masking patterns (show last 4 of SSN)</li><li>Field Set usage for dynamic field visibility</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (clear and firm on security principles):</span>
 <span class="speech">"So the LWC security model has multiple layers. At the runtime level, you have Lightning Web Security â€” or Locker Service in older orgs â€” which sandboxes each component. Components can't access each other's DOM, no global window manipulation, strict JavaScript mode enforced."</span>
 <span class="speech">"Then there's Content Security Policy â€” no inline scripts, no eval(), external resources need to be in CSP Trusted Sites. This prevents XSS attacks at the platform level."</span>
@@ -489,7 +489,7 @@ get canViewSensitive() { return HAS_PERMISSION; }
 <li><strong>Conflict detection</strong>: Before update, check if Last_Modified_Date > Last_Sync_Date. If yes, potential conflict.</li>
 </ul>
 <div class="must-mention"><h5>Must mention</h5><ul><li>Middleware layer (never point-to-point for enterprise)</li><li>External IDs for matching/upsert</li><li>Event-driven over polling</li><li>Conflict resolution strategy</li><li>Error handling and retry mechanism</li></ul></div>
-<div class="bonus"><h5>Bonus</h5><ul><li>Mentions CDC (Change Data Capture) specifically</li><li>Discusses Pub/Sub API for the external subscriber</li><li>Talks about field-level sync rules</li><li>Mentions monitoring/observability (integration dashboards)</li></ul></div>`
+<div class="bonus"><h5>Bonus</h5><ul><li>Mentions CDC (Change Data Capture) specifically</li><li>Discusses Pub/Sub API for the external subscriber</li><li>Talks about field-level sync rules</li><li>Mentions monitoring/observability (integration dashboards)</li></ul></div>`,
 
                     naturalAnswer: `<span class="speaker">You (whiteboarding the architecture):</span>
 <span class="speech">"Okay, bidirectional sync â€” this is a common enterprise pattern. Let me walk through how I'd architect this."</span>
@@ -525,7 +525,7 @@ get canViewSensitive() { return HAS_PERMISSION; }
 <li><strong>External Objects</strong>: Data stays in external system, accessed via OData or custom adapter. No storage in Salesforce. Use for: ERP data you need to display but not own.</li>
 <li><strong>Data Archiving</strong>: Move old records to Big Objects or external system, delete from main object. Reduces working set. Use for: closed cases, old opportunities, expired contracts.</li>
 </ul>
-<div class="must-mention"><h5>Must mention</h5><ul><li>Query selectivity and indexes</li><li>Investigation before solution (don't guess)</li><li>Skinny tables for performance</li><li>Data archiving as a strategy</li><li>Sharing model impact on query performance</li></ul></div>`
+<div class="must-mention"><h5>Must mention</h5><ul><li>Query selectivity and indexes</li><li>Investigation before solution (don't guess)</li><li>Skinny tables for performance</li><li>Data archiving as a strategy</li><li>Sharing model impact on query performance</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (methodical, not jumping to solutions):</span>
 <span class="speech">"First thing â€” I wouldn't jump to a solution without investigating. 'Fix performance' is vague. I need to understand WHICH queries are slow, WHAT filters users are applying, and WHETHER this is a query optimization problem or a data volume problem."</span>
 <span class="speech">"My first step is the Query Plan tool in Developer Console. I'd take the SOQL behind the slow report and run it through the optimizer. It'll tell me if it's doing a full table scan or using an index. With 50 million records, a table scan is going to be brutal."</span>
@@ -571,7 +571,7 @@ List&lt;Approval_Config__mdt&gt; steps = [
 <li>Timeout: Scheduled job checks overdue steps, auto-escalates or auto-approves based on config</li>
 </ul>
 <p><strong>Parallel approvals:</strong> Multiple Approval_Step__c records at same step number. All must approve (AND) or any can approve (OR) — configurable in metadata.</p>
-<div class="must-mention"><h5>Must mention</h5><ul><li>Custom Metadata for admin-configurable rules</li><li>Separation of engine (code) from configuration (metadata)</li><li>Delegation/vacation handling</li><li>Timeout and escalation mechanism</li></ul></div>`
+<div class="must-mention"><h5>Must mention</h5><ul><li>Custom Metadata for admin-configurable rules</li><li>Separation of engine (code) from configuration (metadata)</li><li>Delegation/vacation handling</li><li>Timeout and escalation mechanism</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (solution architect mode):</span>
 <span class="speech">"Interesting â€” so the key requirement here is 'configurable by admins without code.' That immediately tells me Custom Metadata Types. They're deployable, they're admin-editable in the UI, and they're cacheable in Apex for performance."</span>
 <span class="speech">"Here's how I'd design it: I'd create a metadata type called something like Approval_Config__mdt with fields for Department, Step Number, Approver Role or Queue, whether it's parallel, timeout days, and maybe criteria as a formula or filter logic string."</span>
@@ -609,7 +609,7 @@ List&lt;Approval_Config__mdt&gt; steps = [
 <li><strong>Option 3: Before-save flow ONLY</strong> &mdash; Move calculation to before-save flow (runs before triggers in record-triggered context). Or move entirely to before trigger.</li>
 <li><strong>Documentation</strong> &mdash; Create automation inventory document. Each field should have ONE owner.</li>
 </ul>
-<div class="must-mention"><h5>Must mention</h5><ul><li>Systematic debugging approach (not guessing)</li><li>"Some users" = permission/profile/role related</li><li>Automation inventory (know ALL automations on object)</li><li>Execution order awareness</li><li>ONE automation should own each field</li></ul></div>`
+<div class="must-mention"><h5>Must mention</h5><ul><li>Systematic debugging approach (not guessing)</li><li>"Some users" = permission/profile/role related</li><li>Automation inventory (know ALL automations on object)</li><li>Execution order awareness</li><li>ONE automation should own each field</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (experienced debugger, calm and systematic):</span>
 <span class="speech">"Alright, 'sometimes wrong' and 'only some users' â€” those are my two biggest clues. 'Sometimes' usually means there's a specific condition triggering it, and 'some users' means it's likely permission-dependent or profile-dependent."</span>
 <span class="speech">"First thing I'd do is get very specific: which users exactly? What's different about their profiles? What products are they adding? I'd try to find the pattern â€” is it users in a specific role? Users without a certain permission set?"</span>
@@ -656,7 +656,7 @@ List&lt;Approval_Config__mdt&gt; steps = [
 <li>Options: (a) Quick fix the test if obvious. (b) Exclude that test and redeploy with <code>--testlevel RunSpecifiedTests</code>. (c) Abort and fix Monday if non-critical.</li>
 <li><strong>Decision framework</strong>: Is it a test issue or a real logic issue? If the actual feature code is fine and only the test is failing due to org context, option (b) is acceptable with a follow-up ticket.</li>
 </ul>
-<div class="must-mention"><h5>Must mention</h5><ul><li>Validate in production beforehand</li><li>Deployment order awareness</li><li>Rollback plan</li><li>RunSpecifiedTests as a safety valve</li><li>Difference between test failure and logic failure</li></ul></div>`
+<div class="must-mention"><h5>Must mention</h5><ul><li>Validate in production beforehand</li><li>Deployment order awareness</li><li>Rollback plan</li><li>RunSpecifiedTests as a safety valve</li><li>Difference between test failure and logic failure</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (organized, experienced with releases):</span>
 <span class="speech">"Alright, a release with triggers, flows, Apex, LWC, and metadata â€” this needs a solid plan. I've done enough weekend deployments to know what can go wrong."</span>
 <span class="speech">"First â€” days before the actual deployment â€” I'd run a validation in production. sfdx force:source:deploy with the --checkonly flag and --testlevel RunLocalTests. This catches any test failures or dependency issues early, not at 2 AM Saturday."</span>
@@ -696,7 +696,7 @@ EventBus.publish(event);
 <li><strong>Webhook retry</strong> or <strong>pull model</strong> as fallback (partners can poll for missed events)</li>
 <li>If on-platform only: Custom object <code>Outbound_Notification__c</code> with status per partner, batch job retries failures</li>
 </ul>
-<div class="must-mention"><h5>Must mention</h5><ul><li>50 callouts is beyond single-transaction limit (100 max but resource-intensive)</li><li>Platform Events for decoupling</li><li>Middleware for fan-out (enterprise pattern)</li><li>Retry and dead letter queue for reliability</li><li>Governor limit awareness (can't do 50 sequential callouts efficiently)</li></ul></div>`
+<div class="must-mention"><h5>Must mention</h5><ul><li>50 callouts is beyond single-transaction limit (100 max but resource-intensive)</li><li>Platform Events for decoupling</li><li>Middleware for fan-out (enterprise pattern)</li><li>Retry and dead letter queue for reliability</li><li>Governor limit awareness (can't do 50 sequential callouts efficiently)</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (immediately identifying the constraint):</span>
 <span class="speech">"50 external systems — okay, so right away, you cannot do this synchronously within Salesforce. Even though the limit is technically 100 callouts per transaction, making 50 sequential HTTP calls would be incredibly slow and fragile. One timeout kills everything."</span>
 <span class="speech">"This is a fan-out problem, and the right pattern is: Salesforce publishes ONE event, and an external system handles the fan-out to all 50 partners."</span>
@@ -735,7 +735,7 @@ EventBus.publish(event);
 <li><strong>Lunch & learns</strong> &mdash; Monthly sessions on common anti-patterns</li>
 <li><strong>Shared trigger framework</strong> &mdash; Enforces patterns structurally (hard to do it wrong)</li>
 </ul>
-<div class="must-mention"><h5>What interviewers look for</h5><ul><li>Empathy + education (not just authority)</li><li>Concrete strategies (not vague "I'd talk to them")</li><li>System-level prevention (CI, frameworks, standards)</li><li>Understanding that their test "worked" because it was single-record</li></ul></div>`
+<div class="must-mention"><h5>What interviewers look for</h5><ul><li>Empathy + education (not just authority)</li><li>Concrete strategies (not vague "I'd talk to them")</li><li>System-level prevention (CI, frameworks, standards)</li><li>Understanding that their test "worked" because it was single-record</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (empathetic but firm, leadership voice):</span>
 <span class="speech">"So first — I wouldn't just say 'that's wrong, fix it.' That kills learning. Their argument actually makes sense from their perspective: they tested it, it worked. They're not wrong that it works in testing — they're wrong about production scale, and that's a teaching opportunity."</span>
 <span class="speech">"Here's what I'd do: I'd pull up a chair and say, 'Hey, let me show you something.' I'd write a test method that inserts 201 records — the minimum batch size for bulk operations. Run it. Watch it fail with SOQL 101. Now they've seen it with their own eyes."</span>
@@ -780,7 +780,7 @@ EventBus.publish(event);
 <li><strong>Use data</strong> &mdash; "Last quarter, 3 production issues were complex Flows that took days to debug. Similar Apex issues took hours."</li>
 <li><strong>Agree on criteria TOGETHER</strong> &mdash; Create a shared decision tree the whole team uses</li>
 </ul>
-<div class="must-mention"><h5>Key signals</h5><ul><li>Clear decision framework (not dogmatic "always use Apex")</li><li>Acknowledges Flow's strengths (not dismissive)</li><li>Considers maintainability and team skills</li><li>Handles disagreement professionally</li><li>Mentions invocable Apex as a bridge pattern</li></ul></div>`
+<div class="must-mention"><h5>Key signals</h5><ul><li>Clear decision framework (not dogmatic "always use Apex")</li><li>Acknowledges Flow's strengths (not dismissive)</li><li>Considers maintainability and team skills</li><li>Handles disagreement professionally</li><li>Mentions invocable Apex as a bridge pattern</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (balanced, not dogmatic):</span>
 <span class="speech">"I have a simple decision framework that I've refined over the years. It comes down to three questions: Who will maintain this? How complex is the logic? And does it need version control?"</span>
 <span class="speech">"If it's straightforward â€” field updates, email alerts, task creation, simple branching â€” and the admin team can own it long-term, Flow is the right choice. Admins can modify it without waiting for a developer sprint. That's a real business advantage."</span>
@@ -817,7 +817,7 @@ EventBus.publish(event);
 <li>"I'd push back on the timeline more &mdash; we cut testing short and paid for it in bugs"</li>
 <li>"I'd invest more in Custom Metadata instead of hardcoded values"</li>
 </ul>
-<div class="must-mention"><h5>Red flags interviewers watch for</h5><ul><li>"Everything went perfectly" (lacks self-awareness)</li><li>Can't explain technical decisions</li><li>Takes all credit (no team acknowledgment)</li><li>No concrete metrics or outcomes</li></ul></div>`
+<div class="must-mention"><h5>Red flags interviewers watch for</h5><ul><li>"Everything went perfectly" (lacks self-awareness)</li><li>Can't explain technical decisions</li><li>Takes all credit (no team acknowledgment)</li><li>No concrete metrics or outcomes</li></ul></div>`,
                     naturalAnswer: `<span class="speaker">You (storytelling mode, confident):</span>
 <span class="speech">"The most complex project I delivered was a full CPQ-like solution â€” custom, because Salesforce CPQ didn't fit our pricing model. We had tiered pricing, bundle discounts, and approval workflows that were completely dynamic based on deal size and product combination."</span>
 <span class="pause">*setting the scene*</span>
