@@ -3,238 +3,552 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>My Interview Experience</title>
+    <title>My Interview Experience - Comprehensive Scripts & Code</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --bg: #0d1117;
-            --bg-card: #161b22;
-            --border: #30363d;
-            --text: #e6edf3;
-            --text-muted: #8b949e;
-            --blue: #58a6ff;
-            --green: #238636;
-            --purple: #bc8cff;
-            --orange: #f0883e;
-            --red: #da3633;
-            --teal: #39c5cf;
+            --bg: #0d1117; --bg-card: #161b22; --border: #30363d;
+            --text: #e6edf3; --text-muted: #8b949e; --text-dim: #484f58;
+            --blue: #58a6ff; --green: #238636; --purple: #bc8cff;
+            --orange: #f0883e; --red: #da3633; --green-light: #7ee787;
         }
-
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; -webkit-tap-highlight-color: transparent;
         }
 
-        /* Nav & Header */
-        .nav-bar {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
+        /* Topbar */
+        .topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 20px; background: var(--bg-card);
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
         }
-        .back-link {
-            color: var(--blue);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
+        .topbar a, .topbar button { 
+            color: var(--text-muted); text-decoration: none; font-size: 1.3em; 
+            background: none; border: none; cursor: pointer; 
         }
-        .back-link:hover { text-decoration: underline; }
-
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        .header h1 {
-            font-size: clamp(1.5em, 4vw, 2.5em);
-            color: var(--teal);
-            margin-bottom: 12px;
-        }
-        .header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Content Area */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .section-title {
-            font-size: 1.5em;
-            margin: 40px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qa-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
-        }
-        .qa-card:hover { border-color: var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .topbar a:hover, .topbar button:hover { color: var(--blue); }
+        .topbar .title { font-weight: 600; font-size: 0.95em; color: var(--text); }
         
-        .qa-card h3 {
-            color: var(--blue);
-            font-size: 1.1em;
-            margin-bottom: 12px;
-            line-height: 1.4;
+        .container { max-width: 860px; margin: 0 auto; padding: 24px 16px 100px; }
+
+        /* Section Header */
+        .round-header {
+            text-align: center; margin: 40px 0 32px; padding: 20px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; 
         }
+        .round-header h2 { font-size: 1.4em; margin-bottom: 8px; color: var(--text); }
+        .round-header p { color: var(--text-muted); font-size: 0.9em; }
+        .round-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: 600; margin-top: 10px; }
         
-        .qa-card p {
-            color: var(--text);
-            line-height: 1.6;
-            margin-bottom: 12px;
+        .badge-mr { background: #d2992222; color: var(--orange); border: 1px solid var(--orange); }
+        .badge-tech { background: #1f6feb22; color: var(--blue); border: 1px solid var(--blue); }
+        .badge-lwc { background: #8957e522; color: var(--purple); border: 1px solid var(--purple); }
+        
+        /* Interviewer Chat Bubble */
+        .qa-pair { margin-bottom: 48px; }
+        .interviewer { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+        .interviewer-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2em; flex-shrink: 0;
         }
-        .qa-card p:last-child { margin-bottom: 0; }
+        .interviewer-bubble {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 4px 16px 16px 16px; padding: 16px 20px;
+            flex: 1; position: relative;
+        }
+        .interviewer-name { font-size: 0.75em; color: var(--blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .interviewer-bubble p { font-size: 1.05em; line-height: 1.6; }
 
-        .qa-card .highlight {
-            color: var(--orange);
-            font-weight: 600;
+        /* Natural Answer Block */
+        .natural-answer {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border); margin-left: 58px; 
         }
-
-        pre {
-            background: #010409;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            overflow-x: auto;
-            margin-top: 12px;
+        .natural-header { 
+            padding: 12px 16px; font-size: 0.82em; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 0.5px; 
+            background: #8b5cf622; color: #a78bfa; border-bottom: 1px solid #8b5cf6; 
         }
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            color: #e6edf3;
-            font-size: 0.9em;
+        .natural-body { padding: 16px 20px; background: var(--bg-card); font-size: 0.93em; line-height: 1.8; color: var(--text); }
+        .natural-body .speaker { display: block; font-weight: 600; color: #a78bfa; margin-top: 14px; margin-bottom: 4px; font-size: 0.82em; text-transform: uppercase; }
+        .natural-body .speaker:first-child { margin-top: 0; }
+        .natural-body .speech { display: block; padding: 12px 16px; background: #8b5cf60a; border-left: 3px solid #8b5cf640; border-radius: 0 8px 8px 0; margin: 6px 0 14px; font-style: italic; line-height: 1.7; }
+        
+        /* Implementation / Code Blocks */
+        .implementation-box {
+            margin-top: 16px; border: 1px solid var(--border);
+            border-radius: 8px; background: #010409; overflow: hidden;
         }
-
-        /* Theme toggle */
-        .theme-toggle {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 36px; height: 36px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
+        .implementation-title {
+            padding: 8px 12px; font-size: 0.8em; font-weight: 600;
+            background: #21262d; border-bottom: 1px solid var(--border);
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
         }
+        .implementation-steps { padding: 12px 16px; color: var(--text); font-size: 0.9em; line-height: 1.6; }
+        .implementation-steps ul { padding-left: 20px; margin-bottom: 10px; }
+        
+        pre { padding: 12px 16px; overflow-x: auto; font-size: 0.85em; line-height: 1.5; margin: 0; }
+        code { font-family: 'Cascadia Code', 'Courier New', monospace; color: #79c0ff; }
+        .token-keyword { color: #ff7b72; }
+        .token-string { color: #a5d6ff; }
+        .token-comment { color: #8b949e; font-style: italic; }
 
         /* Light theme */
-        body.light {
-            --bg: #ffffff;
-            --bg-card: #f6f8fa;
-            --border: #d1d9e0;
-            --text: #1f2328;
-            --text-muted: #6e7781;
-            --blue: #0550ae;
-            --teal: #057680;
-        }
-        body.light pre { background: #eaeef2; }
-        body.light code { color: #1f2328; }
+        body.light { --bg: #fff; --bg-card: #f6f8fa; --border: #d1d9e0; --text: #1f2328; --text-muted: #6e7781; --text-dim: #8c959f; --blue: #0550ae; --purple: #6639ba; --orange: #953800; }
+        body.light .natural-header { background: #8b5cf615; color: #6639ba; border-bottom-color: #6639ba; }
+        body.light .natural-body .speaker { color: #6639ba; }
+        body.light .natural-body .speech { background: #8b5cf608; border-left-color: #6639ba40; color: #1f2328; }
+        body.light .implementation-box { background: #eaeef2; border-color: #d1d9e0; }
+        body.light .implementation-title { background: #d1d9e0; color: #1f2328; }
+        body.light code { color: #0550ae; }
         
         @media (max-width: 600px) {
-            .qa-card { padding: 16px; }
+            .container { padding: 16px 12px; }
+            .interviewer-bubble { padding: 12px 14px; }
+            .natural-answer { margin-left: 0; margin-top: 10px; } 
         }
     </style>
 </head>
 <body>
-    <nav class="nav-bar">
-        <a href="index.html" class="back-link">&#x2190; Back to Guide</a>
-        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
-    </nav>
+    <div class="topbar">
+        <a href="index.html" title="Home">&#x1F3E0;</a>
+        <span class="title">My Interview Experience</span>
+        <button id="themeBtn" onclick="toggleTheme()" title="Toggle Theme">&#x2600;&#xFE0F;</button>
+    </div>
 
-    <header class="header">
-        <h1>&#x1F4BC; My Interview Experience</h1>
-        <p>A curated collection of actual interview questions, technical scenarios, and personalized scripts tailored for a 5-YOE Salesforce Developer profile.</p>
-    </header>
-
-    <main class="container">
+    <div class="container">
         
-        <h2 class="section-title">&#x1F3A4; Managerial Round (MR) Scripts</h2>
-        
-        <div class="qa-card">
-            <h3>Brief me about yourself. / Tell me about your Salesforce experience.</h3>
-            <p>"I am a Salesforce Developer with 5 years of IT experience, specializing entirely in the Salesforce ecosystem. Over my career, I've focused heavily on backend logic using Apex—building robust trigger frameworks and complex batch classes—and front-end development using Lightning Web Components (LWC). I'm passionate about building scalable solutions and currently looking to bring my development expertise to a new, challenging environment."</p>
+        <div class="round-header" style="margin-top: 0;">
+            <h2>Round 1: Managerial / HR</h2>
+            <p>Background, project experience, and behavioral questions.</p>
+            <span class="round-badge badge-mr">Behavioral</span>
         </div>
 
-        <div class="qa-card">
-            <h3>Tell me about your current project & responsibilities.</h3>
-            <p><span class="highlight">The Project:</span> "I am currently working on a global healthcare implementation utilizing Salesforce and ServiceMax. Our primary goal is to streamline service processes, manage complex data synchronization, and build custom user interfaces for field service teams."</p>
-            <p><span class="highlight">Responsibilities:</span> "As a core Salesforce Developer, my day-to-day is purely development-focused. On the backend, I design Apex classes, triggers, and batch processes to sync critical fields. On the frontend, I build highly interactive LWCs to improve user experience. I also handle declarative automation using Flows, always ensuring governor limits and bulkification best practices."</p>
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>Brief me about yourself and your overall Salesforce experience.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You (Confident & Direct):</span>
+                    <span class="speech">"I’ve been in the IT industry for 5 years, working exclusively in the Salesforce ecosystem. My core expertise is in custom development—so writing Apex triggers, complex batch classes, and building out custom UIs using Lightning Web Components. I’m really passionate about building scalable backend logic and right now, I'm looking for a role where I can tackle heavier architectural challenges."</span>
+                </div>
+            </div>
         </div>
 
-        <h2 class="section-title">&#x1F4BB; Technical Scenarios & Apex</h2>
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>Tell me about your current project and what your specific responsibilities are.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Right now, I'm working on a global healthcare implementation utilizing Salesforce and ServiceMax. My day-to-day is heavily focused on development. On the backend, I write Apex classes and triggers to handle complex data synchronization for the field service teams. On the frontend, I build interactive LWCs to make the UI smoother for the users. I also handle our declarative automation, making sure our flows stay well within governor limits."</span>
+                </div>
+            </div>
+        </div>
 
-        <div class="qa-card">
-            <h3>Scenario: Prevent a user from deleting a Contact if it is the last Contact associated with an Account.</h3>
-            <p><strong>Approach:</strong> Use a `before delete` trigger on Contact. Collect Account IDs, query those Accounts with a subquery for their Contacts, and if the list size is 1 or less, use `.addError()` on the trigger record.</p>
-<pre><code>trigger PreventLastContactDeletion on Contact (before delete) {
-    Set&lt;Id&gt; accountIds = new Set&lt;Id&gt;();
-    for (Contact con : Trigger.old) {
-        if (con.AccountId != null) { accountIds.add(con.AccountId); }
+        <div class="round-header">
+            <h2>Round 2: Apex & Triggers</h2>
+            <p>Coding scenarios, governor limits, and database operations.</p>
+            <span class="round-badge badge-tech">Technical</span>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Lead</div>
+                    <p>You have an Account associated with multiple Contacts. A user should not be able to delete a Contact if it is the "last associated" one. Write the code.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You (Acting as a Senior Developer clarifying requirements):</span>
+                    <span class="speech">"In a real project, I would immediately ask the business to clarify 'last associated', because it can mean two very different things technically."</span>
+                    
+                    <span class="speech">"If they mean the <strong>Final Remaining Contact</strong>—meaning the Account must never be left empty—I would use an Aggregate query in a <code>before delete</code> trigger. I'd count the total current contacts, subtract the ones being deleted, and if that number drops below 1, I use <code>.addError()</code>. This guarantees even a mass-delete won't leave the Account with zero contacts."</span>
+
+                    <span class="speech">"But if they mean the <strong>Chronologically Most Recently Linked Contact</strong>, we have a standard platform limitation. A Contact can be created on Monday, but linked to the Account on Friday. Because of that, the standard <code>CreatedDate</code> is useless."</span>
+                    
+                    <span class="speech">"To properly solve this, I would create a custom DateTime field called <code>Account_Linked_Date__c</code>. I'd stamp it via Flow when the AccountId changes. Then, in my <code>before delete</code> trigger, I would query the contacts ordered by that custom date descending. If the user tries to delete that specific ID, I block it."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Code: Scenario 1 (Preventing Account from being empty - Mass Delete Safe)</div>
+<pre><code><span class="token-keyword">trigger</span> PreventEmptyAccount <span class="token-keyword">on</span> Contact (before delete) {
+    <span class="token-comment">// 1. Map Account Id to count of contacts being deleted</span>
+    Map&lt;Id, Integer&gt; deletedCount = <span class="token-keyword">new</span> Map&lt;Id, Integer&gt;();
+    <span class="token-keyword">for</span>(Contact c : Trigger.old) {
+        <span class="token-keyword">if</span>(c.AccountId != null) {
+            Integer count = deletedCount.containsKey(c.AccountId) ? deletedCount.get(c.AccountId) : 0;
+            deletedCount.put(c.AccountId, count + 1);
+        }
     }
-
-    if (!accountIds.isEmpty()) {
-        Map&lt;Id, Account&gt; accountMap = new Map&lt;Id, Account&gt;([
-            SELECT Id, (SELECT Id FROM Contacts) 
-            FROM Account WHERE Id IN :accountIds
+    
+    <span class="token-keyword">if</span>(!deletedCount.isEmpty()) {
+        <span class="token-comment">// 2. Aggregate query for total current contacts</span>
+        Map&lt;Id, AggregateResult&gt; totalMap = <span class="token-keyword">new</span> Map&lt;Id, AggregateResult&gt;([
+            SELECT AccountId, COUNT(Id) total FROM Contact 
+            WHERE AccountId IN :deletedCount.keySet() GROUP BY AccountId
         ]);
-
-        for (Contact con : Trigger.old) {
-            if (con.AccountId != null) {
-                Account relatedAcc = accountMap.get(con.AccountId);
-                if (relatedAcc != null && relatedAcc.Contacts.size() &lt;= 1) {
-                    con.addError('Cannot delete the last associated contact.');
-                }
+        
+        Set&lt;Id&gt; invalidAccounts = <span class="token-keyword">new</span> Set&lt;Id&gt;();
+        <span class="token-keyword">for</span>(Id accId : deletedCount.keySet()) {
+            Integer total = totalMap.get(accId) != null ? (Integer)totalMap.get(accId).get(<span class="token-string">'total'</span>) : 0;
+            <span class="token-keyword">if</span>((total - deletedCount.get(accId)) &lt; 1) {
+                invalidAccounts.add(accId); <span class="token-comment">// Drops below 1</span>
+            }
+        }
+        
+        <span class="token-keyword">for</span>(Contact c : Trigger.old) {
+            <span class="token-keyword">if</span>(invalidAccounts.contains(c.AccountId)) {
+                c.addError(<span class="token-string">'Cannot delete: Account must retain at least one Contact.'</span>);
             }
         }
     }
 }</code></pre>
-        </div>
+                    </div>
 
-        <div class="qa-card">
-            <h3>Scenario: When a Lead is converted, automatically create a Task assigned to the owner of the Account.</h3>
-            <p><strong>Answer:</strong> "I would use a Record-Triggered Flow on the Lead object (triggered on Update). The condition would be `IsConverted Equals True`. I would then use a Get Records element to find the Account where `Id = $Record.ConvertedAccountId`, followed by a Create Records element to create the Task, setting the `OwnerId` to the Account Owner's ID."</p>
-        </div>
-
-        <h2 class="section-title">&#x26A1; LWC & UI Architecture</h2>
-
-        <div class="qa-card">
-            <h3>Scenario: Build a custom search button on a page layout that extracts records from multiple objects (Account, Contact) based on an email.</h3>
-            <p><strong>Answer:</strong> "I would build a custom LWC exposed as a Quick Action. The LWC takes an email input and calls an `@AuraEnabled` Apex method imperatively. Inside Apex, I would use <strong>SOSL</strong> (`FIND {email} IN Email FIELDS RETURNING Account(Id, Name), Contact(Id, Name)`), and return the list of lists back to the LWC to render."</p>
-        </div>
-
-        <div class="qa-card">
-            <h3>How do you pass data from a parent component down to a grandchild component in LWC?</h3>
-            <p><strong>Answer:</strong> "There are two ways. The first is 'Prop Drilling', where the Parent passes data to the Child using an `@api` property, and the Child immediately passes it to the Grandchild. The second, better approach for deeply nested components is Lightning Message Service (LMS), where the Parent publishes a message and the Grandchild subscribes directly."</p>
-        </div>
+                    <div class="implementation-box" style="margin-top: 16px;">
+                        <div class="implementation-title">Code: Scenario 2 (Preventing deletion of the Most Recently Linked)</div>
+<pre><code><span class="token-keyword">trigger</span> PreventNewestLinkDeletion <span class="token-keyword">on</span> Contact (before delete) {
+    Set&lt;Id&gt; accIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
+    <span class="token-keyword">for</span>(Contact c : Trigger.old) {
+        <span class="token-keyword">if</span>(c.AccountId != null) accIds.add(c.AccountId);
+    }
+    
+    <span class="token-keyword">if</span>(!accIds.isEmpty()) {
+        Set&lt;Id&gt; protectedContactIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
+        <span class="token-comment">// Query the most recently linked contact using our custom field</span>
+        <span class="token-keyword">for</span>(Account acc : [SELECT Id, 
+            (SELECT Id FROM Contacts ORDER BY Account_Linked_Date__c DESC LIMIT 1) 
+            FROM Account WHERE Id IN :accIds]) {
+            <span class="token-keyword">if</span>(!acc.Contacts.isEmpty()) {
+                protectedContactIds.add(acc.Contacts[0].Id);
+            }
+        }
         
-    </main>
+        <span class="token-keyword">for</span>(Contact c : Trigger.old) {
+            <span class="token-keyword">if</span>(protectedContactIds.contains(c.Id)) {
+                c.addError(<span class="token-string">'Cannot delete the most recently associated Contact.'</span>);
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Lead</div>
+                    <p>When a Lead is converted, a task should automatically be created for the owner of the Account. Walk me through the Flow solution, and then tell me how you would write it in Apex if required.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"The absolute best practice today is a <strong>Record-Triggered Flow</strong>. I'd set it to fire After-Save on the Lead object, with the condition `IsConverted = True` and set it to only fire when the record is updated to meet the condition. Then I'd drop in a 'Create Records' element for the Task, mapping `WhatId` to the Lead's `ConvertedAccountId` and `OwnerId` to the `Account.OwnerId`."</span>
+                    <span class="speech">"However, if the org has a strict 'Apex Only' framework, I would write this in an <code>after update</code> trigger on Lead. I'd loop through the updated Leads, check if <code>IsConverted</code> just changed to true, collect the converted Account IDs, query their owners, and insert the Task list."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Solution 1: Record-Triggered Flow (Best Practice)</div>
+                        <div class="implementation-steps">
+                            <ul>
+                                <li><strong>Trigger:</strong> A record is Updated. Object: <code>Lead</code>. Optimize for: Actions and Related Records (After-Save).</li>
+                                <li><strong>Condition:</strong> <code>IsConverted</code> Equals <code>$GlobalConstant.True</code> (Select: Only when a record is updated to meet condition).</li>
+                                <li><strong>Create Records Element:</strong> Create 1 record of type <code>Task</code>.</li>
+                                <li><strong>Field Mappings:</strong><br>
+                                    - <code>WhatId</code> = <code>$Record.ConvertedAccountId</code><br>
+                                    - <code>OwnerId</code> = <code>$Record.ConvertedAccountId</code> (Assuming standard mapping, or use a Get Records on Account to fetch OwnerId)<br>
+                                    - <code>Subject</code> = "Follow up on Converted Lead"
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="implementation-box" style="margin-top: 16px;">
+                        <div class="implementation-title">Solution 2: Apex Trigger (Alternative)</div>
+<pre><code><span class="token-keyword">trigger</span> LeadConvertTask <span class="token-keyword">on</span> Lead (after update) {
+    List&lt;Task&gt; tasksToInsert = <span class="token-keyword">new</span> List&lt;Task&gt;();
+    Set&lt;Id&gt; accountIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
+    
+    <span class="token-comment">// Identify freshly converted leads</span>
+    <span class="token-keyword">for</span>(Lead l : Trigger.new) {
+        Lead oldLead = Trigger.oldMap.get(l.Id);
+        <span class="token-keyword">if</span>(l.IsConverted && !oldLead.IsConverted && l.ConvertedAccountId != null) {
+            accountIds.add(l.ConvertedAccountId);
+        }
+    }
+    
+    <span class="token-keyword">if</span>(!accountIds.isEmpty()) {
+        <span class="token-comment">// Query Account owners</span>
+        Map&lt;Id, Account&gt; accMap = <span class="token-keyword">new</span> Map&lt;Id, Account&gt;([SELECT Id, OwnerId FROM Account WHERE Id IN :accountIds]);
+        
+        <span class="token-keyword">for</span>(Lead l : Trigger.new) {
+            <span class="token-keyword">if</span>(l.IsConverted && l.ConvertedAccountId != null) {
+                tasksToInsert.add(<span class="token-keyword">new</span> Task(
+                    Subject = <span class="token-string">'Follow up with new Account'</span>,
+                    WhatId = l.ConvertedAccountId,
+                    OwnerId = accMap.get(l.ConvertedAccountId).OwnerId,
+                    Status = <span class="token-string">'Not Started'</span>
+                ));
+            }
+        }
+        <span class="token-keyword">if</span>(!tasksToInsert.isEmpty()) insert tasksToInsert;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="round-header">
+            <h2>Round 3: LWC & UI Architecture</h2>
+            <p>Component communication, asynchronous JavaScript, and custom UI design.</p>
+            <span class="round-badge badge-lwc">Lightning Web Components</span>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Senior Developer</div>
+                    <p>We need a custom search button on a page layout. When clicked, it should extract records from multiple objects like Account and Contact based on an email address. Write the components.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I’d build a custom LWC exposed as a Quick Action. The UI has a lightning-input for the email and a button. When they click search, it fires an imperative Apex method."</span>
+                    <span class="speech">"Inside Apex, I must use a <strong>SOSL query</strong> (`FIND`) because we are searching a text string across multiple unrelated objects simultaneously. Writing multiple SOQL queries would be inefficient. I'd return the list of lists back to the LWC and map it to a datatable."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Apex Controller (SOSL)</div>
+<pre><code><span class="token-keyword">public with sharing class</span> GlobalSearchController {
+    @AuraEnabled(cacheable=true)
+    <span class="token-keyword">public static</span> List&lt;List&lt;SObject&gt;&gt; searchByEmail(String emailStr) {
+        <span class="token-comment">// SOSL searches text across multiple objects</span>
+        String searchQuery = <span class="token-string">'FIND \''</span> + emailStr + <span class="token-string">'\' IN EMAIL FIELDS RETURNING Account(Id, Name), Contact(Id, Name)'</span>;
+        <span class="token-keyword">return</span> search.query(searchQuery);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="implementation-box" style="margin-top: 16px;">
+                        <div class="implementation-title">LWC HTML & JS Snippet</div>
+<pre><code><span class="token-comment">&lt;!-- HTML --&gt;</span>
+&lt;template&gt;
+    &lt;lightning-input label="Email" value={searchTerm} onchange={handleChange}&gt;&lt;/lightning-input&gt;
+    &lt;lightning-button label="Search" onclick={handleSearch}&gt;&lt;/lightning-button&gt;
+&lt;/template&gt;
+
+<span class="token-comment">// JavaScript</span>
+<span class="token-keyword">import</span> { LightningElement } <span class="token-keyword">from</span> 'lwc';
+<span class="token-keyword">import</span> searchByEmail <span class="token-keyword">from</span> '@salesforce/apex/GlobalSearchController.searchByEmail';
+
+<span class="token-keyword">export default class</span> EmailSearch <span class="token-keyword">extends</span> LightningElement {
+    searchTerm = '';
+    
+    handleChange(event) { this.searchTerm = event.target.value; }
+
+    <span class="token-keyword">async</span> handleSearch() {
+        <span class="token-keyword">try</span> {
+            <span class="token-keyword">const</span> results = <span class="token-keyword">await</span> searchByEmail({ emailStr: this.searchTerm });
+            <span class="token-keyword">const</span> accounts = results[0];
+            <span class="token-keyword">const</span> contacts = results[1];
+            <span class="token-comment">// map data to table arrays...</span>
+        } <span class="token-keyword">catch</span>(error) {
+            console.error(error);
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Senior Developer</div>
+                    <p>How do you handle component communication? specifically from a Parent down to a Grandchild component?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"If I'm just passing data down one level to a child, I use an <code>@api</code> property. But for a grandchild component, 'prop drilling' (passing from parent -> child -> grandchild) gets messy and tightly couples the components."</span>
+                    <span class="speech">"Instead, I would use <strong>Lightning Message Service (LMS)</strong>. I'd create a Message Channel. The parent publishes the payload, and the grandchild subscribes to it directly, bypassing the middle child entirely."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Code: Parent Component (Publisher)</div>
+<pre><code><span class="token-keyword">import</span> { publish, MessageContext } <span class="token-keyword">from</span> 'lightning/messageService';
+<span class="token-keyword">import</span> DATA_CHANNEL <span class="token-keyword">from</span> '@salesforce/messageChannel/DataChannel__c';
+
+<span class="token-keyword">export default class</span> Parent <span class="token-keyword">extends</span> LightningElement {
+    @wire(MessageContext) messageContext;
+
+    sendData() {
+        <span class="token-keyword">const</span> payload = { recordId: '001...', status: 'Active' };
+        publish(this.messageContext, DATA_CHANNEL, payload);
+    }
+}</code></pre>
+                    </div>
+                    <div class="implementation-box" style="margin-top: 16px;">
+                        <div class="implementation-title">Code: Grandchild Component (Subscriber)</div>
+<pre><code><span class="token-keyword">import</span> { subscribe, MessageContext } <span class="token-keyword">from</span> 'lightning/messageService';
+<span class="token-keyword">import</span> DATA_CHANNEL <span class="token-keyword">from</span> '@salesforce/messageChannel/DataChannel__c';
+
+<span class="token-keyword">export default class</span> Grandchild <span class="token-keyword">extends</span> LightningElement {
+    @wire(MessageContext) messageContext;
+    subscription = null;
+
+    connectedCallback() {
+        this.subscription = subscribe(this.messageContext, DATA_CHANNEL, (message) =&gt; {
+            console.log('Received ID: ', message.recordId);
+        });
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="round-header">
+            <h2>Round 4: Platform & Architecture</h2>
+            <p>Integrations, automation limits, and ecosystem tools.</p>
+            <span class="round-badge badge-tech">Architecture</span>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Architect</div>
+                    <p>How do you restrict specific internal domains in Email-to-Case? Like preventing internal `gmail@tcs.com` emails from creating cases? Explain both Flow and Apex solutions.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Out of the box, standard Email-to-Case ingests everything. The easiest declarative way to stop this is a <strong>Before-Save Record-Triggered Flow</strong> on the Case object. We check if <code>SuppliedEmail</code> contains '@tcs.com' and auto-close it."</span>
+                    <span class="speech">"However, if the volume of spam is massive, creating and closing records wastes database space. In that case, I would write a custom <strong>Apex Email Service</strong>. This runs *before* a record is ever created. I can inspect the sender's address in memory, and if it's internal, I just exit the script without running any DML."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Solution 1: Before-Save Flow (Quick Setup)</div>
+                        <div class="implementation-steps">
+                            <ul>
+                                <li><strong>Trigger:</strong> Record is Created. Object: <code>Case</code>. Optimize for: Fast Field Updates (Before-Save).</li>
+                                <li><strong>Condition:</strong> <code>SuppliedEmail</code> Contains <code>@tcs.com</code></li>
+                                <li><strong>Action (Update Records):</strong> Use the flow that triggered the record. Set <code>Status</code> = <code>Closed</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="implementation-box" style="margin-top: 16px;">
+                        <div class="implementation-title">Solution 2: Apex Email Service (Total Control / Saves Database Storage)</div>
+<pre><code><span class="token-keyword">global class</span> BlockInternalEmailHandler <span class="token-keyword">implements</span> Messaging.InboundEmailHandler {
+    <span class="token-keyword">global</span> Messaging.InboundEmailResult handleInboundEmail(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope) {
+        Messaging.InboundEmailResult result = <span class="token-keyword">new</span> Messaging.InboundEmailResult();
+        
+        <span class="token-comment">// Check the sender domain in memory BEFORE doing any DML</span>
+        <span class="token-keyword">if</span>(email.fromAddress.endsWithIgnoreCase(<span class="token-string">'@tcs.com'</span>)) {
+            result.success = <span class="token-keyword">true</span>; <span class="token-comment">// Return true so it doesn't bounce back to sender</span>
+            <span class="token-keyword">return</span> result;         <span class="token-comment">// Exit without creating a Case</span>
+        }
+        
+        <span class="token-comment">// Otherwise, process normally</span>
+        Case newCase = <span class="token-keyword">new</span> Case(
+            Subject = email.subject,
+            Description = email.plainTextBody,
+            SuppliedEmail = email.fromAddress
+        );
+        <span class="token-keyword">insert</span> newCase;
+        
+        result.success = <span class="token-keyword">true</span>;
+        <span class="token-keyword">return</span> result;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Architect</div>
+                    <p>What is the difference between Platform Events and Change Data Capture (CDC)? How are they implemented?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You (Drawing the distinction):</span>
+                    <span class="speech">"They are both event-driven architectures running on the Salesforce Event Bus, but CDC is declarative data-sync, while Platform Events are custom business logic."</span>
+                    <span class="speech">"CDC is a standard feature. I literally just click a checkbox in Setup for the Account object, and Salesforce automatically publishes a JSON payload every time an Account is created or updated. It's strictly for database synchronization."</span>
+                    <span class="speech">"Platform Events are custom. I define a custom object ending in <code>__e</code>. Then, inside an Apex trigger or Flow, I explicitly publish that event when a specific business rule is met."</span>
+
+                    <div class="implementation-box">
+                        <div class="implementation-title">Code: Publishing a Platform Event in Apex</div>
+<pre><code><span class="token-comment">// Assuming we created a Platform Event called 'Order_Ready__e'</span>
+List&lt;Order_Ready__e&gt; events = <span class="token-keyword">new</span> List&lt;Order_Ready__e&gt;();
+events.add(<span class="token-keyword">new</span> Order_Ready__e(
+    Order_Number__c = <span class="token-string">'ORD-1001'</span>,
+    Customer_Id__c = <span class="token-string">'001...'</span>
+));
+
+<span class="token-comment">// Publish the event to the Event Bus</span>
+List&lt;Database.SaveResult&gt; results = EventBus.publish(events);
+
+<span class="token-keyword">for</span> (Database.SaveResult sr : results) {
+    <span class="token-keyword">if</span> (sr.isSuccess()) {
+        System.debug(<span class="token-string">'Successfully published event.'</span>);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <script>
+        // Light/Dark Theme Toggle
         function toggleTheme() {
             const isLight = document.body.classList.toggle('light');
-            document.getElementById('themeBtn').innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
+            const btn = document.getElementById('themeBtn');
+            btn.innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
             localStorage.setItem('study-theme', isLight ? 'light' : 'dark');
         }
+        
+        // Restore Theme Preference
         if (localStorage.getItem('study-theme') === 'light') {
             document.body.classList.add('light');
             document.getElementById('themeBtn').innerHTML = '&#x1F319;';
