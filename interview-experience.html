@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>My Interview Experience</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0d1117;
+            --bg-card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --blue: #58a6ff;
+            --green: #238636;
+            --purple: #bc8cff;
+            --orange: #f0883e;
+            --red: #da3633;
+            --teal: #39c5cf;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Nav & Header */
+        .nav-bar {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+        }
+        .back-link {
+            color: var(--blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header h1 {
+            font-size: clamp(1.5em, 4vw, 2.5em);
+            color: var(--teal);
+            margin-bottom: 12px;
+        }
+        .header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Area */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qa-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .qa-card:hover { border-color: var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        .qa-card h3 {
+            color: var(--blue);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .qa-card p {
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .qa-card p:last-child { margin-bottom: 0; }
+
+        .qa-card .highlight {
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        pre {
+            background: #010409;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e6edf3;
+            font-size: 0.9em;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Light theme */
+        body.light {
+            --bg: #ffffff;
+            --bg-card: #f6f8fa;
+            --border: #d1d9e0;
+            --text: #1f2328;
+            --text-muted: #6e7781;
+            --blue: #0550ae;
+            --teal: #057680;
+        }
+        body.light pre { background: #eaeef2; }
+        body.light code { color: #1f2328; }
+        
+        @media (max-width: 600px) {
+            .qa-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <a href="index.html" class="back-link">&#x2190; Back to Guide</a>
+        <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </nav>
+
+    <header class="header">
+        <h1>&#x1F4BC; My Interview Experience</h1>
+        <p>A curated collection of actual interview questions, technical scenarios, and personalized scripts tailored for a 5-YOE Salesforce Developer profile.</p>
+    </header>
+
+    <main class="container">
+        
+        <h2 class="section-title">&#x1F3A4; Managerial Round (MR) Scripts</h2>
+        
+        <div class="qa-card">
+            <h3>Brief me about yourself. / Tell me about your Salesforce experience.</h3>
+            <p>"I am a Salesforce Developer with 5 years of IT experience, specializing entirely in the Salesforce ecosystem. Over my career, I've focused heavily on backend logic using Apex—building robust trigger frameworks and complex batch classes—and front-end development using Lightning Web Components (LWC). I'm passionate about building scalable solutions and currently looking to bring my development expertise to a new, challenging environment."</p>
+        </div>
+
+        <div class="qa-card">
+            <h3>Tell me about your current project & responsibilities.</h3>
+            <p><span class="highlight">The Project:</span> "I am currently working on a global healthcare implementation utilizing Salesforce and ServiceMax. Our primary goal is to streamline service processes, manage complex data synchronization, and build custom user interfaces for field service teams."</p>
+            <p><span class="highlight">Responsibilities:</span> "As a core Salesforce Developer, my day-to-day is purely development-focused. On the backend, I design Apex classes, triggers, and batch processes to sync critical fields. On the frontend, I build highly interactive LWCs to improve user experience. I also handle declarative automation using Flows, always ensuring governor limits and bulkification best practices."</p>
+        </div>
+
+        <h2 class="section-title">&#x1F4BB; Technical Scenarios & Apex</h2>
+
+        <div class="qa-card">
+            <h3>Scenario: Prevent a user from deleting a Contact if it is the last Contact associated with an Account.</h3>
+            <p><strong>Approach:</strong> Use a `before delete` trigger on Contact. Collect Account IDs, query those Accounts with a subquery for their Contacts, and if the list size is 1 or less, use `.addError()` on the trigger record.</p>
+<pre><code>trigger PreventLastContactDeletion on Contact (before delete) {
+    Set&lt;Id&gt; accountIds = new Set&lt;Id&gt;();
+    for (Contact con : Trigger.old) {
+        if (con.AccountId != null) { accountIds.add(con.AccountId); }
+    }
+
+    if (!accountIds.isEmpty()) {
+        Map&lt;Id, Account&gt; accountMap = new Map&lt;Id, Account&gt;([
+            SELECT Id, (SELECT Id FROM Contacts) 
+            FROM Account WHERE Id IN :accountIds
+        ]);
+
+        for (Contact con : Trigger.old) {
+            if (con.AccountId != null) {
+                Account relatedAcc = accountMap.get(con.AccountId);
+                if (relatedAcc != null && relatedAcc.Contacts.size() &lt;= 1) {
+                    con.addError('Cannot delete the last associated contact.');
+                }
+            }
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="qa-card">
+            <h3>Scenario: When a Lead is converted, automatically create a Task assigned to the owner of the Account.</h3>
+            <p><strong>Answer:</strong> "I would use a Record-Triggered Flow on the Lead object (triggered on Update). The condition would be `IsConverted Equals True`. I would then use a Get Records element to find the Account where `Id = $Record.ConvertedAccountId`, followed by a Create Records element to create the Task, setting the `OwnerId` to the Account Owner's ID."</p>
+        </div>
+
+        <h2 class="section-title">&#x26A1; LWC & UI Architecture</h2>
+
+        <div class="qa-card">
+            <h3>Scenario: Build a custom search button on a page layout that extracts records from multiple objects (Account, Contact) based on an email.</h3>
+            <p><strong>Answer:</strong> "I would build a custom LWC exposed as a Quick Action. The LWC takes an email input and calls an `@AuraEnabled` Apex method imperatively. Inside Apex, I would use <strong>SOSL</strong> (`FIND {email} IN Email FIELDS RETURNING Account(Id, Name), Contact(Id, Name)`), and return the list of lists back to the LWC to render."</p>
+        </div>
+
+        <div class="qa-card">
+            <h3>How do you pass data from a parent component down to a grandchild component in LWC?</h3>
+            <p><strong>Answer:</strong> "There are two ways. The first is 'Prop Drilling', where the Parent passes data to the Child using an `@api` property, and the Child immediately passes it to the Grandchild. The second, better approach for deeply nested components is Lightning Message Service (LMS), where the Parent publishes a message and the Grandchild subscribes directly."</p>
+        </div>
+        
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light');
+            document.getElementById('themeBtn').innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
+            localStorage.setItem('study-theme', isLight ? 'light' : 'dark');
+        }
+        if (localStorage.getItem('study-theme') === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('themeBtn').innerHTML = '&#x1F319;';
+        }
+    </script>
+</body>
+</html>
