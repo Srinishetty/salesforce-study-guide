@@ -100,21 +100,22 @@
         if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
     });
 
-    // Touch swipe navigation (mobile)
-    let touchStartX = 0, touchStartY = 0;
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
+    // Touch swipe navigation is disabled so only button/keyboard navigation remains.
+    // If swipe support is needed again later, restore the touch handlers below.
+    // let touchStartX = 0, touchStartY = 0;
+    // document.addEventListener('touchstart', (e) => {
+    //     touchStartX = e.changedTouches[0].screenX;
+    //     touchStartY = e.changedTouches[0].screenY;
+    // }, { passive: true });
     
-    document.addEventListener('touchend', (e) => {
-        const diffX = touchStartX - e.changedTouches[0].screenX;
-        const diffY = touchStartY - e.changedTouches[0].screenY;
-        if (Math.abs(diffX) > 70 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
-            if (diffX > 0) nextSlide();
-            else prevSlide();
-        }
-    }, { passive: true });
+    // document.addEventListener('touchend', (e) => {
+    //     const diffX = touchStartX - e.changedTouches[0].screenX;
+    //     const diffY = touchStartY - e.changedTouches[0].screenY;
+    //     if (Math.abs(diffX) > 70 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+    //         if (diffX > 0) nextSlide();
+    //         else prevSlide();
+    //     }
+    // }, { passive: true });
 
     // ===== FONT SIZE CONTROL =====
     let fontScale = 100;
