@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>My Interview Experience - Comprehensive Scripts & Code</title>
+    <title>My Interview Experience - Senior Developer Scripts</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #0d1117; --bg-card: #161b22; --border: #30363d;
-            --text: #e6edf3; --text-muted: #8b949e; --text-dim: #484f58;
+            --text: #e6edf3; --text-muted: #8b949e;
             --blue: #58a6ff; --green: #238636; --purple: #bc8cff;
-            --orange: #f0883e; --red: #da3633; --green-light: #7ee787;
+            --orange: #f0883e; --red: #da3633;
         }
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -24,71 +24,41 @@
             padding: 12px 20px; background: var(--bg-card);
             border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
         }
-        .topbar a, .topbar button { 
-            color: var(--text-muted); text-decoration: none; font-size: 1.3em; 
-            background: none; border: none; cursor: pointer; 
-        }
+        .topbar a, .topbar button { color: var(--text-muted); text-decoration: none; font-size: 1.3em; background: none; border: none; cursor: pointer; }
         .topbar a:hover, .topbar button:hover { color: var(--blue); }
         .topbar .title { font-weight: 600; font-size: 0.95em; color: var(--text); }
         
-        .container { max-width: 860px; margin: 0 auto; padding: 24px 16px 100px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 100px; }
 
-        /* Section Header */
-        .round-header {
-            text-align: center; margin: 40px 0 32px; padding: 20px;
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 16px; 
-        }
+        /* Headers & Badges */
+        .round-header { text-align: center; margin: 40px 0 32px; padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; }
         .round-header h2 { font-size: 1.4em; margin-bottom: 8px; color: var(--text); }
         .round-header p { color: var(--text-muted); font-size: 0.9em; }
         .round-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: 600; margin-top: 10px; }
+        .badge-tr { background: #1f6feb22; color: var(--blue); border: 1px solid var(--blue); }
+        .badge-mr { background: #8957e522; color: var(--purple); border: 1px solid var(--purple); }
+        .badge-hr { background: #23863622; color: var(--green); border: 1px solid var(--green); }
         
-        .badge-mr { background: #d2992222; color: var(--orange); border: 1px solid var(--orange); }
-        .badge-tech { background: #1f6feb22; color: var(--blue); border: 1px solid var(--blue); }
-        .badge-lwc { background: #8957e522; color: var(--purple); border: 1px solid var(--purple); }
-        
-        /* Interviewer Chat Bubble */
+        /* Chat UI */
         .qa-pair { margin-bottom: 48px; }
         .interviewer { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
-        .interviewer-avatar {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue), var(--purple));
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2em; flex-shrink: 0;
-        }
-        .interviewer-bubble {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 4px 16px 16px 16px; padding: 16px 20px;
-            flex: 1; position: relative;
-        }
+        .interviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 1.2em; flex-shrink: 0; }
+        .interviewer-bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 16px 16px 16px; padding: 16px 20px; flex: 1; }
         .interviewer-name { font-size: 0.75em; color: var(--blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
         .interviewer-bubble p { font-size: 1.05em; line-height: 1.6; }
 
-        /* Natural Answer Block */
-        .natural-answer {
-            border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--border); margin-left: 58px; 
-        }
-        .natural-header { 
-            padding: 12px 16px; font-size: 0.82em; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 0.5px; 
-            background: #8b5cf622; color: #a78bfa; border-bottom: 1px solid #8b5cf6; 
-        }
+        /* Answer Blocks */
+        .natural-answer { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-left: 58px; }
+        .natural-header { padding: 12px 16px; font-size: 0.82em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: #8b5cf622; color: #a78bfa; border-bottom: 1px solid #8b5cf6; }
         .natural-body { padding: 16px 20px; background: var(--bg-card); font-size: 0.93em; line-height: 1.8; color: var(--text); }
         .natural-body .speaker { display: block; font-weight: 600; color: #a78bfa; margin-top: 14px; margin-bottom: 4px; font-size: 0.82em; text-transform: uppercase; }
         .natural-body .speaker:first-child { margin-top: 0; }
         .natural-body .speech { display: block; padding: 12px 16px; background: #8b5cf60a; border-left: 3px solid #8b5cf640; border-radius: 0 8px 8px 0; margin: 6px 0 14px; font-style: italic; line-height: 1.7; }
+        .natural-body .tip { display: block; margin-top: 14px; padding: 10px 14px; background: #f0883e15; border: 1px solid #f0883e40; border-radius: 8px; font-size: 0.85em; font-style: normal; }
         
-        /* Implementation / Code Blocks */
-        .implementation-box {
-            margin-top: 16px; border: 1px solid var(--border);
-            border-radius: 8px; background: #010409; overflow: hidden;
-        }
-        .implementation-title {
-            padding: 8px 12px; font-size: 0.8em; font-weight: 600;
-            background: #21262d; border-bottom: 1px solid var(--border);
-            color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
-        }
+        /* Code/Steps */
+        .implementation-box { margin-top: 16px; border: 1px solid var(--border); border-radius: 8px; background: #010409; overflow: hidden; }
+        .implementation-title { padding: 8px 12px; font-size: 0.8em; font-weight: 600; background: #21262d; border-bottom: 1px solid var(--border); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .implementation-steps { padding: 12px 16px; color: var(--text); font-size: 0.9em; line-height: 1.6; }
         .implementation-steps ul { padding-left: 20px; margin-bottom: 10px; }
         
@@ -99,7 +69,7 @@
         .token-comment { color: #8b949e; font-style: italic; }
 
         /* Light theme */
-        body.light { --bg: #fff; --bg-card: #f6f8fa; --border: #d1d9e0; --text: #1f2328; --text-muted: #6e7781; --text-dim: #8c959f; --blue: #0550ae; --purple: #6639ba; --orange: #953800; }
+        body.light { --bg: #fff; --bg-card: #f6f8fa; --border: #d1d9e0; --text: #1f2328; --text-muted: #6e7781; --blue: #0550ae; --purple: #6639ba; --orange: #953800; --green: #1a7f37;}
         body.light .natural-header { background: #8b5cf615; color: #6639ba; border-bottom-color: #6639ba; }
         body.light .natural-body .speaker { color: #6639ba; }
         body.light .natural-body .speech { background: #8b5cf608; border-left-color: #6639ba40; color: #1f2328; }
@@ -117,16 +87,195 @@
 <body>
     <div class="topbar">
         <a href="index.html" title="Home">&#x1F3E0;</a>
-        <span class="title">My Interview Experience</span>
-        <button id="themeBtn" onclick="toggleTheme()" title="Toggle Theme">&#x2600;&#xFE0F;</button>
+        <span class="title">Senior Interview Scenarios</span>
+        <button id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
     </div>
 
     <div class="container">
-        
+
+        <!-- ==========================================
+             ROUND 1: TECHNICAL (TR)
+        =========================================== -->
         <div class="round-header" style="margin-top: 0;">
-            <h2>Round 1: Managerial / HR</h2>
-            <p>Background, project experience, and behavioral questions.</p>
-            <span class="round-badge badge-mr">Behavioral</span>
+            <h2>Round 1: Technical Deep Dive</h2>
+            <p>Apex, LWC, Flows, Scenarios, and Platform Knowledge.</p>
+            <span class="round-badge badge-tr">Technical Round</span>
+        </div>
+
+        <!-- Trigger on Account -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>Write a basic trigger on the Account object.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally (5 YOE)</div>
+                <div class="natural-body">
+                    <span class="speaker">You (Architect Mode):</span>
+                    <span class="speech">"In an enterprise environment, I strictly follow a <strong>Trigger Handler Pattern</strong>. I never write logic inside the `.trigger` file. I use one trigger per object that delegates immediately to a handler class."</span>
+                    <span class="speech">"For a robust setup, I ensure the handler utilizes a static <code>Set&lt;Id&gt;</code> for recursion control to prevent the trigger from firing twice during complex workflows. I also usually implement a custom hierarchy setting (like an 'Automation Bypass' toggle) so we can turn off the trigger dynamically during data migrations without deploying code."</span>
+                    <div class="implementation-box">
+                        <div class="implementation-title">Code: Trigger Handler with Bypass</div>
+<pre><code><span class="token-comment">// The Thin Trigger</span>
+<span class="token-keyword">trigger</span> AccountTrigger <span class="token-keyword">on</span> Account (before insert, after update) {
+    <span class="token-comment">// Check Custom Setting to see if triggers are disabled for this user/profile</span>
+    <span class="token-keyword">if</span>(TriggerSettings__c.getInstance().Disable_Account_Triggers__c) <span class="token-keyword">return</span>;
+    
+    <span class="token-keyword">if</span>(Trigger.isBefore && Trigger.isInsert) {
+        AccountTriggerHandler.onBeforeInsert(Trigger.new);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last Associated Contact -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>An Account has multiple Contacts. A user shouldn't be able to delete a Contact if it is the "last associated" one. How do you solve this?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I always clarify 'last associated' first."</span>
+                    <span class="speech">"If they mean the <strong>Final Remaining Contact</strong> (the account cannot be left empty), I use an Aggregate Query in a <code>before delete</code> trigger. I count the total contacts, subtract the ones being deleted, and if it drops below 1, I use <code>addError()</code>. Doing this math makes it perfectly safe for Mass-Deletes, whereas a Flow custom error might fail in bulk contexts."</span>
+                    <span class="speech">"If they mean the <strong>Chronologically Newest Linked Contact</strong>, standard <code>CreatedDate</code> won't work because a contact could be created Monday but linked Friday. I'd create a custom <code>Account_Linked_Date__c</code> stamped via Flow, and in my trigger, use <code>ORDER BY Account_Linked_Date__c DESC LIMIT 1</code> to find and protect that specific record."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lead Convert -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>When a Lead is converted, automatically create a Task for the Account owner. Flow or Apex?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Flow is the best practice here. I'd use an <strong>After-Save Record-Triggered Flow</strong> on Lead. The condition is <code>IsConverted = True</code> (only when record is updated to meet the condition). I map the Task's `WhatId` to `ConvertedAccountId`."</span>
+                    <span class="speech">"If I absolutely had to use Apex, I'd loop `Trigger.new`, check the `IsConverted` flag change, collect the Account IDs, query the Account owners, and bulk insert the Tasks. But for simple record creation like this, Flow is much more maintainable."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow Errors -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>How do you handle errors in Flow?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally (5 YOE)</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"A lot of people just drag a Fault Path to a screen element, but in an enterprise org, that's not enough. I build a standard <strong>Error Handler Subflow</strong>."</span>
+                    <span class="speech">"Whenever a DML element fails (like an 'Update Records'), I drag the Fault Path to this Subflow and pass in the <code>$Flow.FaultMessage</code>. The Subflow gracefully handles inserting a record into a custom <code>Error_Log__c</code> object so developers can debug it later, and it can optionally send an email alert to the admin team. It keeps all my main flows clean and standardizes how we track failures."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- JSON -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>Explain JSON structure and how you handle it in Salesforce.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally (5 YOE)</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"At a base level, JSON is a lightweight format using key-value pairs. But in Apex integrations, how you handle it is what matters."</span>
+                    <span class="speech">"If I have a complex incoming JSON payload from an external API, I never parse it manually. I create a strongly-typed <strong>Wrapper Class</strong> in Apex, and use <code>JSON.deserialize(jsonString, MyWrapper.class)</code>. It instantly maps the JSON to my Apex object."</span>
+                    <span class="speech">"If the JSON payload has dynamic keys that change constantly, I use <code>JSON.deserializeUntyped()</code>, which casts it to a <code>Map&lt;String, Object&gt;</code> so I can traverse it dynamically."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- LWC Search & Async -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>Build an LWC search button for multiple objects via Email. Explain Async JS and SOSL.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally (5 YOE)</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I’d build a custom LWC exposed as a Quick Action. Since they are typing, I'd implement a <strong>debounce</strong> function in JavaScript—so we wait 300ms after they stop typing before hitting the server. It prevents burning through API limits."</span>
+                    <span class="speech">"When it fires, I use <strong>async/await</strong> to imperatively call an Apex method. Inside Apex, I use a <strong>SOSL</strong> (`FIND`) query. We have to use SOSL because we are searching a text string across multiple unrelated objects (Accounts and Contacts) simultaneously, which SOQL cannot do efficiently in one transaction."</span>
+                    <span class="speech">"I wouldn't use <code>@wire(cacheable=true)</code> if the user expects to edit those records immediately, because cacheable methods restrict DML."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- LWC Component Communication -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>How do you communicate from a Parent component down to a Grandchild component?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I avoid 'prop drilling' (passing `@api` properties through the middle child). It creates tight coupling."</span>
+                    <span class="speech">"Instead, I use <strong>Lightning Message Service (LMS)</strong>. The Parent publishes a payload to a Message Channel, and the Grandchild subscribes to it directly. It’s the modern standard, replacing the old pubsub model, and it even allows communication across Aura, Visualforce, and LWC on the same page."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ecosystem: OmniStudio & Events -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>What is OmniStudio? Difference between PE and CDC?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"<strong>OmniStudio</strong> is a declarative toolset heavily used in Salesforce Industry clouds (like Health Cloud or Vlocity). We use it to build complex, pixel-perfect UIs via FlexCards and guided processes via OmniScripts without writing custom LWC/Apex."</span>
+                    <span class="speech">"For integration: <strong>CDC (Change Data Capture)</strong> is purely for automated data-syncing—turn it on, and it auto-publishes JSON when a record changes. <strong>Platform Events</strong> are for custom business logic—you define the schema and use Apex/Flow to explicitly publish them to external systems."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             ROUND 2: MANAGERIAL (MR)
+        =========================================== -->
+        <div class="round-header">
+            <h2>Round 2: Managerial (MR)</h2>
+            <p>Experience, Project Depth, and Career Trajectory.</p>
+            <span class="round-badge badge-mr">Managerial Fit</span>
         </div>
 
         <div class="qa-pair">
@@ -134,14 +283,14 @@
                 <div class="interviewer-avatar">&#x1F464;</div>
                 <div class="interviewer-bubble">
                     <div class="interviewer-name">Hiring Manager</div>
-                    <p>Brief me about yourself and your overall Salesforce experience.</p>
+                    <p>Brief me about yourself. Is Accenture your first company?</p>
                 </div>
             </div>
             <div class="natural-answer">
                 <div class="natural-header">&#x1F3A4; How to answer naturally</div>
                 <div class="natural-body">
-                    <span class="speaker">You (Confident & Direct):</span>
-                    <span class="speech">"I’ve been in the IT industry for 5 years, working exclusively in the Salesforce ecosystem. My core expertise is in custom development—so writing Apex triggers, complex batch classes, and building out custom UIs using Lightning Web Components. I’m really passionate about building scalable backend logic and right now, I'm looking for a role where I can tackle heavier architectural challenges."</span>
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I am an IT professional with 5 years of overall experience, heavily focused on custom Salesforce development. My core expertise is in backend logic using Apex—triggers, batch processes—and building frontend UIs with Lightning Web Components. Yes, I started my journey at Accenture, where I’ve grown into a core developer role."</span>
                 </div>
             </div>
         </div>
@@ -151,107 +300,78 @@
                 <div class="interviewer-avatar">&#x1F464;</div>
                 <div class="interviewer-bubble">
                     <div class="interviewer-name">Hiring Manager</div>
-                    <p>Tell me about your current project and what your specific responsibilities are.</p>
+                    <p>Tell me about your current project and your specific responsibilities.</p>
                 </div>
             </div>
             <div class="natural-answer">
                 <div class="natural-header">&#x1F3A4; How to answer naturally</div>
                 <div class="natural-body">
                     <span class="speaker">You:</span>
-                    <span class="speech">"Right now, I'm working on a global healthcare implementation utilizing Salesforce and ServiceMax. My day-to-day is heavily focused on development. On the backend, I write Apex classes and triggers to handle complex data synchronization for the field service teams. On the frontend, I build interactive LWCs to make the UI smoother for the users. I also handle our declarative automation, making sure our flows stay well within governor limits."</span>
+                    <span class="speech">"I am currently working on a global healthcare implementation that utilizes both Salesforce and ServiceMax. Our goal is to streamline complex field service processes for our technicians globally."</span>
+                    <span class="speech">"As a developer, my responsibilities are highly technical. I design and maintain Apex classes, trigger frameworks, and complex batch processes to keep data synchronized across ServiceMax objects. On the frontend, I build customized LWCs to improve the mobile and desktop experience for users. I essentially own the backend logic for my feature pods."</span>
                 </div>
             </div>
         </div>
 
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>What flow or component have you built recently? How many years of experience do you have specifically in LWC?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I have solid hands-on experience with LWC over the last 2+ years of my development career."</span>
+                    <span class="speech">"Recently, I built a custom Search and Filter Datatable LWC. Standard list views didn't meet the business requirement, so I built a component where users can search across multiple fields simultaneously. I used an imperative Apex call to fetch the data, standard `lightning-datatable` for the UI, and implemented Lightning Message Service so that when a user selects a row, it automatically updates a separate grandchild component on the same page."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>Why are you switching jobs? And as a Salesforce developer, how do you upgrade yourself?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"While I’ve delivered great technical solutions in my current role, I am looking for an opportunity where I can take on more complex architectural challenges and work with a modern tech stack to grow my career as a senior developer."</span>
+                    <span class="speech">"To upgrade myself, I read the Salesforce Release Notes three times a year and test new features in my personal Dev org. Currently, I am highly focused on upgrading my skills in Agentforce and AI integrations, as I believe that is the immediate future of the platform."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             ROUND 3: HR / NEGOTIATION
+        =========================================== -->
         <div class="round-header">
-            <h2>Round 2: Apex & Triggers</h2>
-            <p>Coding scenarios, governor limits, and database operations.</p>
-            <span class="round-badge badge-tech">Technical</span>
+            <h2>Round 3: HR</h2>
+            <p>Logistics, Relocation, and Salary Setup.</p>
+            <span class="round-badge badge-hr">Human Resources</span>
         </div>
 
         <div class="qa-pair">
             <div class="interviewer">
                 <div class="interviewer-avatar">&#x1F464;</div>
                 <div class="interviewer-bubble">
-                    <div class="interviewer-name">Tech Lead</div>
-                    <p>You have an Account associated with multiple Contacts. A user should not be able to delete a Contact if it is the "last associated" one. Write the code.</p>
+                    <div class="interviewer-name">HR Rep</div>
+                    <p>Are you comfortable switching your location? What is your official notice period?</p>
                 </div>
             </div>
             <div class="natural-answer">
                 <div class="natural-header">&#x1F3A4; How to answer naturally</div>
                 <div class="natural-body">
-                    <span class="speaker">You (Acting as a Senior Developer clarifying requirements):</span>
-                    <span class="speech">"In a real project, I would immediately ask the business to clarify 'last associated', because it can mean two very different things technically."</span>
-                    
-                    <span class="speech">"If they mean the <strong>Final Remaining Contact</strong>—meaning the Account must never be left empty—I would use an Aggregate query in a <code>before delete</code> trigger. I'd count the total current contacts, subtract the ones being deleted, and if that number drops below 1, I use <code>.addError()</code>. This guarantees even a mass-delete won't leave the Account with zero contacts."</span>
-
-                    <span class="speech">"But if they mean the <strong>Chronologically Most Recently Linked Contact</strong>, we have a standard platform limitation. A Contact can be created on Monday, but linked to the Account on Friday. Because of that, the standard <code>CreatedDate</code> is useless."</span>
-                    
-                    <span class="speech">"To properly solve this, I would create a custom DateTime field called <code>Account_Linked_Date__c</code>. I'd stamp it via Flow when the AccountId changes. Then, in my <code>before delete</code> trigger, I would query the contacts ordered by that custom date descending. If the user tries to delete that specific ID, I block it."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Code: Scenario 1 (Preventing Account from being empty - Mass Delete Safe)</div>
-<pre><code><span class="token-keyword">trigger</span> PreventEmptyAccount <span class="token-keyword">on</span> Contact (before delete) {
-    <span class="token-comment">// 1. Map Account Id to count of contacts being deleted</span>
-    Map&lt;Id, Integer&gt; deletedCount = <span class="token-keyword">new</span> Map&lt;Id, Integer&gt;();
-    <span class="token-keyword">for</span>(Contact c : Trigger.old) {
-        <span class="token-keyword">if</span>(c.AccountId != null) {
-            Integer count = deletedCount.containsKey(c.AccountId) ? deletedCount.get(c.AccountId) : 0;
-            deletedCount.put(c.AccountId, count + 1);
-        }
-    }
-    
-    <span class="token-keyword">if</span>(!deletedCount.isEmpty()) {
-        <span class="token-comment">// 2. Aggregate query for total current contacts</span>
-        Map&lt;Id, AggregateResult&gt; totalMap = <span class="token-keyword">new</span> Map&lt;Id, AggregateResult&gt;([
-            SELECT AccountId, COUNT(Id) total FROM Contact 
-            WHERE AccountId IN :deletedCount.keySet() GROUP BY AccountId
-        ]);
-        
-        Set&lt;Id&gt; invalidAccounts = <span class="token-keyword">new</span> Set&lt;Id&gt;();
-        <span class="token-keyword">for</span>(Id accId : deletedCount.keySet()) {
-            Integer total = totalMap.get(accId) != null ? (Integer)totalMap.get(accId).get(<span class="token-string">'total'</span>) : 0;
-            <span class="token-keyword">if</span>((total - deletedCount.get(accId)) &lt; 1) {
-                invalidAccounts.add(accId); <span class="token-comment">// Drops below 1</span>
-            }
-        }
-        
-        <span class="token-keyword">for</span>(Contact c : Trigger.old) {
-            <span class="token-keyword">if</span>(invalidAccounts.contains(c.AccountId)) {
-                c.addError(<span class="token-string">'Cannot delete: Account must retain at least one Contact.'</span>);
-            }
-        }
-    }
-}</code></pre>
-                    </div>
-
-                    <div class="implementation-box" style="margin-top: 16px;">
-                        <div class="implementation-title">Code: Scenario 2 (Preventing deletion of the Most Recently Linked)</div>
-<pre><code><span class="token-keyword">trigger</span> PreventNewestLinkDeletion <span class="token-keyword">on</span> Contact (before delete) {
-    Set&lt;Id&gt; accIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
-    <span class="token-keyword">for</span>(Contact c : Trigger.old) {
-        <span class="token-keyword">if</span>(c.AccountId != null) accIds.add(c.AccountId);
-    }
-    
-    <span class="token-keyword">if</span>(!accIds.isEmpty()) {
-        Set&lt;Id&gt; protectedContactIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
-        <span class="token-comment">// Query the most recently linked contact using our custom field</span>
-        <span class="token-keyword">for</span>(Account acc : [SELECT Id, 
-            (SELECT Id FROM Contacts ORDER BY Account_Linked_Date__c DESC LIMIT 1) 
-            FROM Account WHERE Id IN :accIds]) {
-            <span class="token-keyword">if</span>(!acc.Contacts.isEmpty()) {
-                protectedContactIds.add(acc.Contacts[0].Id);
-            }
-        }
-        
-        <span class="token-keyword">for</span>(Contact c : Trigger.old) {
-            <span class="token-keyword">if</span>(protectedContactIds.contains(c.Id)) {
-                c.addError(<span class="token-string">'Cannot delete the most recently associated Contact.'</span>);
-            }
-        }
-    }
-}</code></pre>
-                    </div>
+                    <span class="speaker">You (Direct & Professional):</span>
+                    <span class="speech">"Yes, I am completely comfortable relocating for the right opportunity. Regarding my notice period, my official notice period is [30/60/90] days, and I can serve it fully to ensure a smooth handover on my current project."</span>
+                    <span class="tip"><strong>Tip:</strong> Always state your exact official notice period. If it is negotiable or buyout-able, add: "However, if an earlier joining date is required, I can discuss an early release or buyout option with my current management."</span>
                 </div>
             </div>
         </div>
@@ -260,279 +380,17 @@
             <div class="interviewer">
                 <div class="interviewer-avatar">&#x1F464;</div>
                 <div class="interviewer-bubble">
-                    <div class="interviewer-name">Tech Lead</div>
-                    <p>When a Lead is converted, a task should automatically be created for the owner of the Account. Walk me through the Flow solution, and then tell me how you would write it in Apex if required.</p>
+                    <div class="interviewer-name">HR Rep</div>
+                    <p>What are your salary expectations for this role?</p>
                 </div>
             </div>
             <div class="natural-answer">
                 <div class="natural-header">&#x1F3A4; How to answer naturally</div>
                 <div class="natural-body">
-                    <span class="speaker">You:</span>
-                    <span class="speech">"The absolute best practice today is a <strong>Record-Triggered Flow</strong>. I'd set it to fire After-Save on the Lead object, with the condition `IsConverted = True` and set it to only fire when the record is updated to meet the condition. Then I'd drop in a 'Create Records' element for the Task, mapping `WhatId` to the Lead's `ConvertedAccountId` and `OwnerId` to the `Account.OwnerId`."</span>
-                    <span class="speech">"However, if the org has a strict 'Apex Only' framework, I would write this in an <code>after update</code> trigger on Lead. I'd loop through the updated Leads, check if <code>IsConverted</code> just changed to true, collect the converted Account IDs, query their owners, and insert the Task list."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Solution 1: Record-Triggered Flow (Best Practice)</div>
-                        <div class="implementation-steps">
-                            <ul>
-                                <li><strong>Trigger:</strong> A record is Updated. Object: <code>Lead</code>. Optimize for: Actions and Related Records (After-Save).</li>
-                                <li><strong>Condition:</strong> <code>IsConverted</code> Equals <code>$GlobalConstant.True</code> (Select: Only when a record is updated to meet condition).</li>
-                                <li><strong>Create Records Element:</strong> Create 1 record of type <code>Task</code>.</li>
-                                <li><strong>Field Mappings:</strong><br>
-                                    - <code>WhatId</code> = <code>$Record.ConvertedAccountId</code><br>
-                                    - <code>OwnerId</code> = <code>$Record.ConvertedAccountId</code> (Assuming standard mapping, or use a Get Records on Account to fetch OwnerId)<br>
-                                    - <code>Subject</code> = "Follow up on Converted Lead"
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="implementation-box" style="margin-top: 16px;">
-                        <div class="implementation-title">Solution 2: Apex Trigger (Alternative)</div>
-<pre><code><span class="token-keyword">trigger</span> LeadConvertTask <span class="token-keyword">on</span> Lead (after update) {
-    List&lt;Task&gt; tasksToInsert = <span class="token-keyword">new</span> List&lt;Task&gt;();
-    Set&lt;Id&gt; accountIds = <span class="token-keyword">new</span> Set&lt;Id&gt;();
-    
-    <span class="token-comment">// Identify freshly converted leads</span>
-    <span class="token-keyword">for</span>(Lead l : Trigger.new) {
-        Lead oldLead = Trigger.oldMap.get(l.Id);
-        <span class="token-keyword">if</span>(l.IsConverted && !oldLead.IsConverted && l.ConvertedAccountId != null) {
-            accountIds.add(l.ConvertedAccountId);
-        }
-    }
-    
-    <span class="token-keyword">if</span>(!accountIds.isEmpty()) {
-        <span class="token-comment">// Query Account owners</span>
-        Map&lt;Id, Account&gt; accMap = <span class="token-keyword">new</span> Map&lt;Id, Account&gt;([SELECT Id, OwnerId FROM Account WHERE Id IN :accountIds]);
-        
-        <span class="token-keyword">for</span>(Lead l : Trigger.new) {
-            <span class="token-keyword">if</span>(l.IsConverted && l.ConvertedAccountId != null) {
-                tasksToInsert.add(<span class="token-keyword">new</span> Task(
-                    Subject = <span class="token-string">'Follow up with new Account'</span>,
-                    WhatId = l.ConvertedAccountId,
-                    OwnerId = accMap.get(l.ConvertedAccountId).OwnerId,
-                    Status = <span class="token-string">'Not Started'</span>
-                ));
-            }
-        }
-        <span class="token-keyword">if</span>(!tasksToInsert.isEmpty()) insert tasksToInsert;
-    }
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="round-header">
-            <h2>Round 3: LWC & UI Architecture</h2>
-            <p>Component communication, asynchronous JavaScript, and custom UI design.</p>
-            <span class="round-badge badge-lwc">Lightning Web Components</span>
-        </div>
-
-        <div class="qa-pair">
-            <div class="interviewer">
-                <div class="interviewer-avatar">&#x1F464;</div>
-                <div class="interviewer-bubble">
-                    <div class="interviewer-name">Senior Developer</div>
-                    <p>We need a custom search button on a page layout. When clicked, it should extract records from multiple objects like Account and Contact based on an email address. Write the components.</p>
-                </div>
-            </div>
-            <div class="natural-answer">
-                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
-                <div class="natural-body">
-                    <span class="speaker">You:</span>
-                    <span class="speech">"I’d build a custom LWC exposed as a Quick Action. The UI has a lightning-input for the email and a button. When they click search, it fires an imperative Apex method."</span>
-                    <span class="speech">"Inside Apex, I must use a <strong>SOSL query</strong> (`FIND`) because we are searching a text string across multiple unrelated objects simultaneously. Writing multiple SOQL queries would be inefficient. I'd return the list of lists back to the LWC and map it to a datatable."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Apex Controller (SOSL)</div>
-<pre><code><span class="token-keyword">public with sharing class</span> GlobalSearchController {
-    @AuraEnabled(cacheable=true)
-    <span class="token-keyword">public static</span> List&lt;List&lt;SObject&gt;&gt; searchByEmail(String emailStr) {
-        <span class="token-comment">// SOSL searches text across multiple objects</span>
-        String searchQuery = <span class="token-string">'FIND \''</span> + emailStr + <span class="token-string">'\' IN EMAIL FIELDS RETURNING Account(Id, Name), Contact(Id, Name)'</span>;
-        <span class="token-keyword">return</span> search.query(searchQuery);
-    }
-}</code></pre>
-                    </div>
-
-                    <div class="implementation-box" style="margin-top: 16px;">
-                        <div class="implementation-title">LWC HTML & JS Snippet</div>
-<pre><code><span class="token-comment">&lt;!-- HTML --&gt;</span>
-&lt;template&gt;
-    &lt;lightning-input label="Email" value={searchTerm} onchange={handleChange}&gt;&lt;/lightning-input&gt;
-    &lt;lightning-button label="Search" onclick={handleSearch}&gt;&lt;/lightning-button&gt;
-&lt;/template&gt;
-
-<span class="token-comment">// JavaScript</span>
-<span class="token-keyword">import</span> { LightningElement } <span class="token-keyword">from</span> 'lwc';
-<span class="token-keyword">import</span> searchByEmail <span class="token-keyword">from</span> '@salesforce/apex/GlobalSearchController.searchByEmail';
-
-<span class="token-keyword">export default class</span> EmailSearch <span class="token-keyword">extends</span> LightningElement {
-    searchTerm = '';
-    
-    handleChange(event) { this.searchTerm = event.target.value; }
-
-    <span class="token-keyword">async</span> handleSearch() {
-        <span class="token-keyword">try</span> {
-            <span class="token-keyword">const</span> results = <span class="token-keyword">await</span> searchByEmail({ emailStr: this.searchTerm });
-            <span class="token-keyword">const</span> accounts = results[0];
-            <span class="token-keyword">const</span> contacts = results[1];
-            <span class="token-comment">// map data to table arrays...</span>
-        } <span class="token-keyword">catch</span>(error) {
-            console.error(error);
-        }
-    }
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="qa-pair">
-            <div class="interviewer">
-                <div class="interviewer-avatar">&#x1F464;</div>
-                <div class="interviewer-bubble">
-                    <div class="interviewer-name">Senior Developer</div>
-                    <p>How do you handle component communication? specifically from a Parent down to a Grandchild component?</p>
-                </div>
-            </div>
-            <div class="natural-answer">
-                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
-                <div class="natural-body">
-                    <span class="speaker">You:</span>
-                    <span class="speech">"If I'm just passing data down one level to a child, I use an <code>@api</code> property. But for a grandchild component, 'prop drilling' (passing from parent -> child -> grandchild) gets messy and tightly couples the components."</span>
-                    <span class="speech">"Instead, I would use <strong>Lightning Message Service (LMS)</strong>. I'd create a Message Channel. The parent publishes the payload, and the grandchild subscribes to it directly, bypassing the middle child entirely."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Code: Parent Component (Publisher)</div>
-<pre><code><span class="token-keyword">import</span> { publish, MessageContext } <span class="token-keyword">from</span> 'lightning/messageService';
-<span class="token-keyword">import</span> DATA_CHANNEL <span class="token-keyword">from</span> '@salesforce/messageChannel/DataChannel__c';
-
-<span class="token-keyword">export default class</span> Parent <span class="token-keyword">extends</span> LightningElement {
-    @wire(MessageContext) messageContext;
-
-    sendData() {
-        <span class="token-keyword">const</span> payload = { recordId: '001...', status: 'Active' };
-        publish(this.messageContext, DATA_CHANNEL, payload);
-    }
-}</code></pre>
-                    </div>
-                    <div class="implementation-box" style="margin-top: 16px;">
-                        <div class="implementation-title">Code: Grandchild Component (Subscriber)</div>
-<pre><code><span class="token-keyword">import</span> { subscribe, MessageContext } <span class="token-keyword">from</span> 'lightning/messageService';
-<span class="token-keyword">import</span> DATA_CHANNEL <span class="token-keyword">from</span> '@salesforce/messageChannel/DataChannel__c';
-
-<span class="token-keyword">export default class</span> Grandchild <span class="token-keyword">extends</span> LightningElement {
-    @wire(MessageContext) messageContext;
-    subscription = null;
-
-    connectedCallback() {
-        this.subscription = subscribe(this.messageContext, DATA_CHANNEL, (message) =&gt; {
-            console.log('Received ID: ', message.recordId);
-        });
-    }
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="round-header">
-            <h2>Round 4: Platform & Architecture</h2>
-            <p>Integrations, automation limits, and ecosystem tools.</p>
-            <span class="round-badge badge-tech">Architecture</span>
-        </div>
-
-        <div class="qa-pair">
-            <div class="interviewer">
-                <div class="interviewer-avatar">&#x1F464;</div>
-                <div class="interviewer-bubble">
-                    <div class="interviewer-name">Architect</div>
-                    <p>How do you restrict specific internal domains in Email-to-Case? Like preventing internal `gmail@tcs.com` emails from creating cases? Explain both Flow and Apex solutions.</p>
-                </div>
-            </div>
-            <div class="natural-answer">
-                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
-                <div class="natural-body">
-                    <span class="speaker">You:</span>
-                    <span class="speech">"Out of the box, standard Email-to-Case ingests everything. The easiest declarative way to stop this is a <strong>Before-Save Record-Triggered Flow</strong> on the Case object. We check if <code>SuppliedEmail</code> contains '@tcs.com' and auto-close it."</span>
-                    <span class="speech">"However, if the volume of spam is massive, creating and closing records wastes database space. In that case, I would write a custom <strong>Apex Email Service</strong>. This runs *before* a record is ever created. I can inspect the sender's address in memory, and if it's internal, I just exit the script without running any DML."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Solution 1: Before-Save Flow (Quick Setup)</div>
-                        <div class="implementation-steps">
-                            <ul>
-                                <li><strong>Trigger:</strong> Record is Created. Object: <code>Case</code>. Optimize for: Fast Field Updates (Before-Save).</li>
-                                <li><strong>Condition:</strong> <code>SuppliedEmail</code> Contains <code>@tcs.com</code></li>
-                                <li><strong>Action (Update Records):</strong> Use the flow that triggered the record. Set <code>Status</code> = <code>Closed</code>.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="implementation-box" style="margin-top: 16px;">
-                        <div class="implementation-title">Solution 2: Apex Email Service (Total Control / Saves Database Storage)</div>
-<pre><code><span class="token-keyword">global class</span> BlockInternalEmailHandler <span class="token-keyword">implements</span> Messaging.InboundEmailHandler {
-    <span class="token-keyword">global</span> Messaging.InboundEmailResult handleInboundEmail(Messaging.InboundEmail email, Messaging.InboundEnvelope envelope) {
-        Messaging.InboundEmailResult result = <span class="token-keyword">new</span> Messaging.InboundEmailResult();
-        
-        <span class="token-comment">// Check the sender domain in memory BEFORE doing any DML</span>
-        <span class="token-keyword">if</span>(email.fromAddress.endsWithIgnoreCase(<span class="token-string">'@tcs.com'</span>)) {
-            result.success = <span class="token-keyword">true</span>; <span class="token-comment">// Return true so it doesn't bounce back to sender</span>
-            <span class="token-keyword">return</span> result;         <span class="token-comment">// Exit without creating a Case</span>
-        }
-        
-        <span class="token-comment">// Otherwise, process normally</span>
-        Case newCase = <span class="token-keyword">new</span> Case(
-            Subject = email.subject,
-            Description = email.plainTextBody,
-            SuppliedEmail = email.fromAddress
-        );
-        <span class="token-keyword">insert</span> newCase;
-        
-        result.success = <span class="token-keyword">true</span>;
-        <span class="token-keyword">return</span> result;
-    }
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="qa-pair">
-            <div class="interviewer">
-                <div class="interviewer-avatar">&#x1F464;</div>
-                <div class="interviewer-bubble">
-                    <div class="interviewer-name">Architect</div>
-                    <p>What is the difference between Platform Events and Change Data Capture (CDC)? How are they implemented?</p>
-                </div>
-            </div>
-            <div class="natural-answer">
-                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
-                <div class="natural-body">
-                    <span class="speaker">You (Drawing the distinction):</span>
-                    <span class="speech">"They are both event-driven architectures running on the Salesforce Event Bus, but CDC is declarative data-sync, while Platform Events are custom business logic."</span>
-                    <span class="speech">"CDC is a standard feature. I literally just click a checkbox in Setup for the Account object, and Salesforce automatically publishes a JSON payload every time an Account is created or updated. It's strictly for database synchronization."</span>
-                    <span class="speech">"Platform Events are custom. I define a custom object ending in <code>__e</code>. Then, inside an Apex trigger or Flow, I explicitly publish that event when a specific business rule is met."</span>
-
-                    <div class="implementation-box">
-                        <div class="implementation-title">Code: Publishing a Platform Event in Apex</div>
-<pre><code><span class="token-comment">// Assuming we created a Platform Event called 'Order_Ready__e'</span>
-List&lt;Order_Ready__e&gt; events = <span class="token-keyword">new</span> List&lt;Order_Ready__e&gt;();
-events.add(<span class="token-keyword">new</span> Order_Ready__e(
-    Order_Number__c = <span class="token-string">'ORD-1001'</span>,
-    Customer_Id__c = <span class="token-string">'001...'</span>
-));
-
-<span class="token-comment">// Publish the event to the Event Bus</span>
-List&lt;Database.SaveResult&gt; results = EventBus.publish(events);
-
-<span class="token-keyword">for</span> (Database.SaveResult sr : results) {
-    <span class="token-keyword">if</span> (sr.isSuccess()) {
-        System.debug(<span class="token-string">'Successfully published event.'</span>);
-    }
-}</code></pre>
-                    </div>
+                    <span class="speaker">You (The Negotiation Script):</span>
+                    <span class="speech">"Based on my 5 years of IT experience and my specialized skills in Salesforce development, Apex, and LWC, I am looking for a standard industry hike over my current CTC."</span>
+                    <span class="speech">"My current fixed CTC is [X Lakhs]. I am expecting an increment of around [30% to 40%], bringing my expectation to around [Y Lakhs]. However, I am highly interested in the work your team is doing, so I am open to a fair discussion based on the overall compensation structure and benefits."</span>
+                    <span class="tip"><strong>Negotiation Rule:</strong> State your current fixed CTC clearly. State a percentage hike you want (standard is 30-40% for a job switch). Always end by saying you are "open to a fair discussion"—it shows flexibility while anchoring your high number.</span>
                 </div>
             </div>
         </div>
@@ -540,15 +398,12 @@ List&lt;Database.SaveResult&gt; results = EventBus.publish(events);
     </div>
 
     <script>
-        // Light/Dark Theme Toggle
         function toggleTheme() {
             const isLight = document.body.classList.toggle('light');
             const btn = document.getElementById('themeBtn');
             btn.innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
             localStorage.setItem('study-theme', isLight ? 'light' : 'dark');
         }
-        
-        // Restore Theme Preference
         if (localStorage.getItem('study-theme') === 'light') {
             document.body.classList.add('light');
             document.getElementById('themeBtn').innerHTML = '&#x1F319;';
