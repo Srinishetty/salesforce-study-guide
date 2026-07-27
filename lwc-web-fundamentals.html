@@ -6,17 +6,22 @@
     <title>Web Fundamentals for LWC - Salesforce Study Guide</title>
     <link rel="stylesheet" href="common.css">
     <style>
-        body { background: #0d1117; color: #e6edf3; }
-        .page { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
-        .hero { text-align: center; margin-bottom: 36px; }
+        body { background: #0d1117; color: #e6edf3; overflow: auto; }
+        html { scroll-behavior: smooth; }
+        .page { max-width: 980px; margin: 0 auto; padding: 36px 20px 80px; }
+        .hero { text-align: center; margin-bottom: 28px; }
         .hero h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 12px; }
         .hero p { color: #8b949e; max-width: 760px; margin: 0 auto; line-height: 1.75; }
-        .nav-panel { margin: 0 auto 24px; max-width: 960px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; text-align: center; }
-        .nav-panel a { color: #58a6ff; text-decoration: none; border: 1px solid #30363d; padding: 10px 16px; border-radius: 12px; background: #010409; transition: background 0.2s, transform 0.2s; }
-        .nav-panel a:hover { background: #161b22; transform: translateY(-1px); }
+        .top-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 18px; }
+        .top-nav a { color: #58a6ff; text-decoration: none; border: 1px solid #30363d; padding: 10px 14px; border-radius: 12px; background: #010409; transition: all 0.2s ease; }
+        .top-nav a:hover { background: #161b22; transform: translateY(-1px); }
+        .jump-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .jump-links a { color: #8b949e; font-weight: 600; text-decoration: none; }
+        .jump-links a:hover { text-decoration: underline; color: #58a6ff; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: #161b22; border: 1px solid #30363d; border-radius: 18px; padding: 24px; }
         .card h2 { margin-top: 0; color: #58a6ff; }
+        .card h3 { color: #bc8cff; }
         .card p, .card li, .card pre { color: #c9d1d9; }
         .card ul { padding-left: 1.2em; margin: 0.5em 0; }
         .card pre { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; overflow-x: auto; }
@@ -27,7 +32,7 @@
         .nav-links a:hover { background: #161b22; }
         @media (max-width: 640px) {
             .page { padding: 24px 16px 60px; }
-            .nav-panel a { flex: 1 1 100%; }
+            .top-nav a, .jump-links a { flex: 1 1 100%; text-align: center; }
             .primary-btn { width: 100%; }
         }
     </style>
@@ -37,19 +42,24 @@
         <div class="hero">
             <h1>Zero to Hero in Lightning Web Components</h1>
             <p>Lightning Web Component framework is the modern Salesforce programming model for building Lightning Components. Learn HTML5, CSS3, JavaScript, and LWC from scratch while building real projects.</p>
+            <p style="margin-top: 16px; color: #8b949e; font-size: 0.95rem;">This study guide is designed to open on laptop, Android, and iOS devices from a single link.</p>
         </div>
 
-        <div class="nav-panel">
+        <div class="top-nav">
             <a href="index.html">Home</a>
             <a href="lwc.html">LWC Guide</a>
+            <a href="lwc-web-fundamentals.html">Fundamentals</a>
+        </div>
+        <div class="jump-links">
             <a href="#overview">Overview</a>
             <a href="#roadmap">Roadmap</a>
-            <a href="#anatomy">Component Anatomy</a>
-            <a href="#html-tags">HTML</a>
-            <a href="#css-selectors">CSS</a>
+            <a href="#anatomy">Anatomy</a>
             <a href="#syntax-shortcuts">Syntax</a>
             <a href="#project-outline">Project</a>
-            <a href="#js-basics">JavaScript</a>
+        </div>
+        <div class="card" style="margin-bottom: 24px;">
+            <h2>Mobile Friendly Note</h2>
+            <p>This page is built for easy reading on laptop and mobile devices. Use the same URL on Android or iPhone, and tap the section links to move quickly between topics.</p>
         </div>
 
         <div class="card" id="overview" style="margin-bottom: 24px;">
