@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Web Fundamentals for LWC - Salesforce Study Guide</title>
+    <title>Zero Hero Developer Guide — LWC Web Fundamentals</title>
     <link rel="stylesheet" href="common.css">
     <style>
-        body { background: #0d1117; color: #e6edf3; overflow: auto; }
+        html, body { min-height: 100%; height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; }
+        body[data-page="lwc-fundamentals"] { overflow-y: auto !important; overflow-x: hidden !important; }
+        body { background: #0d1117; color: #e6edf3; }
         html { scroll-behavior: smooth; }
         .page { max-width: 980px; margin: 0 auto; padding: 36px 20px 80px; }
         .hero { text-align: center; margin-bottom: 28px; }
@@ -37,7 +39,7 @@
         }
     </style>
 </head>
-<body>
+<body data-page="lwc-fundamentals">
     <div class="page">
         <div class="hero">
             <h1>Zero to Hero in Lightning Web Components</h1>
@@ -392,6 +394,19 @@ export default class MyComponent extends LightningElement {
                 </div>
             </div>
             <p style="margin-top: 16px;">If you learn these three simple patterns, you can read and write most LWC pages faster.</p>
+        </div>
+
+        <div class="card" id="debugging" style="margin-top: 24px;">
+            <h2>Debugging Guide for Zero Knowledge</h2>
+            <p>This section is for developers who need to fix a broken Salesforce component without having full context. Use the site as a reference to understand which part of the code is likely causing the problem.</p>
+            <ul>
+                <li><strong>Start with the UI:</strong> note what is missing or not working on the page.</li>
+                <li><strong>Check the template:</strong> missing text or broken layout usually points to HTML/markup issues.</li>
+                <li><strong>Check the JavaScript:</strong> behavior issues, event handlers, or data not appearing are usually problems in the JS controller.</li>
+                <li><strong>Check the metadata:</strong> if the component is not visible in Salesforce, the <code>.js-meta.xml</code> configuration may be wrong.</li>
+                <li><strong>Use browser DevTools:</strong> inspect the DOM, view console errors, and test styles live.</li>
+            </ul>
+            <p>Remember: this site teaches the patterns, and the page below helps you match real components to those patterns quickly.</p>
         </div>
 
         <div class="card" id="requirements" style="margin-top: 24px;">
