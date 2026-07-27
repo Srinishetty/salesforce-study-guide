@@ -29,7 +29,17 @@
             <p>Lightning Web Component framework is the modern Salesforce programming model for building Lightning Components. Learn HTML5, CSS3, JavaScript, and LWC from scratch while building real projects.</p>
         </div>
 
-        <div class="card" style="margin-bottom: 24px;">
+        <div class="nav-panel" style="margin: 0 auto 24px; max-width: 960px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; text-align: center;">
+            <a href="index.html" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Home</a>
+            <a href="lwc.html" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">LWC Guide</a>
+            <a href="#overview" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Overview</a>
+            <a href="#roadmap" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Roadmap</a>
+            <a href="#html-tags" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">HTML</a>
+            <a href="#css-selectors" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">CSS</a>
+            <a href="#js-basics" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">JavaScript</a>
+        </div>
+
+        <div class="card" id="overview" style="margin-bottom: 24px;">
             <h2>Course Overview</h2>
             <p>This learning path starts from the basics and covers both front-end web fundamentals and Salesforce-specific LWC development patterns. You will design and code real apps, explore modern web standards, and use LWC with Apex, navigation, messaging, charts, maps, PDF/CSV generation, and real-time features.</p>
             <ul>
@@ -45,7 +55,7 @@
             </ul>
         </div>
 
-        <div class="card" style="margin-bottom: 24px;">
+        <div class="card" id="roadmap" style="margin-bottom: 24px;">
             <h2>Zero to Hero Roadmap</h2>
             <p>Follow this path step by step. Each item builds on the previous one, so do not skip ahead until you understand the current topic.</p>
             <ol>
@@ -65,7 +75,7 @@
         </div>
 
         <div class="grid">
-            <div class="card">
+            <div class="card" id="html-tags">
                 <h2>HTML — Most Used Tags</h2>
                 <p>In LWC templates, these are the HTML tags and patterns you will write most often.</p>
                 <ul>
@@ -87,7 +97,7 @@
 &lt;/template&gt;</code></pre>
             </div>
 
-            <div class="card">
+            <div class="card" id="html-attributes">
                 <h2>HTML — Common Attributes</h2>
                 <p>These attributes are the ones you use most in templates and markup.</p>
                 <ul>
@@ -112,7 +122,7 @@
 &lt;/template&gt;</code></pre>
             </div>
 
-            <div class="card">
+            <div class="card" id="js-basics">
                 <h2>JavaScript — Most Used Basics</h2>
                 <p>These JavaScript fundamentals are used most in LWC component classes and page logic.</p>
                 <ul>
@@ -155,7 +165,7 @@ export default class ContactList extends LightningElement {
 </code></pre>
             </div>
 
-            <div class="card">
+            <div class="card" id="js-notes">
                 <h2>JavaScript — Essential Notes</h2>
                 <p>These are the practical JS concepts that are especially helpful when learning LWC.</p>
                 <ul>
@@ -178,7 +188,7 @@ const message = `Hello ${name}, you are ${role}`;
 </code></pre>
             </div>
 
-            <div class="card">
+            <div class="card" id="css-selectors">
                 <h2>CSS — Most Used Selectors</h2>
                 <p>These simple selectors cover the majority of styling needs in LWC components.</p>
                 <ul>
@@ -204,7 +214,7 @@ const message = `Hello ${name}, you are ${role}`;
 </code></pre>
             </div>
 
-            <div class="card">
+            <div class="card" id="css-patterns">
                 <h2>CSS — Common Patterns</h2>
                 <p>These are the most useful CSS rules when building layouts and spacing in LWC.</p>
                 <ul>
@@ -234,7 +244,7 @@ const message = `Hello ${name}, you are ${role}`;
             </div>
         </div>
 
-        <div class="card" style="margin-top: 24px;">
+        <div class="card" id="learning" style="margin-top: 24px;">
             <h2>What You'll Learn</h2>
             <ul>
                 <li>HTML and CSS required for LWC</li>
@@ -249,7 +259,7 @@ const message = `Hello ${name}, you are ${role}`;
             </ul>
         </div>
 
-        <div class="card" style="margin-top: 24px;">
+        <div class="card" id="requirements" style="margin-top: 24px;">
             <h2>Course Requirements</h2>
             <ul>
                 <li>A PC with Windows, Linux, or Mac</li>
