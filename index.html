@@ -125,64 +125,6 @@
             color: #fff;
         }
 
-        .recall-section {
-            max-width: 900px;
-            margin: 24px auto 0;
-            padding: 20px;
-            border: 1px solid rgba(88,166,255,0.18);
-            border-radius: 16px;
-            background: rgba(255,255,255,0.04);
-        }
-        .recall-section h3 {
-            font-size: 1.05em;
-            color: #58a6ff;
-            margin-bottom: 8px;
-        }
-        .recall-section p {
-            color: #8b949e;
-            line-height: 1.6;
-            margin-bottom: 14px;
-        }
-        .recall-stack {
-            display: grid;
-            gap: 12px;
-        }
-        .recall-item {
-            background: rgba(9,13,26,0.75);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: left;
-        }
-        .recall-item h4 {
-            font-size: 0.95em;
-            color: #e6edf3;
-            margin-bottom: 6px;
-        }
-        .recall-item .label {
-            display: inline-block;
-            margin-bottom: 8px;
-            font-size: 0.78em;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: rgba(88,166,255,0.14);
-            color: #58a6ff;
-        }
-        .recall-item pre {
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-size: 0.8em;
-            line-height: 1.45;
-            color: #c9d1d9;
-            font-family: Consolas, 'Courier New', monospace;
-            margin-bottom: 8px;
-        }
-        .recall-item .explain {
-            font-size: 0.85em;
-            color: #8b949e;
-            line-height: 1.5;
-        }
-
         /* Topic Grid */
         .topics {
             max-width: 900px;
@@ -334,51 +276,6 @@
             </div>
         </div>
 
-        <section class="recall-section" aria-label="Code structure recall patterns">
-            <h3>Syntax First, Then Example</h3>
-            <p>When you know the concept but freeze while writing code, begin with the structure. Learn the pattern first, then fill the logic.</p>
-            <div class="recall-stack">
-                <div class="recall-item">
-                    <span class="label">Syntax pattern</span>
-                    <h4>LWC JavaScript structure</h4>
-                    <pre>import { LightningElement } from 'lwc';
-export default class ExampleCmp extends LightningElement {
-    connectedCallback() {}
-    handleChange(event) {}
-}</pre>
-                    <div class="explain">Start with the import, then create the class, then add methods. This is the basic LWC skeleton you can reuse for most components.</div>
-                </div>
-                <div class="recall-item">
-                    <span class="label">Syntax pattern</span>
-                    <h4>Apex class structure</h4>
-                    <pre>public with sharing class ExampleService {
-    @AuraEnabled
-    public static void doWork() {
-        // logic
-    }
-}</pre>
-                    <div class="explain">Use the class declaration first, then the method signature, then place the business logic inside the method body.</div>
-                </div>
-                <div class="recall-item">
-                    <span class="label">Syntax pattern</span>
-                    <h4>Trigger handler pattern</h4>
-                    <pre>trigger AccountTrigger on Account (before insert, before update) {
-    if (Trigger.isBefore) {
-        AccountHandler.handle(Trigger.new, Trigger.oldMap);
-    }
-}</pre>
-                    <div class="explain">Keep the trigger thin. Check the event, then delegate the real work to a handler class so the code stays clean and reusable.</div>
-                </div>
-                <div class="recall-item">
-                    <span class="label">Syntax pattern</span>
-                    <h4>Flow logic pattern</h4>
-                    <pre>Start → Decision → Action → End
-If condition is true, do the action.
-Otherwise, branch or stop.</pre>
-                    <div class="explain">Flow is usually about deciding what should happen next. Think in terms of entry, condition, action, and exit.</div>
-                </div>
-            </div>
-        </section>
     </header>
 
     <main class="topics">

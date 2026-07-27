@@ -43,7 +43,35 @@
             </div>
         </div>
 
-        <!-- VF SLIDE 2: Fundamentals -->
+        <!-- VF SLIDE 2: Syntax First, Then Example -->
+        <div class="slide" data-section="visualforce">
+            <h2>Syntax First, Then Example</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Visualforce feels easier once you remember the basic page structure. Start with the page tag, then add the markup and controller binding.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Visualforce page structure</h3>
+<pre><code>&lt;apex:page standardController="Account"&gt;
+    &lt;apex:pageBlock title="Account Details"&gt;
+        &lt;apex:outputField value="{!Account.Name}"/&gt;
+    &lt;/apex:pageBlock&gt;
+&lt;/apex:page&gt;</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">The page starts with apex:page, then you place sections and fields inside it.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card fade-in delay-1">
+                        <h3>Expression syntax pattern</h3>
+<pre><code>{!Account.Name}
+{!Account.Contacts.size}
+{!IF(condition, 'Yes', 'No')}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Remember that Visualforce expressions use {! ... } and that they bind data from the page or controller.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VF SLIDE 3: Fundamentals -->
         <div class="slide" data-section="visualforce">
             <h2>Visualforce Fundamentals</h2>
             <p style="margin-bottom:15px; color:#8b949e;">Visualforce is a tag-based markup language similar to HTML/JSP. Pages run on the Salesforce server and render HTML to the browser. Still relevant for PDF generation, email templates, and legacy maintenance.</p>

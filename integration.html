@@ -43,7 +43,39 @@
             </div>
         </div>
 
-        <!-- INT SLIDE 2: Integration Patterns Overview -->
+        <!-- INT SLIDE 2: Syntax First, Then Example -->
+        <div class="slide" data-section="integration">
+            <h2>Syntax First, Then Example</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">When you know the integration concept but freeze on the implementation, remember the structure first. Build the callout skeleton, then fill in the details.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>HTTP callout structure</h3>
+<pre><code>HttpRequest req = new HttpRequest();
+req.setEndpoint('callout:Named_Credential/endpoint');
+req.setMethod('GET');
+
+Http http = new Http();
+HttpResponse res = http.send(req); </code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Start by creating the request, set the endpoint and method, then send it and inspect the response.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card fade-in delay-1">
+                        <h3>Response handling pattern</h3>
+<pre><code>if (res.getStatusCode() == 200) {
+    String body = res.getBody();
+    // parse JSON / process data
+} else {
+    throw new CalloutException('Request failed');
+}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">The most common recall pattern is: send request, check status code, then process success or failure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INT SLIDE 3: Integration Patterns Overview -->
         <div class="slide" data-section="integration">
             <h2>Integration Patterns — The Big Picture</h2>
             <p style="margin-bottom:15px; color:#8b949e;">Every integration is either Inbound (data coming INTO Salesforce) or Outbound (Salesforce calling OUT). Choose sync vs async based on timing requirements.</p>

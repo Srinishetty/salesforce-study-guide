@@ -53,8 +53,39 @@
             </div>
         </div>
 
+        <!-- SLIDE 2: Syntax First, Then Example -->
+        <div class="slide">
+            <h2>Syntax First, Then Example</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">When you know the concept but freeze while writing code, begin with the structure. Learn the pattern first, then fill in the logic.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>LWC HTML structure</h3>
+<pre><code>&lt;template&gt;
+    &lt;lightning-card title="Example"&gt;
+        &lt;div class="slds-p-around_medium"&gt;
+            Hello
+        &lt;/div&gt;
+    &lt;/lightning-card&gt;
+&lt;/template&gt;</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Start with the template root, then add your markup inside it. This is the basic shape you can reuse for most components.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card fade-in delay-1">
+                        <h3>LWC JavaScript structure</h3>
+<pre><code>import { LightningElement } from 'lwc';
+export default class ExampleCmp extends LightningElement {
+    connectedCallback() {}
+    handleChange(event) {}
+}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Import LightningElement first, create the class, then add methods for lifecycle hooks and user actions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- SLIDE 2: Before You Start — Key Terms -->
+        <!-- SLIDE 3: Before You Start — Key Terms -->
         <div class="slide">
             <h2>Before You Start — Key Terms</h2>
             <p style="margin-bottom:15px; color:#8b949e;">If you're new to Salesforce or web development, learn these terms first. Every slide ahead uses them.</p>

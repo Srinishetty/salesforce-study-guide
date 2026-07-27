@@ -43,7 +43,51 @@
             </div>
         </div>
 
-        <!-- APEX SLIDE 2: Apex Fundamentals -->
+        <!-- APEX SLIDE 2: Syntax First, Then Example -->
+        <div class="slide" data-section="apex">
+            <h2>Syntax First, Then Example</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">When you know the concept but freeze while writing code, begin with the structure. Learn the pattern first, then fill in the logic.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Apex class structure</h3>
+<pre><code>public with sharing class ExampleService {
+    @AuraEnabled
+    public static void doWork() {
+        // business logic
+    }
+}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Start with the class declaration, then the method signature, then place the logic inside the method body.</p>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Trigger handler pattern</h3>
+<pre><code>trigger AccountTrigger on Account (before insert, before update) {
+    if (Trigger.isBefore) {
+        AccountHandler.handle(Trigger.new, Trigger.oldMap);
+    }
+}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">Keep the trigger thin. Check the event, then delegate the real work to a handler class.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card fade-in delay-1">
+                        <h3>SOQL + loop pattern</h3>
+<pre><code>List&lt;Contact&gt; contacts = [SELECT Id, AccountId FROM Contact WHERE AccountId IN :accountIds];
+for (Contact c : contacts) {
+    // process record
+}</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">The common recall pattern is: query first, then loop over the results, then process the records.</p>
+                    </div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Flow thinking pattern</h3>
+<pre><code>Start → Decision → Action → End</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;">When you get stuck, think in terms of entry, condition, action, and exit. That makes code and flow logic easier to reconstruct.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APEX SLIDE 3: Apex Fundamentals -->
         <div class="slide" data-section="apex">
             <h2>Apex Fundamentals — What Makes It Different</h2>
             <p style="margin-bottom:15px; color:#8b949e;">Apex looks like Java but runs inside Salesforce. It has built-in database access, automatic governor limits, and is designed for multi-tenant cloud computing.</p>
