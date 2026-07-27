@@ -11,15 +11,25 @@
         .hero { text-align: center; margin-bottom: 36px; }
         .hero h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 12px; }
         .hero p { color: #8b949e; max-width: 760px; margin: 0 auto; line-height: 1.75; }
+        .nav-panel { margin: 0 auto 24px; max-width: 960px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; text-align: center; }
+        .nav-panel a { color: #58a6ff; text-decoration: none; border: 1px solid #30363d; padding: 10px 16px; border-radius: 12px; background: #010409; transition: background 0.2s, transform 0.2s; }
+        .nav-panel a:hover { background: #161b22; transform: translateY(-1px); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: #161b22; border: 1px solid #30363d; border-radius: 18px; padding: 24px; }
         .card h2 { margin-top: 0; color: #58a6ff; }
         .card p, .card li, .card pre { color: #c9d1d9; }
         .card ul { padding-left: 1.2em; margin: 0.5em 0; }
         .card pre { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; overflow-x: auto; }
+        .primary-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: #ffffff; background: linear-gradient(135deg, #58a6ff, #7c3aed); border: none; padding: 13px 22px; border-radius: 14px; text-decoration: none; font-weight: 600; box-shadow: 0 16px 40px rgba(9,15,26,0.25); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 48px rgba(9,15,26,0.32); }
         .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
         .nav-links a { color: #58a6ff; text-decoration: none; border: 1px solid #30363d; padding: 10px 18px; border-radius: 12px; background: #010409; }
         .nav-links a:hover { background: #161b22; }
+        @media (max-width: 640px) {
+            .page { padding: 24px 16px 60px; }
+            .nav-panel a { flex: 1 1 100%; }
+            .primary-btn { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -29,15 +39,15 @@
             <p>Lightning Web Component framework is the modern Salesforce programming model for building Lightning Components. Learn HTML5, CSS3, JavaScript, and LWC from scratch while building real projects.</p>
         </div>
 
-        <div class="nav-panel" style="margin: 0 auto 24px; max-width: 960px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; text-align: center;">
-            <a href="index.html" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Home</a>
-            <a href="lwc.html" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">LWC Guide</a>
-            <a href="#overview" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Overview</a>
-            <a href="#roadmap" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Roadmap</a>
-            <a href="#html-tags" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">HTML</a>
-            <a href="#css-selectors" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">CSS</a>
-            <a href="#project-outline" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">Project</a>
-            <a href="#js-basics" style="color: #58a6ff; text-decoration:none; border:1px solid #30363d; padding: 10px 16px; border-radius: 12px; background:#010409;">JavaScript</a>
+        <div class="nav-panel">
+            <a href="index.html">Home</a>
+            <a href="lwc.html">LWC Guide</a>
+            <a href="#overview">Overview</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#html-tags">HTML</a>
+            <a href="#css-selectors">CSS</a>
+            <a href="#project-outline">Project</a>
+            <a href="#js-basics">JavaScript</a>
         </div>
 
         <div class="card" id="overview" style="margin-bottom: 24px;">
@@ -308,6 +318,10 @@ const message = `Hello ${name}, you are ${role}`;
         <div class="card" style="margin-top: 24px;">
             <h2>Next Step</h2>
             <p>When you are comfortable with HTML, CSS, and JavaScript, continue to the main LWC module for component architecture, decorators, events, and advanced patterns.</p>
+            <div class="cta-panel">
+                <p>Ready to move forward? Start the LWC module now.</p>
+                <a href="lwc.html" class="primary-btn">Continue to LWC</a>
+            </div>
         </div>
 
         <div class="nav-links">
