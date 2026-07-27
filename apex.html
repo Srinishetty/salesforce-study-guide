@@ -57,7 +57,7 @@
         // business logic
     }
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Start with the class declaration, then the method signature, then place the logic inside the method body.</p>
+                        <p style="margin-top:8px; color:#8b949e;">Remember this shape as a template: class → method → logic. When writing from memory, write the class first, then the method, then the body.</p>
                     </div>
                     <div class="card fade-in delay-1">
                         <h3>Trigger handler pattern</h3>
@@ -66,7 +66,7 @@
         AccountHandler.handle(Trigger.new, Trigger.oldMap);
     }
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Keep the trigger thin. Check the event, then delegate the real work to a handler class.</p>
+                        <p style="margin-top:8px; color:#8b949e;">Use this mnemonic: thin trigger, thick handler. Trigger = event routing, Handler = actual processing. That helps you write the skeleton quickly.</p>
                     </div>
                 </div>
                 <div>
@@ -76,12 +76,12 @@
 for (Contact c : contacts) {
     // process record
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">The common recall pattern is: query first, then loop over the results, then process the records.</p>
+                        <p style="margin-top:8px; color:#8b949e;">Memorize this as Q→L: Query, then Loop. Write the query first, then the for-loop skeleton, then the per-record action.</p>
                     </div>
                     <div class="card highlight fade-in delay-2">
                         <h3>Flow thinking pattern</h3>
 <pre><code>Start → Decision → Action → End</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">When you get stuck, think in terms of entry, condition, action, and exit. That makes code and flow logic easier to reconstruct.</p>
+                        <p style="margin-top:8px; color:#8b949e;">Think of Flow as a map: start, ask a question, do something, then finish. This lets you rebuild the flow logic from memory.</p>
                     </div>
                 </div>
             </div>
