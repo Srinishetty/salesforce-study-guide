@@ -39,7 +39,10 @@
                     <span class="badge orange" onclick="window.SlideEngine.goToSlide(5)" style="cursor:pointer;">Governor Limits</span>
                     <span class="badge red" onclick="window.SlideEngine.goToSlide(3)" style="cursor:pointer;">DML Operations</span>
                 </div>
-                <p class="fade-in delay-3" style="margin-top: 40px; color: #484f58;">Java-like strongly-typed language that runs on Salesforce servers</p>
+                <div class="note-box fade-in delay-3">
+                    <strong>How to read this page:</strong> each slide is a pattern. Look for the bold memory phrases and code skeletons, then use the examples to fill in details.
+                </div>
+                <p class="fade-in delay-3" style="margin-top: 20px; color: #484f58;">Java-like strongly-typed language that runs on Salesforce servers</p>
             </div>
         </div>
 
@@ -79,9 +82,9 @@ for (Contact c : contacts) {
                         <p style="margin-top:8px; color:#8b949e;"><strong>Recall rule:</strong> Q → L. Write the query first, then write the for-loop. If you forget the fields, use placeholders and fill them after.</p>
                     </div>
                     <div class="card highlight fade-in delay-2">
-                        <h3>Flow thinking pattern</h3>
+                        <h3>Process skeleton</h3>
 <pre><code>Start → Decision → Action → End</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;"><strong>Use this map:</strong> start the flow, decide which path, perform the action, then finish. That helps you sketch the flow without worrying about exact element names.</p>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Use this map:</strong> begin with the problem, decide the path, perform the action, then finish. That helps you sketch solutions without freezing on exact syntax.</p>
                     </div>
                 </div>
             </div>
@@ -170,7 +173,7 @@ Account newAcc = AccountService.createAccount('Acme');</code></pre>
             </div>
         </div>
 
-        <!-- APEX SLIDE 3: SOQL & SOSL -->
+        <!-- APEX SLIDE 4: SOQL & SOSL -->
         <div class="slide" data-section="apex">
             <h2>SOQL & SOSL — Querying Data</h2>
             <p style="margin-bottom:15px; color:#8b949e;">SOQL = Salesforce Object Query Language (like SQL for one object + relationships). SOSL = Salesforce Object Search Language (full-text search across multiple objects).</p>
@@ -900,8 +903,9 @@ Integer len = myString?.length();
 // Works with collections:
 String first = myList?.get(0)?.Name;
 
-// Works in SOQL:
-List&lt;Contact&gt; cons = [SELECT Account?.Name FROM Contact];
+// Works after query in Apex expressions:
+Contact firstContact = [SELECT Account.Name FROM Contact LIMIT 1];
+String accountName = firstContact.Account?.Name;
 
 // Common patterns:
 String msg = error?.body?.message ?? 'Unknown error';
@@ -1071,7 +1075,6 @@ String msg = System.Label.Error_Required_Field;
                             <tr><td>Assert class</td><td>Spring '23</td><td>Assert.areEqual() replaces System.assertEquals()</td></tr>
                             <tr><td>Set literals</td><td>Spring '24</td><td>Set&lt;String&gt; s = {'a', 'b', 'c'};</td></tr>
                             <tr><td>Multi-currency SOQL</td><td>Summer '24</td><td>convertCurrency() in SOQL</td></tr>
-                            <tr><td>Apex Guru AI</td><td>Winter '25</td><td>AI-powered code analysis in Setup</td></tr>
                         </table>
                     </div>
                 </div>
