@@ -174,6 +174,7 @@ Account newAcc = AccountService.createAccount('Acme');</code></pre>
         <div class="slide" data-section="apex">
             <h2>SOQL & SOSL — Querying Data</h2>
             <p style="margin-bottom:15px; color:#8b949e;">SOQL = Salesforce Object Query Language (like SQL for one object + relationships). SOSL = Salesforce Object Search Language (full-text search across multiple objects).</p>
+            <p style="margin-bottom:15px; color:#8b949e;"><strong>Quick recall:</strong> SOQL is always <code>List&lt;SObject&gt; results = [SELECT ... FROM Object WHERE ...];</code>. SOSL is always <code>List&lt;List&lt;SObject&gt;&gt; results = [FIND 'text' IN ALL FIELDS RETURNING Object(fields) LIMIT n];</code></p>
             <div class="two-col">
                 <div>
                     <div class="card fade-in">
@@ -266,6 +267,7 @@ List&lt;Account&gt; results = Database.query(query);</code></pre>
         <div class="slide" data-section="apex">
             <h2>DML Operations — Creating, Updating, Deleting Records</h2>
             <p style="margin-bottom:15px; color:#8b949e;">DML (Data Manipulation Language) statements persist changes to the database. Always bulkify — operate on lists, not single records.</p>
+            <p style="margin-bottom:15px; color:#8b949e;"><strong>Quick recall:</strong> DML patterns are <code>insert records;</code>, <code>update records;</code>, <code>delete records;</code>, <code>upsert records External_Id__c;</code>, <code>undelete records;</code>, <code>merge master dupe;</code>.</p>
             <div class="two-col">
                 <div>
                     <div class="card fade-in">
@@ -350,6 +352,7 @@ for (Database.SaveResult sr : results) {
         <div class="slide" data-section="apex">
             <h2>Triggers — Automating on Record Changes</h2>
             <p style="margin-bottom:15px; color:#8b949e;">Triggers execute Apex code before or after DML events on records. Always use a handler pattern — never put logic directly in the trigger.</p>
+            <p style="margin-bottom:15px; color:#8b949e;"><strong>Quick recall:</strong> Trigger skeleton = <code>trigger Name on Object(events) { if (Trigger.isBefore) { ... } if (Trigger.isAfter) { ... } }</code>. Then delegate to handler methods by event.</p>
             <div class="two-col">
                 <div>
                     <div class="card fade-in">
@@ -511,6 +514,7 @@ Account a = [SELECT Name, Industry FROM Account WHERE Id = :id];</code></pre>
         <div class="slide" data-section="apex">
             <h2>Collections — List, Set, Map</h2>
             <p style="margin-bottom:15px; color:#8b949e;">Collections are the foundation of bulkified Apex. Master these patterns and you'll never hit governor limits.</p>
+            <p style="margin-bottom:15px; color:#8b949e;"><strong>Quick recall:</strong> List = ordered list, Set = unique values, Map = key-value lookup. Use List for query results, Set for unique IDs, and Map for fast record lookup by Id.</p>
             <div class="two-col">
                 <div>
                     <div class="card fade-in">
@@ -597,6 +601,7 @@ Map&lt;Id, Account&gt; m = new Map&lt;Id, Account&gt;(
                 <div>
                     <div class="card fade-in">
                         <h3>@future — Simple Async</h3>
+                        <p style="margin-bottom:12px; color:#8b949e;"><strong>Quick recall:</strong> @future methods are fire-and-forget. Syntax: <code>public static void methodName(Set&lt;Id&gt; ids)</code> with <code>@future(callout=true)</code> above it.</p>
 <pre><code>// Fire-and-forget. No return value. No chaining.
 public class CalloutService {
     @future(callout=true)
@@ -645,6 +650,14 @@ Id jobId = System.enqueueJob(new ProcessRecordsJob(accts));
                 <div>
                     <div class="card fade-in delay-1">
                         <h3>Batch Apex — Large Data Volumes</h3>
+                        <p style="margin-bottom:12px; color:#8b949e;"><strong>Remember:</strong> Collect → Process → Finish. Batch classes always have the same 3 methods: <code>start()</code>, <code>execute()</code>, <code>finish()</code>.</p>
+                        <ul style="margin-bottom:12px; color:#8b949e; font-size:0.95em;">
+                            <li><code>class MyBatch implements Database.Batchable&lt;SObject&gt;</code></li>
+                            <li><code>public Database.QueryLocator start(Database.BatchableContext bc) { ... }</code></li>
+                            <li><code>public void execute(Database.BatchableContext bc, List&lt;Account&gt; scope) { ... }</code></li>
+                            <li><code>public void finish(Database.BatchableContext bc) { ... }</code></li>
+                            <li><code>Database.executeBatch(new MyBatch(), 200);</code></li>
+                        </ul>
 <pre><code>public class CleanupBatch implements 
     Database.Batchable&lt;SObject&gt;, Database.Stateful {
     
@@ -673,6 +686,7 @@ Id jobId = System.enqueueJob(new ProcessRecordsJob(accts));
 // Execute (200 records per batch by default):
 Database.executeBatch(new CleanupBatch(), 200);
 // For callouts: use batch size 1-100</code></pre>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Batch Mnemonic:</strong> <code>class → start → execute → finish → executeBatch</code>. If asked in an interview, write the skeleton first, then fill the query and chunk logic.</p>
                     </div>
                     <div class="card highlight fade-in delay-2">
                         <h3>When to Use What</h3>
