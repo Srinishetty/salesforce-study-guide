@@ -69,6 +69,76 @@
             color: var(--text-muted);
         }
 
+        .question-banner {
+            margin: 28px auto 0;
+            max-width: 760px;
+            border: 1px solid rgba(88,166,255,0.18);
+            background: rgba(9,13,26,0.9);
+            border-radius: 18px;
+            padding: 18px 22px;
+            text-align: left;
+            color: #c9d1d9;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+        .question-banner h2 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #58a6ff;
+        }
+        .question-banner p {
+            margin-bottom: 14px;
+            color: #8b949e;
+            line-height: 1.6;
+        }
+        .question-text {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #e6edf3;
+            margin-bottom: 14px;
+        }
+        .question-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .question-controls button,
+        .question-controls .countdown {
+            background: rgba(88,166,255,0.12);
+            border: 1px solid rgba(88,166,255,0.25);
+            color: #c9d1d9;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.92em;
+        }
+        .question-controls button {
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .question-controls button:hover {
+            background: rgba(88,166,255,0.18);
+            transform: translateY(-1px);
+        }
+        .question-controls button.active {
+            background: #2ea043;
+            border-color: #2ea043;
+            color: #fff;
+        }
+        .question-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 14px;
+            border-radius: 12px;
+            color: #8b949e;
+            font-size: 0.9em;
+        }
+        .question-category strong {
+            color: #58a6ff;
+        }
+
         /* Topic Grid */
         .topics {
             max-width: 900px;
@@ -208,6 +278,18 @@
             <span>&#x1F4C5; 2024-2026</span>
             <span>&#x1F4F1; Mobile Friendly</span>
         </div>
+        <div class="question-banner" aria-live="polite">
+            <h2>Live Questions for Interview & Project Stories</h2>
+            <p>Every time you open this site, a fresh Salesforce question appears so you can think like a developer working on a story. Use the mode buttons to switch between interview questions and live project decision questions.</p>
+            <div class="question-category">Category: <strong id="questionCategory">Interview</strong></div>
+            <div class="question-text" id="questionText">Loading your first question...</div>
+            <div class="question-controls">
+                <button id="modeInterview" type="button" class="active">Interview Questions</button>
+                <button id="modeProject" type="button">Project Questions</button>
+                <button id="toggleQuestions" type="button">Pause Questions</button>
+                <div class="countdown"><span id="countdown">60</span>s until next question</div>
+            </div>
+        </div>
     </header>
 
     <main class="topics">
@@ -322,6 +404,224 @@
     </footer>
 
     <script>
+        const interviewQuestions = [
+            'What is the difference between Lightning Web Components and Aura components?',
+            'How does the @api decorator work in LWC?',
+            'When would you use @wire versus imperative Apex calls?',
+            'What is the Shadow DOM and why does LWC use it?',
+            'How do you pass data from a parent component to a child component?',
+            'What is a custom event in LWC and how do you fire one?',
+            'How do you handle styling in LWC and why is it scoped?',
+            'What is Lightning Data Service and when should you use it?',
+            'How does the connectedCallback lifecycle hook work?',
+            'What is refreshApex used for in LWC?',
+            'How do you build a reusable card component in LWC?',
+            'When should you use lightning-record-form instead of lightning-record-edit-form?',
+            'How do you debug JavaScript errors in an LWC component?',
+            'What are the common performance issues in LWC and how can you avoid them?',
+            'How do you conditionally render content in an LWC template?',
+            'What is the purpose of the js-meta.xml file in LWC?',
+            'How can you use slots in Lightning Web Components?',
+            'What is the difference between @track and plain properties in LWC?',
+            'How do you use getRecord to retrieve Salesforce data?',
+            'What is Lightning Message Service and when should you use it?',
+            'How do you implement pagination in an LWC list component?',
+            'What are best practices for naming LWC files and components?',
+            'How do you apply responsive design in LWC?',
+            'What is the role of Apex test coverage in Salesforce deployments?',
+            'How can you prevent cross-site scripting in an LWC app?',
+            'How do you handle user input validation in LWC?',
+            'What is the difference between @track and getters in LWC?',
+            'How do you use a third-party JavaScript library in LWC?',
+            'How does navigation work in Lightning Experience?',
+            'What is the purpose of lightning-input-field in forms?',
+            'How do getters improve rendering performance in LWC?',
+            'What is a public property and how is it used in LWC?',
+            'How do you use @api to expose methods to parent components?',
+            'What is the role of connectedCallback vs renderedCallback?',
+            'How do you use template literals inside LWC templates?',
+            'When should you use lightning-record-view-form?',
+            'What is the difference between wire and imperative Apex in handling errors?',
+            'How can you share CSS across multiple components?',
+            'How do you use lightning-combobox for user selections?',
+            'What is a reactive property in LWC?',
+            'How do you memoize values using getters in LWC?',
+            'How do you implement search filtering in an LWC list?',
+            'What is the correct way to call a child method from a parent?',
+            'How do you use the RecordEditForm with custom validation?',
+            'What is the purpose of the `@salesforce/apex` import in LWC?',
+            'How do you handle record sharing when calling Apex from LWC?',
+            'What is an event detail and how is it used?',
+            'How do you use the `lightning-card` component effectively?',
+            'What is the difference between `lightning-input` and `lightning-input-field`?',
+            'How do you test LWC with Jest mocks for Apex?',
+            'How can you create dynamic CSS classes in LWC templates?',
+            'How do you use `querySelector` inside an LWC component?' 
+        ];
+
+        const projectQuestions = [
+            'You have a story to add a dashboard widget. What questions do you ask before starting?',
+            'A component is slow to render on record pages. What would you check first?',
+            'A form submission fails only for certain users. What could be the cause?',
+            'You need to display related records with filters. What is the best LWC pattern?',
+            'A page needs to be responsive on mobile and desktop. Which CSS strategy would you use?',
+            'A new field was added but not appearing in the component. Where do you check?',
+            'A component should show spinner while loading data. How would you implement that?',
+            'A lookup field selection is not updating the record. What event should you inspect?',
+            'A component is deployed but not visible in App Builder. What metadata setting might be wrong?',
+            'A user reports stale data after saving a record. What refresh strategy would you use?',
+            'A project requires CSV export from a list of records. What LWC pattern supports this?',
+            'A shared component must work in multiple pages. How do you design it for reuse?',
+            'A quick action should open an LWC form. What target should be set in js-meta.xml?',
+            'A field value needs to change based on another field. How do you handle this in LWC?',
+            'A component needs to call Apex and handle errors gracefully. What approach is best?',
+            'A list should support inline edit and save. What Salesforce UI component helps here?',
+            'A page needs to use the lightning-navigation service. What information is required?',
+            'A story asks for dark mode support. How do you handle it in a component style sheet?',
+            'A component should remember its state after refresh. What client-side storage can you use?',
+            'A form uses lightning-record-edit-form but custom validation is needed. How do you add it?',
+            'A component must work with Lightning Message Service. When is LMS a good choice?',
+            'A record page has a broken layout on small screens. What CSS settings help fix it?',
+            'A project asks to load related data in one request. What Apex or wire strategy do you choose?',
+            'A component is not accessible for keyboard users. What should you check?',
+            'A story requires event-based communication between siblings. What is the recommended pattern?',
+            'A page should show loading placeholders while data loads. What UX improvement can you apply?',
+            'A component should support multi-step input. How would you structure the template and JS?',
+            'A developer wants to add tests. What should you verify in Jest for LWC?',
+            'A story requires a chart with Salesforce data. What approach works best in LWC?',
+            'A component must handle record edit and creation in the same page. What design would you use?',
+            'A request asks for permission-based UI sections. How do you determine visibility?',
+            'A screen requires inline help text for fields. Where should it be placed in the template?',
+            'A story involves picking a record from a modal. What LWC pattern supports this?',
+            'A page should show a summary card and details view. How do you structure the components?',
+            'A project must support multiple tabs inside LWC. How do you handle state between tabs?',
+            'A component needs to use a third-party chart library. How do you add it to LWC?',
+            'A story requires record-level security enforcement. Where is this handled in Salesforce?',
+            'A user asks for CSV download of filtered data. How would you implement that in LWC?',
+            'A component should be reusable across multiple record pages. What metadata targets are needed?',
+            'A story requires a lookup search component. How do you avoid expensive SOQL calls?',
+            'A new integration requires OAuth authentication. How do you store credentials securely?',
+            'A project wants to show data freshness timestamp. How would you calculate and display it?',
+            'A page should update when related records change. What event or refresh strategy do you use?',
+            'A component needs to handle file upload. What Lightning component simplifies that?',
+            'A story asks for a responsive grid of cards. How do you achieve that in LWC CSS?',
+            'A user must be prevented from double-submitting a form. What pattern do you use?',
+            'A project requires dynamic picklist values. How do you load them in LWC?',
+            'A component needs to render raw HTML safely. What restrictions should you enforce?',
+            'A form should reset after saving. What method do you call on lightning-record-form?',
+            'A component should show inline validation messages. How do you implement those?',
+            'A record page should use conditional sections. How do you manage this in the template?',
+            'A component requires batch updates. How do you optimize data submission to Apex?',
+            'A story asks for improved accessibility. What aria attributes should you verify?'
+        ];
+
+        let questionQueue = [];
+        let currentQuestionIndex = 0;
+        let currentMode = 'interview';
+        let countdownSeconds = 60;
+        let questionTimer = null;
+        let countdownTimer = null;
+        let paused = false;
+
+        function shuffle(array) {
+            const result = array.slice();
+            for (let i = result.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+            return result;
+        }
+
+        function resetQuestionQueue(mode) {
+            const source = mode === 'project' ? projectQuestions : interviewQuestions;
+            questionQueue = shuffle(source);
+            currentQuestionIndex = 0;
+        }
+
+        function getCurrentQuestion() {
+            if (!questionQueue.length) {
+                resetQuestionQueue(currentMode);
+            }
+            return questionQueue[currentQuestionIndex];
+        }
+
+        function showQuestion(index) {
+            if (!questionQueue.length) {
+                resetQuestionQueue(currentMode);
+            }
+            const questionText = document.getElementById('questionText');
+            questionText.textContent = questionQueue[index % questionQueue.length];
+        }
+
+        function updateCategoryLabel() {
+            document.getElementById('questionCategory').textContent = currentMode === 'project' ? 'Project' : 'Interview';
+        }
+
+        function advanceQuestion() {
+            if (paused) return;
+            currentQuestionIndex += 1;
+            if (currentQuestionIndex >= questionQueue.length) {
+                resetQuestionQueue(currentMode);
+            }
+            showQuestion(currentQuestionIndex);
+            countdownSeconds = 60;
+            updateCountdown();
+        }
+
+        function startQuestionRotation() {
+            if (questionTimer) return;
+            questionTimer = setInterval(advanceQuestion, 60000);
+        }
+
+        function startCountdown() {
+            const countdown = document.getElementById('countdown');
+            countdownTimer = setInterval(() => {
+                if (!paused) {
+                    countdownSeconds -= 1;
+                    if (countdownSeconds <= 0) {
+                        countdownSeconds = 60;
+                    }
+                    countdown.textContent = countdownSeconds;
+                }
+            }, 1000);
+        }
+
+        function updateCountdown() {
+            const countdown = document.getElementById('countdown');
+            countdown.textContent = countdownSeconds;
+        }
+
+        function toggleQuestions() {
+            paused = !paused;
+            const button = document.getElementById('toggleQuestions');
+            button.textContent = paused ? 'Resume Questions' : 'Pause Questions';
+            button.classList.toggle('active', paused);
+        }
+
+        function setMode(mode) {
+            if (mode === currentMode) return;
+            currentMode = mode;
+            resetQuestionQueue(mode);
+            countdownSeconds = 60;
+            updateCategoryLabel();
+            showQuestion(currentQuestionIndex);
+            updateCountdown();
+            document.getElementById('modeInterview').classList.toggle('active', mode === 'interview');
+            document.getElementById('modeProject').classList.toggle('active', mode === 'project');
+        }
+
+        function initializeQuestionBanner() {
+            updateCategoryLabel();
+            resetQuestionQueue(currentMode);
+            showQuestion(currentQuestionIndex);
+            updateCountdown();
+            startQuestionRotation();
+            startCountdown();
+            document.getElementById('toggleQuestions').addEventListener('click', toggleQuestions);
+            document.getElementById('modeInterview').addEventListener('click', () => setMode('interview'));
+            document.getElementById('modeProject').addEventListener('click', () => setMode('project'));
+        }
+
         function toggleTheme() {
             const isLight = document.body.classList.toggle('light');
             document.getElementById('themeBtn').innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
@@ -332,6 +632,8 @@
             document.body.classList.add('light');
             document.getElementById('themeBtn').innerHTML = '&#x1F319;';
         }
+
+        initializeQuestionBanner();
     </script>
 </body>
 </html>
