@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Web Fundamentals for LWC - Salesforce Study Guide</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body { background: #0d1117; color: #e6edf3; }
+        .page { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+        .hero { text-align: center; margin-bottom: 36px; }
+        .hero h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 12px; }
+        .hero p { color: #8b949e; max-width: 760px; margin: 0 auto; line-height: 1.75; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 18px; padding: 24px; }
+        .card h2 { margin-top: 0; color: #58a6ff; }
+        .card p, .card li, .card pre { color: #c9d1d9; }
+        .card ul { padding-left: 1.2em; margin: 0.5em 0; }
+        .card pre { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; overflow-x: auto; }
+        .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
+        .nav-links a { color: #58a6ff; text-decoration: none; border: 1px solid #30363d; padding: 10px 18px; border-radius: 12px; background: #010409; }
+        .nav-links a:hover { background: #161b22; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="hero">
+            <h1>Web Fundamentals for LWC</h1>
+            <p>Before you build Lightning Web Components, you need a strong foundation in HTML, CSS, and JavaScript. This module covers the core web skills that every LWC developer uses every day.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>HTML — Most Used Tags</h2>
+                <p>In LWC templates, these are the HTML tags and patterns you will write most often.</p>
+                <ul>
+                    <li><strong>&lt;template&gt;</strong> — root wrapper for every LWC markup file.</li>
+                    <li><strong>&lt;div&gt;</strong>, <strong>&lt;span&gt;</strong> — generic containers for layout and inline text.</li>
+                    <li><strong>&lt;p&gt;</strong>, <strong>&lt;h1&gt;-&lt;h3&gt;</strong> — headings and paragraphs for readable structure.</li>
+                    <li><strong>&lt;ul&gt;/&lt;li&gt;</strong> — lists for menus, options, or bullet points.</li>
+                    <li><strong>&lt;template if:true={...}&gt;</strong> / <strong>for:each</strong> — conditional display and loops inside LWC templates.</li>
+                    <li><strong>&lt;lightning-input&gt;</strong>, <strong>&lt;lightning-combobox&gt;</strong>, <strong>&lt;lightning-button&gt;</strong> — reusable Salesforce input components.</li>
+                </ul>
+                <pre><code>&lt;template&gt;
+  &lt;lightning-card title="Customer Details"&gt;
+    &lt;p&gt;Name: {contactName}&lt;/p&gt;
+    &lt;lightning-input label="Email" value={email} onchange={handleEmailChange}&gt;&lt;/lightning-input&gt;
+    &lt;template if:true={hasPhone}&gt;
+      &lt;p&gt;Phone: {phoneNumber}&lt;/p&gt;
+    &lt;/template&gt;
+  &lt;/lightning-card&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h2>HTML — Common Attributes</h2>
+                <p>These attributes are the ones you use most in templates and markup.</p>
+                <ul>
+                    <li><strong>class</strong> — attach scoped component styles.</li>
+                    <li><strong>data-*</strong> — store custom values for event handlers.</li>
+                    <li><strong>onclick / onchange</strong> — wire template events to component methods.</li>
+                    <li><strong>value / checked / disabled</strong> — bind input state to JavaScript properties.</li>
+                    <li><strong>for:key</strong> — use with repeaters (<code>for:each</code>) to keep DOM stable.</li>
+                </ul>
+                <pre><code>&lt;template&gt;
+  &lt;lightning-input
+    class="field"
+    type="text"
+    value={name}
+    onchange={handleNameChange}
+    data-field="Name"
+  &gt;&lt;/lightning-input&gt;
+
+  &lt;template for:each={items} for:item="item"&gt;
+    &lt;div key={item.id}&gt;{item.label}&lt;/div&gt;
+  &lt;/template&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h2>JavaScript — Most Used Basics</h2>
+                <p>These JavaScript fundamentals are used most in LWC component classes and page logic.</p>
+                <ul>
+                    <li><strong>let / const</strong> — <code>const</code> for values that don't change, <code>let</code> when state updates.</li>
+                    <li><strong>Data types</strong> — string, number, boolean, object, array, undefined / null.</li>
+                    <li><strong>Functions</strong> — event handlers, lifecycle helpers, and utility methods.</li>
+                    <li><strong>Arrow functions</strong> — short syntax and lexical <code>this</code> binding.</li>
+                    <li><strong>Async / await</strong> — handle Apex and promise-based code cleanly.</li>
+                    <li><strong>Import / export</strong> — bring in Apex methods, Lightning modules, and shared utilities.</li>
+                </ul>
+                <pre><code>import { LightningElement } from 'lwc';
+import getContacts from '@salesforce/apex/ContactController.getContacts';
+
+export default class ContactList extends LightningElement {
+  contacts = [];
+  isLoading = false;
+
+  connectedCallback() {
+    this.loadContacts();
+  }
+
+  async loadContacts() {
+    this.isLoading = true;
+    try {
+      this.contacts = await getContacts();
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  get hasContacts() {
+    return this.contacts.length > 0;
+  }
+
+  handleSearchChange(event) {
+    const searchTerm = event.target.value;
+    console.log('Search:', searchTerm);
+  }
+}
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h2>JavaScript — Essential Notes</h2>
+                <p>These are the practical JS concepts that are especially helpful when learning LWC.</p>
+                <ul>
+                    <li><strong>Template literals</strong> — use backticks for embedded values and multi-line strings.</li>
+                    <li><strong>Spread operator</strong> — copy arrays/objects without mutating the original.</li>
+                    <li><strong>Destructuring</strong> — pull out values from objects or arrays in one expression.</li>
+                    <li><strong>Array methods</strong> — <code>map</code>, <code>filter</code>, <code>find</code>, <code>reduce</code> are used for list data.</li>
+                    <li><strong>Event handling</strong> — templates wire events to JS methods with <code>onclick</code>, <code>onchange</code>, <code>onsubmit</code>.</li>
+                    <li><strong>Querying DOM</strong> — use <code>this.template.querySelector()</code> inside a component, never <code>document.querySelector()</code>.</li>
+                </ul>
+                <pre><code>const values = [1, 2, 3];
+const doubled = values.map(n => n * 2);
+
+const user = { name: 'Maya', role: 'Admin' };
+const { name, role } = user;
+
+const clone = { ...user, role: 'User' };
+
+const message = `Hello ${name}, you are ${role}`;
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h2>CSS — Most Used Selectors</h2>
+                <p>These simple selectors cover the majority of styling needs in LWC components.</p>
+                <ul>
+                    <li><strong>element</strong> — style tags directly, e.g. <code>p</code>, <code>div</code>.</li>
+                    <li><strong>.class</strong> — attach reusable styles to elements.</li>
+                    <li><strong>#id</strong> — target a unique element when needed.</li>
+                    <li><strong>[attribute]</strong> — style elements by attributes or data values.</li>
+                    <li><strong>p + p</strong>, <strong>div > span</strong> — common child/sibling selectors.</li>
+                </ul>
+                <pre><code>p {
+  color: #c9d1d9;
+  line-height: 1.6;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+[data-state="active"] {
+  border-color: #58a6ff;
+}
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h2>CSS — Common Patterns</h2>
+                <p>These are the most useful CSS rules when building layouts and spacing in LWC.</p>
+                <ul>
+                    <li><strong>Box model</strong> — margin, padding, border, width.</li>
+                    <li><strong>Flexbox</strong> — align rows and columns.</li>
+                    <li><strong>Responsive</strong> — use min-width and max-width for mobile.</li>
+                    <li><strong>Text</strong> — color, font-size, font-weight.</li>
+                    <li><strong>Spacing</strong> — use margin/padding consistently.</li>
+                </ul>
+                <pre><code>.row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+}
+</code></pre>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+            <h2>Next Step</h2>
+            <p>When you are comfortable with HTML, CSS, and JavaScript, continue to the main LWC module for component architecture, decorators, events, and advanced patterns.</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">← Back to Home</a>
+            <a href="lwc.html">Continue to LWC</a>
+        </div>
+    </div>
+</body>
+</html>
