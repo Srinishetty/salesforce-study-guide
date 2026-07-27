@@ -124,20 +124,6 @@
             border-color: #2ea043;
             color: #fff;
         }
-        .question-category {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 14px;
-            border-radius: 12px;
-            color: #8b949e;
-            font-size: 0.9em;
-        }
-        .question-category strong {
-            color: #58a6ff;
-        }
 
         /* Topic Grid */
         .topics {
@@ -281,7 +267,6 @@
         <div class="question-banner" aria-live="polite">
             <h2>Live Questions for Interview & Project Stories</h2>
             <p>Every time you open this site, a fresh Salesforce question appears so you can think like a developer working on a story. Use the mode buttons to switch between interview questions and live project decision questions.</p>
-            <div class="question-category">Category: <strong id="questionCategory">Interview</strong></div>
             <div class="question-text" id="questionText">Loading your first question...</div>
             <div class="question-controls">
                 <button id="modeInterview" type="button" class="active">Interview Questions</button>
@@ -553,10 +538,6 @@
             questionText.textContent = questionQueue[index % questionQueue.length];
         }
 
-        function updateCategoryLabel() {
-            document.getElementById('questionCategory').textContent = currentMode === 'project' ? 'Project' : 'Interview';
-        }
-
         function advanceQuestion() {
             if (paused) return;
             currentQuestionIndex += 1;
@@ -603,7 +584,6 @@
             currentMode = mode;
             resetQuestionQueue(mode);
             countdownSeconds = 60;
-            updateCategoryLabel();
             showQuestion(currentQuestionIndex);
             updateCountdown();
             document.getElementById('modeInterview').classList.toggle('active', mode === 'interview');
@@ -611,7 +591,6 @@
         }
 
         function initializeQuestionBanner() {
-            updateCategoryLabel();
             resetQuestionQueue(currentMode);
             showQuestion(currentQuestionIndex);
             updateCountdown();
