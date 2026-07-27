@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>My Interview Experience - Conversational Scripts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0d1117; --bg-card: #161b22; --border: #30363d;
+            --text: #e6edf3; --text-muted: #8b949e;
+            --blue: #58a6ff; --green: #238636; --purple: #bc8cff;
+            --orange: #f0883e; --red: #da3633;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Topbar */
+        .topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 20px; background: var(--bg-card);
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
+        }
+        .topbar a, .topbar button { color: var(--text-muted); text-decoration: none; font-size: 1.3em; background: none; border: none; cursor: pointer; }
+        .topbar a:hover, .topbar button:hover { color: var(--blue); }
+        .topbar .title { font-weight: 600; font-size: 0.95em; color: var(--text); }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 100px; }
+
+        /* Headers & Badges */
+        .round-header { text-align: center; margin: 40px 0 32px; padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; }
+        .round-header h2 { font-size: 1.4em; margin-bottom: 8px; color: var(--text); }
+        .round-header p { color: var(--text-muted); font-size: 0.9em; }
+        .round-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; font-weight: 600; margin-top: 10px; }
+        .badge-tr { background: #1f6feb22; color: var(--blue); border: 1px solid var(--blue); }
+        .badge-mr { background: #8957e522; color: var(--purple); border: 1px solid var(--purple); }
+        
+        /* Chat UI */
+        .qa-pair { margin-bottom: 48px; }
+        .interviewer { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+        .interviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 1.2em; flex-shrink: 0; }
+        .interviewer-bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 16px 16px 16px; padding: 16px 20px; flex: 1; }
+        .interviewer-name { font-size: 0.75em; color: var(--blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .interviewer-bubble p { font-size: 1.05em; line-height: 1.6; }
+
+        /* Answer Blocks */
+        .natural-answer { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-left: 58px; }
+        .natural-header { padding: 12px 16px; font-size: 0.82em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: #8b5cf622; color: #a78bfa; border-bottom: 1px solid #8b5cf6; }
+        .natural-body { padding: 16px 20px; background: var(--bg-card); font-size: 0.93em; line-height: 1.8; color: var(--text); }
+        .natural-body .speaker { display: block; font-weight: 600; color: #a78bfa; margin-top: 14px; margin-bottom: 4px; font-size: 0.82em; text-transform: uppercase; }
+        .natural-body .speaker:first-child { margin-top: 0; }
+        .natural-body .speech { display: block; padding: 12px 16px; background: #8b5cf60a; border-left: 3px solid #8b5cf640; border-radius: 0 8px 8px 0; margin: 6px 0 14px; font-style: italic; line-height: 1.7; }
+        
+        /* Code/Steps */
+        .implementation-box { margin-top: 16px; border: 1px solid var(--border); border-radius: 8px; background: #010409; overflow: hidden; }
+        .implementation-title { padding: 8px 12px; font-size: 0.8em; font-weight: 600; background: #21262d; border-bottom: 1px solid var(--border); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .implementation-steps { padding: 12px 16px; color: var(--text); font-size: 0.9em; line-height: 1.6; }
+        .implementation-steps ul { padding-left: 20px; margin-bottom: 10px; }
+        
+        pre { padding: 12px 16px; overflow-x: auto; font-size: 0.85em; line-height: 1.5; margin: 0; }
+        code { font-family: 'Cascadia Code', 'Courier New', monospace; color: #79c0ff; }
+        .token-keyword { color: #ff7b72; }
+        .token-string { color: #a5d6ff; }
+        .token-comment { color: #8b949e; font-style: italic; }
+
+        /* Light theme */
+        body.light { --bg: #fff; --bg-card: #f6f8fa; --border: #d1d9e0; --text: #1f2328; --text-muted: #6e7781; --blue: #0550ae; --purple: #6639ba; --orange: #953800; --green: #1a7f37;}
+        body.light .natural-header { background: #8b5cf615; color: #6639ba; border-bottom-color: #6639ba; }
+        body.light .natural-body .speaker { color: #6639ba; }
+        body.light .natural-body .speech { background: #8b5cf608; border-left-color: #6639ba40; color: #1f2328; }
+        body.light .implementation-box { background: #eaeef2; border-color: #d1d9e0; }
+        body.light .implementation-title { background: #d1d9e0; color: #1f2328; }
+        body.light code { color: #0550ae; }
+        
+        @media (max-width: 600px) {
+            .container { padding: 16px 12px; }
+            .interviewer-bubble { padding: 12px 14px; }
+            .natural-answer { margin-left: 0; margin-top: 10px; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="index.html" title="Home">&#x1F3E0;</a>
+        <span class="title">My Interview Experience</span>
+        <button id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+
+    <div class="container">
+
+        <!-- ==========================================
+             ROUND 1: TECHNICAL (TR)
+        =========================================== -->
+        <div class="round-header" style="margin-top: 0;">
+            <h2>Round 1: Technical (TR)</h2>
+            <p>Apex, LWC, Flows, Scenarios, and Platform Knowledge.</p>
+            <span class="round-badge badge-tr">Technical Round</span>
+        </div>
+
+        <!-- Q1: Salesforce Experience -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>1. Tell me about your Salesforce experience.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You (Conversational, confident):</span>
+                    <span class="speech">"Sure! So, I've got about 5 years of experience in the IT industry, all within the Salesforce ecosystem. I'm a core developer, which means my day-to-day usually involves writing Apex trigger frameworks, handling batch processes, and building out custom UIs using LWC. I try to focus a lot on writing clean, bulk-safe code."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q2: Sharing Rule Scenario -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>2. Scenario: We have an "Advisers" object. When an Adviser creates a record, it should be editable by them, but NOT visible to other Advisers. However, a Sales Manager should be able to see and edit ALL Adviser records. How do you design this?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Okay, so this is actually a pretty straightforward standard security model scenario. We wouldn't need any code for this."</span>
+                    <span class="speech">"First, I'd go into Sharing Settings and set the OWD (Org-Wide Default) for the Advisers object to 'Private'. That instantly locks it down so Advisers can only see their own records. They won't see their peers' data."</span>
+                    <span class="speech">"Then, to handle the Sales Manager part, I'd rely on the Role Hierarchy. I'd make sure we have an 'Adviser' role, and the 'Sales Manager' role sits right above it. As long as 'Grant Access Using Hierarchies' is checked, the Manager automatically gets full view and edit access to everything their team owns."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q3: Lead Convert to Task -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>3. When a Lead is converted, automatically create a Task for the owner of the account. How will you achieve this? What are the possibilities?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"We could do this with Apex or a Flow, but honestly, these days I'd definitely go with a Record-Triggered Flow. It's much easier to maintain."</span>
+                    <span class="speech">"I'd set up an After-Save Flow on the Lead object. The trigger condition would just check if `IsConverted` equals true. Then I'd drag in a 'Create Records' element to make the Task, setting the `WhatId` to the newly converted Account's ID, and the `OwnerId` to the Account Owner."</span>
+                    <span class="speech">"If the client really insisted on Apex, I'd just write an `after update` trigger, loop through `Trigger.new` to check for that conversion flag, query the account owners, and do a bulk insert of the tasks. But Flow is the way to go here."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q4: Last Associated Contact -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>4. An Account has multiple Contacts. A user shouldn't be able to delete a Contact if it is the "last associated" one. How do you solve this?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"This is an interesting one. I'd actually ask the business for a quick clarification first. Does 'last associated' mean we just can't leave the Account empty, or does it mean the chronologically newest contact?"</span>
+                    <span class="speech">"If they just mean 'don't leave the account empty', we could use a Before-Delete Flow with a Custom Error. But to be fully safe against users doing mass-deletes, I prefer an Apex trigger. I'd do an aggregate query to count the total contacts, subtract the amount they are trying to delete, and if that math drops below 1, I use `.addError()` to block it."</span>
+                    <span class="speech">"If they actually mean 'don't delete the newest contact', I can't trust the standard `CreatedDate` because a contact could be created on Monday but linked to the account on Friday. So I'd use a Flow to stamp a custom 'Linked Date' field, and then write an Apex trigger to query the contacts ordered by that custom date to protect the newest one."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q5: OmniStudio -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>5. What features are available in OmniStudio, how do you use it, and where is it used?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Yeah, OmniStudio is awesome, especially for the Industry Clouds like Health or Financial Services. It basically lets us build really complex UIs without writing custom LWC."</span>
+                    <span class="speech">"The main pieces are FlexCards, which are great for displaying data at a glance; OmniScripts, which we use to build those guided, step-by-step wizards for the users; DataRaptors to grab and save data without writing SOQL; and Integration Procedures to handle heavy backend logic or API calls."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q6: Assignment Rule -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>6. What is an Assignment rule? Can you give an example?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Basically, it's how we automate routing for Leads and Cases. Instead of someone manually looking at new records and assigning them, the system does it based on criteria."</span>
+                    <span class="speech">"So, for example, if a Lead comes in from the website and the 'Country' field says 'US', the rule automatically assigns it to the North America Sales Queue. If it says 'UK', it goes to the EMEA Queue."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q7: Approval Process -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>7. What is an Approval process? How to configure it? Any example?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"It's exactly what it sounds like—automating business sign-offs. We configure it by setting entry criteria, defining who needs to approve it, and what happens when they say yes or no. Usually, it locks the record while it's pending."</span>
+                    <span class="speech">"A classic example is quoting. If a sales rep tries to give a discount over 20%, the entry criteria catches it, locks the quote, and pings the Regional Manager. If the manager hits approve, a field update automatically changes the status to 'Approved' and unlocks the record."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q8: Email to Case -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>8. What is Email-to-Case?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"It's a standard feature where you set up a support email address, and whenever a customer emails it, Salesforce automatically turns that email into a Case record. It maps the subject to the case subject and the email body to the description."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q9: Email Domain Restriction -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>9. A case is created via Email-to-Case. If the email is from within the internal team (like gmail@tcs.com), it should prevent the case creation. How do you resolve this?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"By default, Email-to-Case grabs everything. To stop internal spam, the quickest way is a Before-Save Flow on the Case. We check if the sender email contains '@tcs.com' and just auto-close the case before an agent ever sees it."</span>
+                    <span class="speech">"But if we want to be really strict and save database storage, I'd skip standard Email-to-Case entirely and write a custom Apex Email Service. That way, my code intercepts the email in memory, sees the internal domain, and just drops it completely without inserting a record."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q10: Flow - Scheduled Path -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>10. Do you know Flow? What have you built recently? (Schedule path in flow to monitor external systems response)</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Yes, absolutely. A good example is a monitoring flow I built recently using a Scheduled Path."</span>
+                    <span class="speech">"We had a process where we requested data from an external system, and we needed to make sure they replied. So, when the outbound request was sent, a flow triggered and I set a Scheduled Path to wake up exactly 1 hour later."</span>
+                    <span class="speech">"When that hour elapsed, the flow checked the record status. If the external system had replied, great, it did nothing. But if the status was still 'Pending', it automatically logged an error and emailed the admin team saying the external system timed out."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q11: Flow Errors -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>11. How do you handle errors in Flow?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I don't just rely on the default red error screen. If a DML element fails, I always drag a Fault Path off of it."</span>
+                    <span class="speech">"In a proper org, I route that fault path to a standard Error Handler Subflow. I pass the fault message into it, and the subflow takes care of logging it to a custom Error object so the dev team can investigate, while showing the user a friendly 'Oops, something went wrong' screen."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q12: JSON -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>12. Explain JSON structure and how you handle it in Salesforce.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Honestly, JSON is just the standard format we use to pass data back and forth in APIs. It's built on key-value pairs wrapped in curly braces."</span>
+                    <span class="speech">"In Apex, I handle it mainly using wrapper classes. If an external system sends us a JSON payload, I don't try to parse it string by string. I build a Wrapper Class that matches the structure, and just run `JSON.deserialize()`. It automatically dumps the JSON data straight into my Apex variables."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q13: Trigger on Account -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>13. Write a trigger on account.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I strictly use the Trigger Handler pattern. You'll never see me writing logic in the `.trigger` file itself."</span>
+                    <span class="speech">"I'd define the trigger, set the events like `before insert` or `after update`, and immediately pass `Trigger.new` or `Trigger.oldMap` to a helper class. It makes the code way easier to read, test, and maintain."</span>
+                    <div class="implementation-box">
+                        <div class="implementation-title">Code: Trigger Pattern</div>
+<pre><code><span class="token-keyword">trigger</span> AccountTrigger <span class="token-keyword">on</span> Account (before insert, after update) {
+    <span class="token-keyword">if</span>(Trigger.isBefore && Trigger.isInsert) {
+        AccountTriggerHandler.onBeforeInsert(Trigger.new);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q14: Decorators -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>14. What is a Decorator and what is it used for in LWC?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"We basically use three main decorators in LWC to change how properties behave."</span>
+                    <span class="speech">"If I need to pass data from a parent component into a child, I use `@api` to make the child's property public. If I need to pull data from Salesforce automatically without imperative Apex, I use `@wire`. And I use `@track` if I have an array or object and I need the UI to update when data *inside* that object changes."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q15: Recent Project -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>15. Tell me about your recent project.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Right now, I'm working on a pretty large global healthcare implementation. We're using both Salesforce and ServiceMax to manage field service operations."</span>
+                    <span class="speech">"My job is mainly ensuring the backend architecture holds up—syncing data smoothly across standard and custom ServiceMax objects for the technicians in the field."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q16: Recent Build -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>16. What have you built recently?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I recently put together a custom LWC datatable. The standard list views just weren't cutting it for our users who needed advanced, multi-field filtering."</span>
+                    <span class="speech">"So I built a custom UI where they can search and filter dynamically. It calls an Apex backend imperatively and renders the results instantly."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q17: Parent to Grandchild -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>17. How do you communicate from a Parent component down to a Grandchild component?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I try to avoid prop drilling. Passing an `@api` property from parent, to child, to grandchild gets messy fast."</span>
+                    <span class="speech">"Instead, I rely on Lightning Message Service (LMS). I just create a Message Channel. The parent component publishes the data, and the grandchild component subscribes to it. It totally bypasses the middle component and keeps the architecture decoupled."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q18: Search LWC -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>18. Build an LWC search button for multiple objects via Email.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I'd create a quick action LWC with a search input. When they enter the email and hit search, JavaScript uses async/await to call my Apex method."</span>
+                    <span class="speech">"The important part is the Apex. I wouldn't use SOQL here. I'd use a SOSL 'FIND' query, passing in the email. SOSL is perfect for this because it lets me search across Accounts, Contacts, and Leads all at the exact same time. Then I just return those results back to the LWC."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q19: SOSL -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>19. How to use SOSL?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I use SOSL specifically when I need to do a text search across multiple, unrelated objects. You start it with the `FIND` keyword."</span>
+                    <span class="speech">"So, `FIND 'john@gmail.com' IN EMAIL FIELDS RETURNING Account, Contact`. It gives you back a list of lists, which you can then parse out."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q20: Platform Events -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>20. What is a Platform Event? Have you built anything using it?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Yeah, Platform Events are our go-to for event-driven architecture. They're custom objects that end in `__e`."</span>
+                    <span class="speech">"I recently used them to decouple an integration. Instead of my Apex trigger waiting around for an external system to respond via a slow HTTP callout, the trigger just published a Platform Event. The external system subscribed to the Salesforce event bus, grabbed the payload, and processed it on its own time."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q21: CDC -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>21. What is CDC?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"CDC is Change Data Capture. It's basically automated data replication. Once you turn it on in Setup, anytime a record is created or changed, Salesforce automatically fires off an event payload. We mostly use it just to keep external databases perfectly in sync with our Salesforce org."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q22: SOQL -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>22. SOQL: Write a query to find the number of contacts in each account.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I'd use an aggregate query with a GROUP BY clause for this. `SELECT AccountId, COUNT(Id) FROM Contact GROUP BY AccountId`."</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q23: JS Async -->
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Tech Panel</div>
+                    <p>23. JS: How does async work? What are the ways we can configure it?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Since JS doesn't block the thread, async operations like Apex callouts run in the background and return a Promise."</span>
+                    <span class="speech">"You can handle that promise the old way, using `.then()` and `.catch()`, but I prefer the modern way: `async/await`. You just tag the function as async, and use the await keyword before the Apex call. It pauses the code right there until the server responds, which makes the code way easier to read."</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ==========================================
+             ROUND 2: MANAGERIAL (MR)
+        =========================================== -->
+        <div class="round-header">
+            <h2>Round 2: Managerial (MR)</h2>
+            <p>Experience, Project Depth, and Career Trajectory.</p>
+            <span class="round-badge badge-mr">Managerial Fit</span>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>1. Brief me about yourself.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Sure. I'm a Salesforce developer with about 5 years of experience in the IT space. I spend most of my time focused on custom development—writing Apex, handling integrations, and building LWC frontends. I really enjoy solving backend architecture problems, which is why I'm looking for a role that pushes me a bit more in that direction."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>2. Tell me about your current project.</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"We are implementing a global healthcare solution using Salesforce and ServiceMax. The whole idea is to streamline operations for our field technicians so they have the exact data and inventory they need while out on a job."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>3. What is your responsibility in the current project?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I'm one of the core devs, so my day-to-day is pretty technical. I own a lot of the backend syncing logic between standard Salesforce and ServiceMax objects. I write the Apex batches, handle the trigger frameworks, and occasionally build out custom LWCs when the standard UI doesn't fit the requirement."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>4. Why are you switching jobs?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I've learned a lot here and delivered some really solid features, but I'm looking for a bit more of a challenge. I want to step into an environment where I can tackle heavier architectural problems and work with a more modern tech stack."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>5. Is Accenture your first company?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Yep, I started out at Accenture and I've spent the last 5 years here really honing my skills as a developer."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>6. How many years of experience do you have specifically in LWC?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"I've been heavily using LWC for the last 2+ years. I'm very comfortable with it, whether it's building a quick action or setting up complex components that talk to each other via message channels."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">HR Rep</div>
+                    <p>7. Are you compatible with switching your location?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Yeah, absolutely. I'm totally open to relocating for this role."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">Hiring Manager</div>
+                    <p>8. As a Salesforce developer, what do you want to upgrade?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"Skill-wise, I'm really looking at Agentforce and AI right now. I think that's where the platform is heading. Career-wise, I want to upgrade my ability to lead integrations and make those big architectural decisions."</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-pair">
+            <div class="interviewer">
+                <div class="interviewer-avatar">&#x1F464;</div>
+                <div class="interviewer-bubble">
+                    <div class="interviewer-name">HR Rep</div>
+                    <p>9. What is your Notice period?</p>
+                </div>
+            </div>
+            <div class="natural-answer">
+                <div class="natural-header">&#x1F3A4; How to answer naturally</div>
+                <div class="natural-body">
+                    <span class="speaker">You:</span>
+                    <span class="speech">"My official notice is [30/60/90] days, and I'm ready to serve that to make sure I hand off my current work properly."</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light');
+            const btn = document.getElementById('themeBtn');
+            btn.innerHTML = isLight ? '&#x1F319;' : '&#x2600;&#xFE0F;';
+            localStorage.setItem('study-theme', isLight ? 'light' : 'dark');
+        }
+        if (localStorage.getItem('study-theme') === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('themeBtn').innerHTML = '&#x1F319;';
+        }
+    </script>
+</body>
+</html>
