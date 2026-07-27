@@ -46,7 +46,7 @@
         <!-- APEX SLIDE 2: Syntax First, Then Example -->
         <div class="slide" data-section="apex">
             <h2>Syntax First, Then Example</h2>
-            <p style="margin-bottom:15px; color:#8b949e;">When you know the concept but freeze while writing code, begin with the structure. Learn the pattern first, then fill in the logic.</p>
+            <p style="margin-bottom:15px; color:#8b949e;">When you know the concept but freeze while writing code, start by writing the outer shape. Use the pattern names below as memory hooks.</p>
             <div class="two-col">
                 <div>
                     <div class="card fade-in">
@@ -57,7 +57,7 @@
         // business logic
     }
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Remember this shape as a template: class → method → logic. When writing from memory, write the class first, then the method, then the body.</p>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Remember:</strong> class → method → logic. If you forget details, write the class header first, then stub the method, then add the body comments.</p>
                     </div>
                     <div class="card fade-in delay-1">
                         <h3>Trigger handler pattern</h3>
@@ -66,7 +66,7 @@
         AccountHandler.handle(Trigger.new, Trigger.oldMap);
     }
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Use this mnemonic: thin trigger, thick handler. Trigger = event routing, Handler = actual processing. That helps you write the skeleton quickly.</p>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Memory tip:</strong> thin trigger, thick handler. The trigger only routes events; the handler contains the logic. That skeleton is what most interviewers want to hear.</p>
                     </div>
                 </div>
                 <div>
@@ -76,12 +76,12 @@
 for (Contact c : contacts) {
     // process record
 }</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Memorize this as Q→L: Query, then Loop. Write the query first, then the for-loop skeleton, then the per-record action.</p>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Recall rule:</strong> Q → L. Write the query first, then write the for-loop. If you forget the fields, use placeholders and fill them after.</p>
                     </div>
                     <div class="card highlight fade-in delay-2">
                         <h3>Flow thinking pattern</h3>
 <pre><code>Start → Decision → Action → End</code></pre>
-                        <p style="margin-top:8px; color:#8b949e;">Think of Flow as a map: start, ask a question, do something, then finish. This lets you rebuild the flow logic from memory.</p>
+                        <p style="margin-top:8px; color:#8b949e;"><strong>Use this map:</strong> start the flow, decide which path, perform the action, then finish. That helps you sketch the flow without worrying about exact element names.</p>
                     </div>
                 </div>
             </div>
