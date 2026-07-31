@@ -90,6 +90,32 @@
             color: #8b949e;
             line-height: 1.6;
         }
+        .study-note {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            color: #8b949e;
+            font-size: 0.95em;
+            line-height: 1.5;
+            justify-content: center;
+            max-width: 780px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .study-note strong {
+            color: #e6edf3;
+            min-width: 100%;
+            font-weight: 600;
+        }
+        .study-note span {
+            background: rgba(88,166,255,0.12);
+            border: 1px solid rgba(88,166,255,0.18);
+            border-radius: 999px;
+            padding: 6px 12px;
+            display: inline-flex;
+        }
         .question-text {
             font-size: 1.05em;
             font-weight: 600;
@@ -102,14 +128,20 @@
             gap: 10px;
             align-items: center;
         }
-        .question-controls button,
-        .question-controls .countdown {
+        .question-controls button {
             background: rgba(88,166,255,0.12);
             border: 1px solid rgba(88,166,255,0.25);
             color: #c9d1d9;
             border-radius: 12px;
             padding: 10px 14px;
             font-size: 0.92em;
+        }
+        .answer-text {
+            font-size: 0.95em;
+            color: #8b949e;
+            border-top: 1px solid rgba(88,166,255,0.12);
+            padding-top: 12px;
+            margin-top: 10px;
         }
         .question-controls button {
             cursor: pointer;
@@ -148,6 +180,37 @@
             gap: 12px;
             position: relative;
             overflow: hidden;
+        }
+        .topic-card .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .topic-card .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .topic-card .action-btn:hover {
+            transform: translateY(-1px);
+        }
+        .topic-card .action-btn.primary {
+            background: #2ea043;
+            color: #fff;
+        }
+        .topic-card .action-btn.secondary {
+            background: rgba(88,166,255,0.12);
+            border: 1px solid rgba(88,166,255,0.25);
+            color: #c9d1d9;
+        }
+        .topic-card .action-btn.secondary:hover {
+            background: rgba(88,166,255,0.18);
         }
         .topic-card::before {
             content: '';
@@ -257,22 +320,31 @@
 
     <header class="header">
         <h1>&#x26A1; Salesforce Developer Study Guide</h1>
-        <p>Comprehensive study material covering LWC, Apex, Flow, Visualforce, and Integration. Tap a topic to start learning.</p>
+        <p>Comprehensive study material covering LWC, Apex, Flow, Visualforce, and Integration. Optimized for Android and modern mobile browsers.</p>
         <div class="badge-row">
             <span>&#x1F4D6; 94 Slides</span>
             <span>&#x2753; 90+ Q&amp;A</span>
             <span>&#x1F4C5; 2024-2026</span>
             <span>&#x1F4F1; Mobile Friendly</span>
         </div>
+        <div class="study-note">
+            <strong>What you get on every topic:</strong>
+            <span>Syntax</span>
+            <span>Example</span>
+            <span>Edge cases</span>
+            <span>Thumb rules</span>
+            <span>When to use</span>
+            <span>Advantages</span>
+            <span>Drawbacks</span>
+        </div>
         <div class="question-banner" aria-live="polite">
-            <h2>Live Questions for Interview & Project Stories</h2>
-            <p>Every time you open this site, a fresh Salesforce question appears so you can think like a developer working on a story. Use the mode buttons to switch between interview questions and live project decision questions.</p>
+            <h2>Live Salesforce Questions</h2>
+            <p>Each minute, a new Salesforce question appears. Tap the button to pause or resume the countdown.</p>
             <div class="question-text" id="questionText">Loading your first question...</div>
             <div class="question-controls">
                 <button id="modeInterview" type="button" class="active">Interview Questions</button>
                 <button id="modeProject" type="button">Project Questions</button>
-                <button id="toggleQuestions" type="button">Pause Questions</button>
-                <div class="countdown"><span id="countdown">60</span>s until next question</div>
+                <button id="toggleQuestions" type="button">Pause Questions · 60s</button>
             </div>
         </div>
 
@@ -282,25 +354,25 @@
         <div class="topic-card" style="--card-accent: #58a6ff;">
             <div class="icon">&#x26A1;</div>
             <div>
-                <h2>Lightning Web Components — Zero Hero Path</h2>
-                <p>Start with core HTML/CSS/JavaScript fundamentals, then move into full LWC architecture, lifecycle, reactivity, decorators, component communication, Shadow DOM, LDS, wire adapters, and advanced app patterns.</p>
+                <h2>Learn LWC from the Basics</h2>
+                <p>Begin with LWC fundamentals, then progress through component architecture, reactivity, decorators, communication, and advanced Salesforce patterns.</p>
                 <div class="meta">
                     <span>📘 beginner</span>
                     <span>⚡ essential</span>
                     <span>&#x1F4CA; 62 slides</span>
                     <span>&#x2753; 90+ Q&amp;A</span>
                 </div>
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;">
-                    <a href="lwc-web-fundamentals.html" style="display:inline-block; background:#2ea043; color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none;">Start Fundamentals</a>
-                    <a href="lwc.html" style="display:inline-block; background:#58a6ff; color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none;">Open LWC Guide</a>
+                <div class="actions" style="margin-top:16px;">
+                    <a href="lwc-web-fundamentals.html" class="action-btn primary">Start Fundamentals</a>
+                    <a href="lwc.html" class="action-btn secondary">Open Full LWC Guide</a>
                 </div>
             </div>
         </div>
         <a href="apex.html" class="topic-card" style="--card-accent: #f0883e;">
             <div class="icon">&#x2615;</div>
             <div>
-                <h2>Apex Programming</h2>
-                <p>Classes, triggers, SOQL/DML, governor limits, async patterns, testing, modern features (switch, ?., User Mode).</p>
+                <h2>APEX</h2>
+                <p>Classes, triggers, SOQL/DML, governor limits, async patterns, testing, and modern Apex design.</p>
                 <div class="meta">
                     <span>&#x1F4CA; 14 slides</span>
                     <span>&#x1F525; Core skill</span>
@@ -536,7 +608,14 @@
                 resetQuestionQueue(currentMode);
             }
             const questionText = document.getElementById('questionText');
-            questionText.textContent = questionQueue[index % questionQueue.length];
+            const answerText = document.getElementById('answerText');
+            questionText.textContent = 'Question: ' + questionQueue[index % questionQueue.length];
+            answerText.textContent = 'Answer: think through the approach, then explain the implementation path.';
+        }
+
+        function updatePauseButton() {
+            const button = document.getElementById('toggleQuestions');
+            button.textContent = paused ? 'Resume Questions · Paused' : `Pause Questions · ${countdownSeconds}s`;
         }
 
         function advanceQuestion() {
@@ -556,28 +635,27 @@
         }
 
         function startCountdown() {
-            const countdown = document.getElementById('countdown');
+            const button = document.getElementById('toggleQuestions');
             countdownTimer = setInterval(() => {
                 if (!paused) {
                     countdownSeconds -= 1;
                     if (countdownSeconds <= 0) {
                         countdownSeconds = 60;
                     }
-                    countdown.textContent = countdownSeconds;
+                    button.textContent = `Pause Questions · ${countdownSeconds}s`;
                 }
             }, 1000);
         }
 
         function updateCountdown() {
-            const countdown = document.getElementById('countdown');
-            countdown.textContent = countdownSeconds;
+            updatePauseButton();
         }
 
         function toggleQuestions() {
             paused = !paused;
             const button = document.getElementById('toggleQuestions');
-            button.textContent = paused ? 'Resume Questions' : 'Pause Questions';
             button.classList.toggle('active', paused);
+            updatePauseButton();
         }
 
         function setMode(mode) {

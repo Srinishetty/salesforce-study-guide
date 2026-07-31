@@ -31,7 +31,11 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     overflow: hidden;
+    -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+}
+button, a {
+    touch-action: manipulation;
 }
 
 /* ===== SLIDE CONTAINER ===== */
