@@ -459,8 +459,7 @@
             <div class="question-text" id="questionText">Loading your first question...</div>
             <div class="answer-text" id="answerText">Answer: think through the approach, then explain the implementation path.</div>
             <div class="question-controls">
-                <button id="modeInterview" type="button" class="active">Interview Questions</button>
-                <button id="modeProject" type="button">Project Questions</button>
+                <button id="modeToggle" type="button">Switch to Project Questions</button>
                 <button id="toggleQuestions" type="button">Pause Questions · 60s</button>
             </div>
         </div>
@@ -707,6 +706,13 @@
             answerText.textContent = 'Answer: think through the approach, then explain the implementation path.';
         }
 
+        function updateModeButton() {
+            const button = document.getElementById('modeToggle');
+            button.textContent = currentMode === 'interview'
+                ? 'Switch to Project Questions'
+                : 'Switch to Interview Questions';
+        }
+
         function updatePauseButton() {
             const button = document.getElementById('toggleQuestions');
             button.textContent = paused ? 'Resume Questions · Paused' : `Pause Questions · ${countdownSeconds}s`;
@@ -752,26 +758,40 @@
             updatePauseButton();
         }
 
+        function saveQuestionMode(mode) {
+            localStorage.setItem('study-question-mode', mode);
+        }
+
+        function getSavedQuestionMode() {
+            const saved = localStorage.getItem('study-question-mode');
+            return saved === 'project' ? 'project' : 'interview';
+        }
+
         function setMode(mode) {
             if (mode === currentMode) return;
             currentMode = mode;
+            saveQuestionMode(mode);
             resetQuestionQueue(mode);
             countdownSeconds = 60;
             showQuestion(currentQuestionIndex);
             updateCountdown();
-            document.getElementById('modeInterview').classList.toggle('active', mode === 'interview');
-            document.getElementById('modeProject').classList.toggle('active', mode === 'project');
+            updateModeButton();
+        }
+
+        function toggleMode() {
+            setMode(currentMode === 'interview' ? 'project' : 'interview');
         }
 
         function initializeQuestionBanner() {
+            currentMode = getSavedQuestionMode();
             resetQuestionQueue(currentMode);
             showQuestion(currentQuestionIndex);
+            updateModeButton();
             updateCountdown();
             startQuestionRotation();
             startCountdown();
             document.getElementById('toggleQuestions').addEventListener('click', toggleQuestions);
-            document.getElementById('modeInterview').addEventListener('click', () => setMode('interview'));
-            document.getElementById('modeProject').addEventListener('click', () => setMode('project'));
+            document.getElementById('modeToggle').addEventListener('click', toggleMode);
         }
 
         function toggleTheme() {
