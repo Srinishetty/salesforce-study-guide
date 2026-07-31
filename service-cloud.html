@@ -9,6 +9,23 @@
         .diagram-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-top: 20px; }
         .diagram-card svg { width: 100%; height: auto; display: block; }
         .diagram-title { margin-bottom: 12px; color: var(--text-secondary); font-size: 0.95em; }
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: rgba(56,189,248,0.12);
+            border: 1px solid rgba(56,189,248,0.2);
+            color: #8be5ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .resource-link:hover {
+            background: rgba(56,189,248,0.18);
+            border-color: rgba(56,189,248,0.3);
+        }
     </style>
 </head>
 <body data-page="service-cloud">
@@ -40,6 +57,10 @@
                 <div class="note-box fade-in delay-3">
                     <strong>How to use this page:</strong> learn Service Cloud concepts before building support processes or integrations.
                 </div>
+                <a class="resource-link fade-in delay-4" href="https://www.apexhours.com/salesforce-service-cloud-training/" target="_blank" rel="noopener noreferrer">
+                    <span>📚</span>
+                    <span>Deepen your Service Cloud knowledge with Apex Hours training</span>
+                </a>
                 <div class="diagram-card fade-in delay-4">
                     <div class="diagram-title">Service Cloud process overview</div>
                     <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

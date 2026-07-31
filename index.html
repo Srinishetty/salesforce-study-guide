@@ -217,29 +217,123 @@
             color: #fff;
         }
 
-        /* Topic Grid */
-        .topics {
-            max-width: 900px;
+        .hero {
+            max-width: 1080px;
             margin: 0 auto;
-            padding: 40px 20px 60px;
+            padding: 0 20px 28px;
+            display: grid;
+            gap: 26px;
+        }
+        .hero-copy {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .hero-copy h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            line-height: 1.02;
+        }
+        .hero-copy p {
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 170px;
+        }
+        .feature-card h3 {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.05em;
+        }
+        .feature-card p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+            flex: 1;
+        }
+        .feature-card span {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .page-sections {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: grid;
+            gap: 42px;
+        }
+        .page-section {
+            display: grid;
+            gap: 18px;
+        }
+        .section-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 16px;
+        }
+        .section-header h2 {
+            font-size: 1.6em;
+            margin: 0;
+        }
+        .section-header p {
+            margin: 0;
+            color: var(--text-muted);
+            max-width: 680px;
+            line-height: 1.7;
+        }
+        .section-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
         }
-
         .topic-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 28px 24px;
+            padding: 24px;
             text-decoration: none;
             color: var(--text);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             position: relative;
             overflow: hidden;
+        }
+        .topic-card .meta {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+        .topic-card .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.06);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.82em;
+            color: var(--text-secondary);
         }
         .topic-card .actions {
             display: flex;
@@ -416,45 +510,46 @@
     <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">&#x2600;&#xFE0F;</button>
 
     <header class="header">
-        <h1>&#x26A1; Salesforce Developer Study Guide</h1>
-        <p>Comprehensive study material covering LWC, Apex, Flow, Visualforce, and Integration. Optimized for Android and modern mobile browsers.</p>
+        <div class="hero">
+            <div class="hero-copy">
+                <h1>&#x26A1; Salesforce Developer Study Guide</h1>
+                <p>Fast, organized learning for Salesforce developers: start with the cloud, build core developer skills, and prepare for interviews.</p>
+            </div>
+            <div class="hero-grid">
+                <div class="feature-card">
+                    <h3>Cloud first, code later</h3>
+                    <p>Start with Sales Cloud and Service Cloud to understand business workflows before jumping into Apex, LWC, and Flow.</p>
+                    <span>Beginner-friendly path</span>
+                </div>
+                <div class="feature-card">
+                    <h3>Developer-ready content</h3>
+                    <p>Use slide-based topics with examples, patterns, and quick recall cards for real Salesforce development questions.</p>
+                    <span>Practical examples</span>
+                </div>
+                <div class="feature-card">
+                    <h3>Interview-ready flow</h3>
+                    <p>Open the interview hub to choose the right prep path: mock questions, senior scenarios, or TCS-specific experience.</p>
+                    <span>Clear practice menu</span>
+                </div>
+            </div>
+        </div>
+
         <div class="badge-row">
             <span>&#x1F4D6; 94 Slides</span>
             <span>&#x2753; 90+ Q&amp;A</span>
             <span>&#x1F4C5; 2024-2026</span>
             <span>&#x1F4F1; Mobile Friendly</span>
         </div>
-        <div class="study-note">
-            <strong>What you get on every topic:</strong>
-            <span>Syntax</span>
-            <span>Example</span>
-            <span>Edge cases</span>
-            <span>Thumb rules</span>
-            <span>When to use</span>
-            <span>Advantages</span>
-            <span>Drawbacks</span>
-        </div>
-        <div class="quick-start">
-            <strong>Recommended beginner path</strong>
-            <ul>
-                <li>Start with the platform basics and data model before writing code.</li>
-                <li>Learn Sales Cloud and Service Cloud first so you understand business workflows.</li>
-                <li>Move to LWC, Apex, and Flow only after the core Salesforce concepts are clear.</li>
-                <li>Finish with the Interview Preparation hub for real question practice.</li>
-            </ul>
-        </div>
+
         <div class="learn-before">
-            <h2>Learn before you start development</h2>
-            <p>Before writing code, make sure you understand the platform foundation, security model, declarative automation, and Salesforce data architecture.</p>
+            <h2>Recommended learning sequence</h2>
             <ul>
-                <li><strong>Sales Cloud:</strong> Leads, Accounts, Opportunities, Products, Price Books, Sales processes and opportunity stages.</li>
-                <li><strong>Service Cloud:</strong> Cases, Service Console, Knowledge, Entitlements, Omni-Channel routing, and support processes.</li>
-                <li>Data model and object relationships: lookup vs master-detail, Account/Contact model, and schema design.</li>
-                <li>Security model: profiles, permission sets, roles, sharing rules, and record visibility.</li>
-                <li>Declarative automation: Flow, validation rules, approval processes, page layouts, and compact layouts.</li>
-                <li>Development basics: LWC component structure, Apex governor limits, transaction control, and integration patterns.</li>
+                <li><strong>Step 1:</strong> Learn Sales Cloud and Service Cloud first to understand how Salesforce solves business problems.</li>
+                <li><strong>Step 2:</strong> Study LWC, Apex, Flow, and Integration to build real applications.</li>
+                <li><strong>Step 3:</strong> Practice interview questions and scenario answers in the interview hub.</li>
             </ul>
         </div>
+
         <div class="question-banner" aria-live="polite">
             <div class="question-text" id="questionText">Loading your first question...</div>
             <div class="answer-text" id="answerText">Answer: think through the approach, then explain the implementation path.</div>
@@ -463,107 +558,131 @@
                 <button id="toggleQuestions" type="button">Pause Questions · 60s</button>
             </div>
         </div>
-
     </header>
 
-    <main class="topics">
-        <a href="sales-cloud.html" class="topic-card" style="--card-accent: #22c55e;">
-            <div class="icon">&#x1F4B8;</div>
-            <div>
-                <h2>Sales Cloud</h2>
-                <p>Learn opportunity management, product pricing, lead conversion, and forecast operations.</p>
-                <div class="meta">
-                    <span>&#x1F4C8; Sales Process</span>
-                    <span>&#x1F4B0; Revenue</span>
+    <main class="page-sections">
+        <section class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Cloud Foundations</h2>
+                    <p>Build your platform understanding with Salesforce Sales Cloud and Service Cloud before customizing or coding.</p>
                 </div>
             </div>
-        </a>
+            <div class="section-grid">
+                <a href="sales-cloud.html" class="topic-card" style="--card-accent: #22c55e;">
+                    <div class="icon">&#x1F4B8;</div>
+                    <div>
+                        <h2>Sales Cloud</h2>
+                        <p>Learn opportunity management, product pricing, lead conversion, and revenue forecasting.</p>
+                        <div class="meta">
+                            <span>&#x1F4C8; Sales Process</span>
+                            <span>&#x1F4B0; Revenue</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="service-cloud.html" class="topic-card" style="--card-accent: #38bdf8;">
+                    <div class="icon">&#x1F527;</div>
+                    <div>
+                        <h2>Service Cloud</h2>
+                        <p>Learn case lifecycle, support console, knowledge management, and Omni-Channel routing.</p>
+                        <div class="meta">
+                            <span>&#x1F4A1; Support Flow</span>
+                            <span>&#x1F4AC; Agent Tools</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-        <a href="service-cloud.html" class="topic-card" style="--card-accent: #38bdf8;">
-            <div class="icon">&#x1F527;</div>
-            <div>
-                <h2>Service Cloud</h2>
-                <p>Learn case lifecycle, console productivity, knowledge management, and Omni-Channel routing.</p>
-                <div class="meta">
-                    <span>&#x1F4A1; Support Flow</span>
-                    <span>&#x1F4AC; Agent Tools</span>
+        <section class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Developer Skills</h2>
+                    <p>Master the core Salesforce development stack: LWC, Apex, Flow, Integration, and Visualforce.</p>
                 </div>
             </div>
-        </a>
+            <div class="section-grid">
+                <a href="lwc.html#foundations" class="topic-card" style="--card-accent: #58a6ff;">
+                    <div class="icon">&#x26A1;</div>
+                    <div>
+                        <h2>Lightning Web Components</h2>
+                        <p>Begin with LWC fundamentals, then progress through component architecture, reactivity, communication, and advanced patterns.</p>
+                        <div class="meta">
+                            <span>📘 Beginner</span>
+                            <span>&#x1F4CA; 62 slides</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="apex.html" class="topic-card" style="--card-accent: #f0883e;">
+                    <div class="icon">&#x2615;</div>
+                    <div>
+                        <h2>APEX</h2>
+                        <p>Learn classes, triggers, SOQL/DML, governor limits, asynchronous patterns, testing, and modern Apex design.</p>
+                        <div class="meta">
+                            <span>&#x1F4CA; 14 slides</span>
+                            <span>&#x1F525; Core skill</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="flow.html" class="topic-card" style="--card-accent: #bc8cff;">
+                    <div class="icon">&#x1F504;</div>
+                    <div>
+                        <h2>Salesforce Flow</h2>
+                        <p>Screen Flows, Record-Triggered Flows, Subflows, Decision Elements, and best practices.</p>
+                        <div class="meta">
+                            <span>&#x1F4CA; 8 slides</span>
+                            <span>&#x2699;&#xFE0F; Declarative</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="section-grid">
+                <a href="visualforce.html" class="topic-card" style="--card-accent: #7ee787;">
+                    <div class="icon">&#x1F4C4;</div>
+                    <div>
+                        <h2>Visualforce</h2>
+                        <p>Study page architecture, controllers, component communication, view state, and migration strategies to LWC.</p>
+                        <div class="meta">
+                            <span>&#x1F4CA; 5 slides</span>
+                            <span>&#x1F504; Legacy</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="integration.html" class="topic-card" style="--card-accent: #da3633;">
+                    <div class="icon">&#x1F517;</div>
+                    <div>
+                        <h2>Integration</h2>
+                        <p>Explore REST/SOAP APIs, Platform Events, Pub/Sub, Named Credentials, and callout patterns.</p>
+                        <div class="meta">
+                            <span>&#x1F4CA; 8 slides</span>
+                            <span>&#x1F310; Enterprise</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-        <a href="lwc.html#foundations" class="topic-card" style="--card-accent: #58a6ff;">
-            <div class="icon">&#x26A1;</div>
-            <div>
-                <h2>Learn LWC from the Basics</h2>
-                <p>Begin with LWC fundamentals, then progress through component architecture, reactivity, decorators, communication, and advanced Salesforce patterns.</p>
-                <div class="meta">
-                    <span>📘 beginner</span>
-                    <span>⚡ essential</span>
-                    <span>&#x1F4CA; 62 slides</span>
-                    <span>&#x2753; 90+ Q&amp;A</span>
+        <section class="page-section">
+            <div class="section-header">
+                <div>
+                    <h2>Interview Preparation</h2>
+                    <p>One place to choose the interview path you need: mock questions, senior scenarios, TCS experience, or prep templates.</p>
                 </div>
             </div>
-        </a>
-        <a href="apex.html" class="topic-card" style="--card-accent: #f0883e;">
-            <div class="icon">&#x2615;</div>
-            <div>
-                <h2>APEX</h2>
-                <p>Classes, triggers, SOQL/DML, governor limits, async patterns, testing, and modern Apex design.</p>
-                <div class="meta">
-                    <span>&#x1F4CA; 14 slides</span>
-                    <span>&#x1F525; Core skill</span>
-                </div>
+            <div class="section-grid">
+                <a href="interview-prep.html" class="topic-card" style="--card-accent: #f0883e;">
+                    <div class="icon">&#x1F3A4;</div>
+                    <div>
+                        <h2>Interview Hub</h2>
+                        <p>Open the interview menu for targeted practice and answer frameworks, without searching through pages.</p>
+                        <div class="meta">
+                            <span>&#x1F4DA; Hub</span>
+                            <span>&#x1F4AC; Prep</span>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
-
-        <a href="flow.html" class="topic-card" style="--card-accent: #bc8cff;">
-            <div class="icon">&#x1F504;</div>
-            <div>
-                <h2>Salesforce Flow</h2>
-                <p>Screen Flows, Record-Triggered Flows, Subflows, Decision Elements, Error Handling, and best practices.</p>
-                <div class="meta">
-                    <span>&#x1F4CA; 8 slides</span>
-                    <span>&#x2699;&#xFE0F; Declarative</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="visualforce.html" class="topic-card" style="--card-accent: #7ee787;">
-            <div class="icon">&#x1F4C4;</div>
-            <div>
-                <h2>Visualforce</h2>
-                <p>Page architecture, controllers, component communication, view state, and migration strategies to LWC.</p>
-                <div class="meta">
-                    <span>&#x1F4CA; 5 slides</span>
-                    <span>&#x1F504; Legacy</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="integration.html" class="topic-card" style="--card-accent: #da3633;">
-            <div class="icon">&#x1F517;</div>
-            <div>
-                <h2>Integration</h2>
-                <p>REST/SOAP APIs, Platform Events, Pub/Sub API (gRPC), Named Credentials, callout patterns, and best practices.</p>
-                <div class="meta">
-                    <span>&#x1F4CA; 8 slides</span>
-                    <span>&#x1F310; Enterprise</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="interview-prep.html" class="topic-card" style="--card-accent: #f0883e; grid-column: 1 / -1;">
-            <div class="icon">&#x1F3A4;</div>
-            <div>
-                <h2>Interview Preparation</h2>
-                <p>Open the interview hub for Mock, Senior, TCS, and structured prep guide cards.</p>
-                <div class="meta">
-                    <span>&#x1F4DA; Interview Menu</span>
-                    <span>&#x1F4AB; Preparation</span>
-                    <span>&#x1F4AC; Answer Crafting</span>
-                </div>
-            </div>
-        </a>
+        </section>
     </main>
     <script>
         const interviewQuestions = [
