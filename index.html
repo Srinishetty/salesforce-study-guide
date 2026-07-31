@@ -264,6 +264,36 @@
         .topic-card .meta span {
             display: flex; align-items: center; gap: 4px;
         }
+        .topic-card.interview-group .interview-subcards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .sub-topic-card {
+            display: block;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .sub-topic-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+        .sub-topic-card h3 {
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        .sub-topic-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
 
         /* Theme toggle */
         .theme-toggle {
@@ -347,6 +377,7 @@
         <div class="question-banner" aria-live="polite">
             <h2>Live Salesforce Questions</h2>
             <div class="question-text" id="questionText">Loading your first question...</div>
+            <div class="answer-text" id="answerText">Answer: think through the approach, then explain the implementation path.</div>
             <div class="question-controls">
                 <button id="modeInterview" type="button" class="active">Interview Questions</button>
                 <button id="modeProject" type="button">Project Questions</button>
@@ -440,64 +471,33 @@
             </div>
         </div>
 
-        <a href="mock-interview.html" class="topic-card" style="--card-accent: #f0883e; grid-column: 1 / -1;">
+        <div class="topic-card interview-group" style="--card-accent: #f0883e; grid-column: 1 / -1;">
             <div class="icon">&#x1F3A4;</div>
             <div>
-                <h2>&#x1F525; Mock Interview (Beginner)</h2>
-                <p>Practice with 16 real Salesforce developer interview questions. Self-rate your answers, track your score, and identify weak areas.</p>
-                <div class="meta">
-                    <span>&#x2753; 16 questions</span>
-                    <span>&#x1F3AF; All topics</span>
-                    <span>&#x1F4CA; Score tracking</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="senior-interview.html" class="topic-card" style="--card-accent: #da3633; grid-column: 1 / -1;">
-            <div class="icon">&#x1F525;</div>
-            <div>
-                <h2>&#x1F3AF; Senior Interview (5 YOE)</h2>
-                <p>4-round interview simulation: Technical Deep Dive, System Design, Scenario Problem-Solving, and Leadership. Timed. With follow-up questions.</p>
-                <div class="meta">
-                    <span>&#x23F1; 45 min</span>
-                    <span>&#x2753; 14 questions</span>
-                    <span>&#x1F4AA; Senior level</span>
-                    <span>&#x1F504; 4 rounds</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="interview-experience.html" class="topic-card" style="--card-accent: #39c5cf;">
-            <div class="icon">&#x1F4BC;</div>
-            <div>
                 <h2>Interview Preparation</h2>
-                <p>Prepare with curated scripts, answer structure, and technical interview strategies for Salesforce roles.</p>
-                <div class="meta">
-                    <span>&#x1F4DD; Answer Templates</span>
-                    <span>&#x1F4AC; Practical Scripts</span>
+                <div class="interview-subcards">
+                    <a href="mock-interview.html" class="sub-topic-card">
+                        <h3>Mock Interview</h3>
+                        <p>16 beginner questions with score tracking and self-rating.</p>
+                    </a>
+                    <a href="senior-interview.html" class="sub-topic-card">
+                        <h3>Senior Interview (5 YOE)</h3>
+                        <p>4-round simulation with technical, design, scenario, and leadership questions.</p>
+                    </a>
+                    <a href="interview-experience.html" class="sub-topic-card">
+                        <h3>Interview Prep Guide</h3>
+                        <p>Answer templates, structured responses, and Salesforce interview guidance.</p>
+                    </a>
+                    <a href="interview-experience.html" class="sub-topic-card">
+                        <h3>TCS Interview Experience</h3>
+                        <p>Review scripted responses and real interview scenarios from the TCS Salesforce track.</p>
+                    </a>
                 </div>
             </div>
-        </a>
-                          
+        </div>
     </main>
-
-    <footer class="footer">
-        <p>Salesforce Developer Study Guide &mdash; Built for mobile &amp; desktop &mdash; 2024-2026 Features</p>
-    </footer>
-
     <script>
         const interviewQuestions = [
-            'What is the difference between Lightning Web Components and Aura components?',
-            'How does the @api decorator work in LWC?',
-            'When would you use @wire versus imperative Apex calls?',
-            'What is the Shadow DOM and why does LWC use it?',
-            'How do you pass data from a parent component to a child component?',
-            'What is a custom event in LWC and how do you fire one?',
-            'How do you handle styling in LWC and why is it scoped?',
-            'What is Lightning Data Service and when should you use it?',
-            'How does the connectedCallback lifecycle hook work?',
-            'What is refreshApex used for in LWC?',
-            'How do you build a reusable card component in LWC?',
             'When should you use lightning-record-form instead of lightning-record-edit-form?',
             'How do you debug JavaScript errors in an LWC component?',
             'What are the common performance issues in LWC and how can you avoid them?',
