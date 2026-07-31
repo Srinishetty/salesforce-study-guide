@@ -212,6 +212,13 @@
         .topic-card .action-btn.secondary:hover {
             background: rgba(88,166,255,0.18);
         }
+        .topic-card.coming-soon {
+            opacity: 0.84;
+            cursor: default;
+        }
+        .topic-card.coming-soon .meta span {
+            background: rgba(248, 136, 62, 0.12);
+        }
         .topic-card::before {
             content: '';
             position: absolute;
@@ -411,6 +418,28 @@
             </div>
         </a>
 
+        <div class="topic-card coming-soon" style="--card-accent: #22c55e;">
+            <div class="icon">&#x1F4B8;</div>
+            <div>
+                <h2>Sales Cloud</h2>
+                <p>Coming soon: Opportunity management, lead conversion, forecasting, and sales automation best practices.</p>
+                <div class="meta">
+                    <span>&#x1F6A7; Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-card coming-soon" style="--card-accent: #38bdf8;">
+            <div class="icon">&#x1F527;</div>
+            <div>
+                <h2>Service Cloud</h2>
+                <p>Coming soon: Case management, support automation, knowledge base, and service console guidance.</p>
+                <div class="meta">
+                    <span>&#x1F6A7; Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
         <a href="mock-interview.html" class="topic-card" style="--card-accent: #f0883e; grid-column: 1 / -1;">
             <div class="icon">&#x1F3A4;</div>
             <div>
@@ -441,11 +470,11 @@
         <a href="interview-experience.html" class="topic-card" style="--card-accent: #39c5cf;">
             <div class="icon">&#x1F4BC;</div>
             <div>
-                <h2>TCS Interview Experience</h2>
-                <p>Curated list of actual MR scripts, technical scenarios, triggers, and LWC questions tailored to a 5 YOE profile.</p>
+                <h2>Interview Preparation</h2>
+                <p>Prepare with curated scripts, answer structure, and technical interview strategies for Salesforce roles.</p>
                 <div class="meta">
-                    <span>&#x1F4DD; Real Scenarios</span>
-                    <span>&#x1F4AC; Scripted Answers</span>
+                    <span>&#x1F4DD; Answer Templates</span>
+                    <span>&#x1F4AC; Practical Scripts</span>
                 </div>
             </div>
         </a>
