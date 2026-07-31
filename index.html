@@ -116,6 +116,38 @@
             padding: 6px 12px;
             display: inline-flex;
         }
+        .learn-before {
+            max-width: 780px;
+            margin: 24px auto 0;
+            padding: 22px 24px;
+            border-radius: 18px;
+            border: 1px solid rgba(88,166,255,0.18);
+            background: rgba(9,13,26,0.92);
+            box-shadow: 0 18px 36px rgba(0,0,0,0.18);
+            color: #c9d1d9;
+            text-align: left;
+        }
+        .learn-before h2 {
+            margin-bottom: 10px;
+            color: #58a6ff;
+            font-size: 1.05em;
+        }
+        .learn-before p {
+            margin-bottom: 14px;
+            color: #8b949e;
+            line-height: 1.6;
+        }
+        .learn-before ul {
+            display: grid;
+            gap: 10px;
+            padding-left: 18px;
+            list-style: disc;
+            color: #c9d1d9;
+        }
+        .learn-before li {
+            margin-left: 4px;
+            line-height: 1.5;
+        }
         .question-text {
             font-size: 1.05em;
             font-weight: 600;
@@ -374,8 +406,19 @@
             <span>Advantages</span>
             <span>Drawbacks</span>
         </div>
+        <div class="learn-before">
+            <h2>Learn before you start development</h2>
+            <p>Before writing code, make sure you understand the platform foundation, security model, declarative automation, and Salesforce data architecture.</p>
+            <ul>
+                <li><strong>Sales Cloud:</strong> Leads, Accounts, Opportunities, Products, Price Books, Sales processes and opportunity stages.</li>
+                <li><strong>Service Cloud:</strong> Cases, Service Console, Knowledge, Entitlements, Omni-Channel routing, and support processes.</li>
+                <li>Data model and object relationships: lookup vs master-detail, Account/Contact model, and schema design.</li>
+                <li>Security model: profiles, permission sets, roles, sharing rules, and record visibility.</li>
+                <li>Declarative automation: Flow, validation rules, approval processes, page layouts, and compact layouts.</li>
+                <li>Development basics: LWC component structure, Apex governor limits, transaction control, and integration patterns.</li>
+            </ul>
+        </div>
         <div class="question-banner" aria-live="polite">
-            <h2>Live Salesforce Questions</h2>
             <div class="question-text" id="questionText">Loading your first question...</div>
             <div class="answer-text" id="answerText">Answer: think through the approach, then explain the implementation path.</div>
             <div class="question-controls">
@@ -388,6 +431,28 @@
     </header>
 
     <main class="topics">
+        <div class="topic-card coming-soon" style="--card-accent: #22c55e;">
+            <div class="icon">&#x1F4B8;</div>
+            <div>
+                <h2>Sales Cloud</h2>
+                <p>Coming soon: Opportunity management, lead conversion, forecasting, and sales automation best practices.</p>
+                <div class="meta">
+                    <span>&#x1F6A7; Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-card coming-soon" style="--card-accent: #38bdf8;">
+            <div class="icon">&#x1F527;</div>
+            <div>
+                <h2>Service Cloud</h2>
+                <p>Coming soon: Case management, support automation, knowledge base, and service console guidance.</p>
+                <div class="meta">
+                    <span>&#x1F6A7; Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
         <a href="lwc.html#foundations" class="topic-card" style="--card-accent: #58a6ff;">
             <div class="icon">&#x26A1;</div>
             <div>
@@ -448,28 +513,6 @@
                 </div>
             </div>
         </a>
-
-        <div class="topic-card coming-soon" style="--card-accent: #22c55e;">
-            <div class="icon">&#x1F4B8;</div>
-            <div>
-                <h2>Sales Cloud</h2>
-                <p>Coming soon: Opportunity management, lead conversion, forecasting, and sales automation best practices.</p>
-                <div class="meta">
-                    <span>&#x1F6A7; Coming Soon</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="topic-card coming-soon" style="--card-accent: #38bdf8;">
-            <div class="icon">&#x1F527;</div>
-            <div>
-                <h2>Service Cloud</h2>
-                <p>Coming soon: Case management, support automation, knowledge base, and service console guidance.</p>
-                <div class="meta">
-                    <span>&#x1F6A7; Coming Soon</span>
-                </div>
-            </div>
-        </div>
 
         <div class="topic-card interview-group" style="--card-accent: #f0883e; grid-column: 1 / -1;">
             <div class="icon">&#x1F3A4;</div>
