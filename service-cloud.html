@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Service Cloud - Salesforce Study Guide</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .diagram-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-top: 20px; }
+        .diagram-card svg { width: 100%; height: auto; display: block; }
+        .diagram-title { margin-bottom: 12px; color: var(--text-secondary); font-size: 0.95em; }
+    </style>
+</head>
+<body data-page="service-cloud">
+    <div class="mobile-top-bar"></div>
+    <div class="progress" id="progress"></div>
+    <div class="slide-num" id="slideNum"></div>
+    <div class="keys-hint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or swipe on mobile</div>
+
+    <a href="index.html" class="home-btn" title="Back to Topics">&#x1F3E0;</a>
+
+    <div class="toolbar" style="left: 70px;">
+        <button onclick="changeFontSize(-1)" title="Decrease font" aria-label="Decrease font">A-</button>
+        <button onclick="changeFontSize(1)" title="Increase font" aria-label="Increase font">A+</button>
+        <span class="sep"></span>
+        <button onclick="toggleTheme()" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">&#x2600;&#xFE0F;</button>
+    </div>
+
+    <div class="deck" id="deck">
+        <div class="slide" data-section="service-cloud">
+            <div class="center">
+                <h1 class="fade-in">Service Cloud</h1>
+                <p class="fade-in delay-1" style="font-size: 1.4em; color: #8b949e; margin: 20px 0;">Customer support automation for cases, knowledge, and service operations.</p>
+                <div class="fade-in delay-2" style="margin-top: 30px;">
+                    <span class="badge purple" onclick="window.SlideEngine.goToSlide(1)" style="cursor:pointer;">Cases</span>
+                    <span class="badge blue" onclick="window.SlideEngine.goToSlide(2)" style="cursor:pointer;">Service Console</span>
+                    <span class="badge orange" onclick="window.SlideEngine.goToSlide(3)" style="cursor:pointer;">Knowledge</span>
+                    <span class="badge red" onclick="window.SlideEngine.goToSlide(4)" style="cursor:pointer;">Omni-Channel</span>
+                </div>
+                <div class="note-box fade-in delay-3">
+                    <strong>How to use this page:</strong> learn Service Cloud concepts before building support processes or integrations.
+                </div>
+                <div class="diagram-card fade-in delay-4">
+                    <div class="diagram-title">Service Cloud process overview</div>
+                    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L10,5 L0,10 Z" fill="#38bdf8" />
+                            </marker>
+                        </defs>
+                        <rect x="40" y="34" width="180" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="130" y="60" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Customer</text>
+                        <rect x="280" y="34" width="180" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="370" y="60" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Case</text>
+                        <rect x="520" y="14" width="180" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="610" y="40" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Agent / Queue</text>
+                        <path d="M220,69 L280,69" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)" />
+                        <path d="M460,69 L520,69" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)" />
+                        <rect x="280" y="124" width="180" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="370" y="150" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Knowledge</text>
+                        <path d="M370,104 L370,124" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)" />
+                        <rect x="520" y="124" width="180" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="610" y="150" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Omni-Channel</text>
+                        <path d="M520,104 L520,124" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)" />
+                        <path d="M370,164 L520,164" stroke="#38bdf8" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow2)" />
+                    </svg>
+                </div>
+                <p class="fade-in delay-3" style="margin-top: 20px; color: #484f58;">Focus on case lifecycle, queue routing, knowledge search, and service metrics.</p>
+            </div>
+        </div>
+
+        <div class="slide" data-section="service-cloud">
+            <h2>Case Management Essentials</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Cases track customer issues across support teams. Understand case statuses, priorities, record types, and queues.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Case Object</h3>
+                        <ul>
+                            <li><strong>Subject / Description</strong> capture the issue.
+                            <li><strong>Status</strong> tracks stage: New, Working, Escalated, Closed.
+                            <li><strong>Priority</strong> indicates urgency.</li>
+                            <li><strong>Case Owner</strong> handles assignment and routing.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Support Processes</h3>
+                        <ul>
+                            <li>Case assignment rules route cases to queues or users.</li>
+                            <li>Auto-response rules send immediate email replies.</li>
+                            <li>Escalation rules create tasks or alerts for overdue cases.</li>
+                            <li>Case teams give shared access to multiple agents.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-1">
+                        <h3>Developer Notes</h3>
+                        <ul>
+                            <li>Use record-triggered flows for simple case automation.</li>
+                            <li>Use Apex when logic spans multiple objects or external systems.</li>
+                            <li>Respect case assignment and sharing model in automation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="service-cloud">
+            <h2>Service Console & Agent Productivity</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">The console is the main workspace for support agents. Know the key components and how they speed case work.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Console Features</h3>
+                        <ul>
+                            <li>Tabbed workspaces let agents switch cases quickly.</li>
+                            <li>Utility bar provides quick access to common tools.</li>
+                            <li>Related records and quick actions appear on the same page.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Useful Elements</h3>
+                        <ul>
+                            <li>Case Feed shows history, emails, and chatter updates.</li>
+                            <li>Macros automate repetitive tasks.</li>
+                            <li>Quick Text inserts pre-approved replies.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Implementation Tips</h3>
+                        <ul>
+                            <li>Use Lightning App Builder to customize the console layout.</li>
+                            <li>Compact layouts improve data visibility on record headers.</li>
+                            <li>Use global actions for high-value support tools (e.g., create case).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="service-cloud">
+            <h2>Knowledge Management</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Knowledge articles reduce case volume by giving agents and customers the right answers.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Article Basics</h3>
+                        <ul>
+                            <li>Articles are grouped by data category and article type.</li>
+                            <li>Use record types to define different article structures.</li>
+                            <li>Publish articles in draft, review, or published status.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Search & Access</h3>
+                        <ul>
+                            <li>Knowledge search uses keywords and categories.</li>
+                            <li>Data categories control article visibility by profile.</li>
+                            <li>Article actions include translate, archive, and publish.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Developer Notes</h3>
+                        <ul>
+                            <li>Use article types for structured knowledge content.</li>
+                            <li>Keep article versions clean and archive outdated content.</li>
+                            <li>Use Experience Cloud for customer-facing knowledge portals.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="service-cloud">
+            <h2>Omni-Channel & Routing</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Omni-Channel routes work items to available agents. It is the backbone of modern service operations.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Omni-Channel Basics</h3>
+                        <ul>
+                            <li>Work items include cases, chats, leads, and custom objects.</li>
+                            <li>Presence statuses indicate agent availability.</li>
+                            <li>Routing configurations determine who receives work.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Queue & Skill-Based Routing</h3>
+                        <ul>
+                            <li>Queues hold work items until an agent accepts them.</li>
+                            <li>Skills let you route to agents with special expertise.</li>
+                            <li>Capacity models control how many items an agent can handle.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Service Cloud Best Practices</h3>
+                        <ul>
+                            <li>Start with simple queue-based routing, then refine with skills.</li>
+                            <li>Use service goals for response time and remaining work.
+                            </li>
+                            <li>Test Omni-Channel in a sandbox before production rollout.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" title="Table of Contents">&#x2630;</button>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <input type="text" class="slide-menu-search" id="menuSearch" placeholder="Search slides..." oninput="filterMenu(this.value)">
+        <div id="menuItems"></div>
+    </div>
+
+    <div class="nav">
+        <button id="prevBtn" onclick="prevSlide()" aria-label="Previous">&larr; Prev</button>
+        <button id="nextBtn" onclick="nextSlide()" aria-label="Next">Next &rarr;</button>
+    </div>
+
+    <script src="slides.js"></script>
+</body>
+</html>

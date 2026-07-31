@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Sales Cloud - Salesforce Study Guide</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .diagram-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-top: 20px; }
+        .diagram-card svg { width: 100%; height: auto; display: block; }
+        .diagram-title { margin-bottom: 12px; color: var(--text-secondary); font-size: 0.95em; }
+    </style>
+</head>
+<body data-page="sales-cloud">
+    <div class="mobile-top-bar"></div>
+    <div class="progress" id="progress"></div>
+    <div class="slide-num" id="slideNum"></div>
+    <div class="keys-hint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> or swipe on mobile</div>
+
+    <a href="index.html" class="home-btn" title="Back to Topics">&#x1F3E0;</a>
+
+    <div class="toolbar" style="left: 70px;">
+        <button onclick="changeFontSize(-1)" title="Decrease font" aria-label="Decrease font">A-</button>
+        <button onclick="changeFontSize(1)" title="Increase font" aria-label="Increase font">A+</button>
+        <span class="sep"></span>
+        <button onclick="toggleTheme()" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">&#x2600;&#xFE0F;</button>
+    </div>
+
+    <div class="deck" id="deck">
+        <div class="slide" data-section="sales-cloud">
+            <div class="center">
+                <h1 class="fade-in">Sales Cloud</h1>
+                <p class="fade-in delay-1" style="font-size: 1.4em; color: #8b949e; margin: 20px 0;">Sales automation for lead management, opportunities, and revenue forecasting.</p>
+                <div class="fade-in delay-2" style="margin-top: 30px;">
+                    <span class="badge purple" onclick="window.SlideEngine.goToSlide(1)" style="cursor:pointer;">Objects</span>
+                    <span class="badge blue" onclick="window.SlideEngine.goToSlide(2)" style="cursor:pointer;">Lead Conversion</span>
+                    <span class="badge orange" onclick="window.SlideEngine.goToSlide(3)" style="cursor:pointer;">Products</span>
+                    <span class="badge red" onclick="window.SlideEngine.goToSlide(4)" style="cursor:pointer;">Forecasting</span>
+                </div>
+                <div class="note-box fade-in delay-3">
+                    <strong>How to use this page:</strong> each slide focuses on a Sales Cloud concept you should know before starting development.
+                </div>
+                <div class="diagram-card fade-in delay-4">
+                    <div class="diagram-title">Sales Cloud overview</div>
+                    <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L10,5 L0,10 Z" fill="#58a6ff" />
+                            </marker>
+                        </defs>
+                        <rect x="36" y="34" width="170" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="120" y="60" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Lead</text>
+                        <rect x="286" y="14" width="170" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="371" y="40" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Account</text>
+                        <rect x="286" y="94" width="170" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="371" y="120" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Contact</text>
+                        <rect x="536" y="54" width="170" height="70" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="621" y="80" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Opportunity</text>
+                        <path d="M206,69 L286,69" stroke="#58a6ff" stroke-width="3" marker-end="url(#arrow)" />
+                        <path d="M456,84 L536,84" stroke="#58a6ff" stroke-width="3" marker-end="url(#arrow)" />
+                        <path d="M206,69 L456,69" stroke="#58a6ff" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)" />
+                        <rect x="286" y="184" width="170" height="60" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="371" y="210" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Price Book</text>
+                        <path d="M456,214 L536,214" stroke="#58a6ff" stroke-width="3" marker-end="url(#arrow)" />
+                        <rect x="536" y="184" width="170" height="60" rx="14" fill="#0f172a" stroke="#445569"/>
+                        <text x="621" y="210" fill="#c9d1d9" font-size="14" font-weight="700" text-anchor="middle">Opportunity Line Item</text>
+                    </svg>
+                </div>
+                <p class="fade-in delay-3" style="margin-top: 20px; color: #484f58;">Start with the data model, then move to process flow, pricing, and forecasting.</p>
+            </div>
+        </div>
+
+        <div class="slide" data-section="sales-cloud">
+            <h2>Sales Cloud Data Model</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">The core Sales Cloud objects model the revenue lifecycle. Understanding these relationships is essential for any Salesforce developer.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Core Objects</h3>
+                        <ul>
+                            <li><strong>Lead</strong> — prospect before qualification.</li>
+                            <li><strong>Account</strong> — company or partner record.</li>
+                            <li><strong>Contact</strong> — person linked to an account.</li>
+                            <li><strong>Opportunity</strong> — potential revenue deal.</li>
+                            <li><strong>Product</strong> — catalog item sold through Opportunity.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Relationships</h3>
+                        <table>
+                            <tr><th>Object</th><th>Relationship</th></tr>
+                            <tr><td>Contact</td><td>Lookup to Account</td></tr>
+                            <tr><td>Opportunity</td><td>Lookup to Account</td></tr>
+                            <tr><td>OpportunityLineItem</td><td>Master-detail to Opportunity, lookup to Product</td></tr>
+                            <tr><td>Quote</td><td>Lookup to Opportunity</td></tr>
+                            <tr><td>PricebookEntry</td><td>Lookup to Price Book and Product</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-1">
+                        <h3>Sales Cloud Rules</h3>
+                        <ul>
+                            <li>Leads are converted into Account/Contact/Opportunity.</li>
+                            <li>Opportunities use Stage and Probability to track progress.</li>
+                            <li>Products are attached to Opportunities via OpportunityLineItems.</li>
+                            <li>Price Books manage standard and custom pricing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="sales-cloud">
+            <h2>Lead Conversion Flow</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Lead conversion is the gateway from marketing to sales. Know which fields carry over and what can be automatically created.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Convert Lead</h3>
+                        <ul>
+                            <li>Create Account and Contact from Lead.</li>
+                            <li>Create Opportunity optionally.</li>
+                            <li>Map Lead fields to Account/Contact/Opportunity fields.</li>
+                            <li>Retain history via Lead History and Activities.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Developer Notes</h3>
+                        <ul>
+                            <li>Use <code>Database.LeadConvert</code> for automation.</li>
+                            <li>Custom mapping happens in Lead Field Mapping.</li>
+                            <li>Ensure required Account/Contact fields are populated.</li>
+                            <li>Converted leads become read-only.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Common Interview Points</h3>
+                        <ul>
+                            <li>Explain when to convert a lead manually vs automatically.</li>
+                            <li>Mention how lead assignment rules and queues work first.</li>
+                            <li>Note that campaign influence stays on converted account.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="sales-cloud">
+            <h2>Product, Price Book, Quote</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Sales Cloud pricing objects determine how products and discounts appear on opportunities and quotes.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Products & Price Books</h3>
+                        <ul>
+                            <li><strong>Product</strong> defines the item or service.</li>
+                            <li><strong>Price Book</strong> groups prices; standard price book is required.</li>
+                            <li><strong>PricebookEntry</strong> links a product to a price book.</li>
+                            <li>Opportunities use price book entries to create line items.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Quote Process</h3>
+                        <ul>
+                            <li>Create a quote from an opportunity.</li>
+                            <li>Sync quote line items with opportunity line items.</li>
+                            <li>Generate PDF quote documents.</li>
+                            <li>Use quote templates for consistent formatting.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Salesforce Rules</h3>
+                        <ul>
+                            <li>Opportunity line items must use the opportunity's price book.</li>
+                            <li>Products can be active/inactive; only active products are sellable.</li>
+                            <li>Quote sync overwrites opportunity data when synced.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-section="sales-cloud">
+            <h2>Forecasting and Sales Operations</h2>
+            <p style="margin-bottom:15px; color:#8b949e;">Forecasting turns opportunity data into predictable revenue. Understand the difference between collaborative and custom forecasts.</p>
+            <div class="two-col">
+                <div>
+                    <div class="card fade-in">
+                        <h3>Forecast Basics</h3>
+                        <ul>
+                            <li>Forecast categories map to opportunity stages.</li>
+                            <li>Commit types: commit, best case, pipeline.</li>
+                            <li>Forecasts can be by owner, product family, or territory.</li>
+                            <li>Forecast adjustments allow manual overrides.</li>
+                        </ul>
+                    </div>
+                    <div class="card fade-in delay-1">
+                        <h3>Sales Processes</h3>
+                        <ul>
+                            <li>Sales process defines which opportunity stages are available.</li>
+                            <li>Record types can use different page layouts per process.</li>
+                            <li>Validation rules enforce stage-specific requirements.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="card highlight fade-in delay-2">
+                        <h3>Developer checklist</h3>
+                        <ul>
+                            <li>Use <code>Apex</code> or <code>Flow</code> to update quotes when opportunity changes.</li>
+                            <li>Protect forecast fields with field level security.</li>
+                            <li>Use custom objects only when standard product/opportunity model isn't sufficient.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" title="Table of Contents">&#x2630;</button>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <input type="text" class="slide-menu-search" id="menuSearch" placeholder="Search slides..." oninput="filterMenu(this.value)">
+        <div id="menuItems"></div>
+    </div>
+
+    <div class="nav">
+        <button id="prevBtn" onclick="prevSlide()" aria-label="Previous">&larr; Prev</button>
+        <button id="nextBtn" onclick="nextSlide()" aria-label="Next">Next &rarr;</button>
+    </div>
+
+    <script src="slides.js"></script>
+</body>
+</html>

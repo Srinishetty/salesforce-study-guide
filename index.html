@@ -116,6 +116,34 @@
             padding: 6px 12px;
             display: inline-flex;
         }
+        .quick-start {
+            max-width: 760px;
+            margin: 20px auto 0;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(8,12,19,0.95);
+            border: 1px solid rgba(88,166,255,0.15);
+            color: #c9d1d9;
+            display: grid;
+            gap: 14px;
+            text-align: left;
+        }
+        .quick-start strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #e6edf3;
+        }
+        .quick-start ul {
+            display: grid;
+            gap: 10px;
+            padding-left: 20px;
+            list-style: decimal inside;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95em;
+        }
+        .quick-start li {
+            line-height: 1.6;
+        }
         .learn-before {
             max-width: 780px;
             margin: 24px auto 0;
@@ -406,6 +434,15 @@
             <span>Advantages</span>
             <span>Drawbacks</span>
         </div>
+        <div class="quick-start">
+            <strong>Recommended beginner path</strong>
+            <ul>
+                <li>Start with the platform basics and data model before writing code.</li>
+                <li>Learn Sales Cloud and Service Cloud first so you understand business workflows.</li>
+                <li>Move to LWC, Apex, and Flow only after the core Salesforce concepts are clear.</li>
+                <li>Finish with the Interview Preparation hub for real question practice.</li>
+            </ul>
+        </div>
         <div class="learn-before">
             <h2>Learn before you start development</h2>
             <p>Before writing code, make sure you understand the platform foundation, security model, declarative automation, and Salesforce data architecture.</p>
@@ -431,27 +468,29 @@
     </header>
 
     <main class="topics">
-        <div class="topic-card coming-soon" style="--card-accent: #22c55e;">
+        <a href="sales-cloud.html" class="topic-card" style="--card-accent: #22c55e;">
             <div class="icon">&#x1F4B8;</div>
             <div>
                 <h2>Sales Cloud</h2>
-                <p>Coming soon: Opportunity management, lead conversion, forecasting, and sales automation best practices.</p>
+                <p>Learn opportunity management, product pricing, lead conversion, and forecast operations.</p>
                 <div class="meta">
-                    <span>&#x1F6A7; Coming Soon</span>
+                    <span>&#x1F4C8; Sales Process</span>
+                    <span>&#x1F4B0; Revenue</span>
                 </div>
             </div>
-        </div>
+        </a>
 
-        <div class="topic-card coming-soon" style="--card-accent: #38bdf8;">
+        <a href="service-cloud.html" class="topic-card" style="--card-accent: #38bdf8;">
             <div class="icon">&#x1F527;</div>
             <div>
                 <h2>Service Cloud</h2>
-                <p>Coming soon: Case management, support automation, knowledge base, and service console guidance.</p>
+                <p>Learn case lifecycle, console productivity, knowledge management, and Omni-Channel routing.</p>
                 <div class="meta">
-                    <span>&#x1F6A7; Coming Soon</span>
+                    <span>&#x1F4A1; Support Flow</span>
+                    <span>&#x1F4AC; Agent Tools</span>
                 </div>
             </div>
-        </div>
+        </a>
 
         <a href="lwc.html#foundations" class="topic-card" style="--card-accent: #58a6ff;">
             <div class="icon">&#x26A1;</div>
@@ -514,30 +553,18 @@
             </div>
         </a>
 
-        <div class="topic-card interview-group" style="--card-accent: #f0883e; grid-column: 1 / -1;">
+        <a href="interview-prep.html" class="topic-card" style="--card-accent: #f0883e; grid-column: 1 / -1;">
             <div class="icon">&#x1F3A4;</div>
             <div>
                 <h2>Interview Preparation</h2>
-                <div class="interview-subcards">
-                    <a href="mock-interview.html" class="sub-topic-card">
-                        <h3>Mock Interview</h3>
-                        <p>16 beginner questions with score tracking and self-rating.</p>
-                    </a>
-                    <a href="senior-interview.html" class="sub-topic-card">
-                        <h3>Senior Interview (5 YOE)</h3>
-                        <p>4-round simulation with technical, design, scenario, and leadership questions.</p>
-                    </a>
-                    <a href="interview-experience.html" class="sub-topic-card">
-                        <h3>Interview Prep Guide</h3>
-                        <p>Answer templates, structured responses, and Salesforce interview guidance.</p>
-                    </a>
-                    <a href="interview-experience.html" class="sub-topic-card">
-                        <h3>TCS Interview Experience</h3>
-                        <p>Review scripted responses and real interview scenarios from the TCS Salesforce track.</p>
-                    </a>
+                <p>Open the interview hub for Mock, Senior, TCS, and structured prep guide cards.</p>
+                <div class="meta">
+                    <span>&#x1F4DA; Interview Menu</span>
+                    <span>&#x1F4AB; Preparation</span>
+                    <span>&#x1F4AC; Answer Crafting</span>
                 </div>
             </div>
-        </div>
+        </a>
     </main>
     <script>
         const interviewQuestions = [

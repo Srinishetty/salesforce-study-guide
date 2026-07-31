@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Interview Preparation Hub - Salesforce Interview Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0d1117; --bg-card: #161b22; --border: #30363d;
+            --text: #e6edf3; --text-muted: #8b949e;
+            --blue: #58a6ff; --green: #238636; --purple: #bc8cff;
+            --orange: #f0883e; --red: #da3633;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 10;
+        }
+        .topbar a, .topbar button { color: var(--text-muted); text-decoration: none; font-size: 1.2em; background: none; border: none; cursor: pointer; }
+        .topbar a:hover, .topbar button:hover { color: var(--blue); }
+        .topbar .title { font-weight: 700; color: var(--text); font-size: 0.95em; }
+        .container { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
+        .round-header { text-align: center; margin-bottom: 20px; padding: 22px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; }
+        .round-header h2 { font-size: 1.6em; margin-bottom: 10px; }
+        .round-header p { color: var(--text-muted); font-size: 1em; line-height: 1.7; max-width: 760px; margin: 0 auto; }
+        .quick-path { display: grid; gap: 16px; margin-bottom: 24px; padding: 18px 20px; border-radius: 18px; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.15); }
+        .quick-path h3 { font-size: 1.05em; margin-bottom: 10px; color: var(--text); }
+        .quick-path ol { padding-left: 20px; color: var(--text-muted); line-height: 1.75; }
+        .quick-path li { margin-bottom: 10px; }
+        .section-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+        .section-card { display: block; padding: 24px 20px; border-radius: 18px; border: 1px solid var(--border); background: var(--bg-card); color: inherit; text-decoration: none; transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease; }
+        .section-card:hover { transform: translateY(-3px); border-color: var(--blue); background: rgba(88,166,255,0.08); }
+        .section-card h3 { margin-bottom: 12px; font-size: 1.05em; }
+        .section-card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95em; }
+        .section-card .tag-row { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .section-card .tag { padding: 6px 12px; border-radius: 999px; font-size: 0.78em; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+        .note-box { margin-top: 24px; padding: 18px 20px; border-radius: 16px; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.18); color: #c9d1d9; }
+        .note-box strong { color: #e6edf3; }
+        body.light { --bg: #ffffff; --bg-card: #f6f8fa; --border: #d1d9e0; --text: #1f2328; --text-muted: #6e7781; --blue: #0550ae; --green: #1a7f37; --purple: #6639ba; --orange: #953800; }
+        body.light .topbar { background: var(--bg-card); }
+        body.light .section-card:hover { background: rgba(5,86,174,0.08); }
+        @media (max-width: 620px) {
+            .container { padding: 20px 14px 50px; }
+            .section-card { padding: 20px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="index.html" title="Home">&#x1F3E0;</a>
+        <span class="title">Interview Preparation</span>
+        <button id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+    <div class="container">
+        <div class="round-header">
+            <h2>Interview Preparation Hub</h2>
+            <p>Open the interview card view to choose your path: mock questions, senior scenarios, prep templates, or TCS-specific experience.</p>
+        </div>
+        <div class="quick-path">
+            <h3>How to use this page</h3>
+            <ol>
+                <li>If you're just starting, open <strong>Interview Prep Guide</strong> first to learn answer frameworks and common formats.</li>
+                <li>Then try <strong>Mock Interview</strong> for hands-on question drills and fast self-practice.</li>
+                <li>If you have 5+ years of experience, explore <strong>Senior Interview</strong> for deeper scenario thinking.</li>
+                <li>Use <strong>TCS Interview Experience</strong> for company-specific tips and real-world preparation notes.</li>
+            </ol>
+        </div>
+        <div class="section-cards">
+            <a href="mock-interview.html" class="section-card">
+                <h3>Mock Interview</h3>
+                <p>Practice core Salesforce developer questions with a structured self-study walkthrough.</p>
+                <div class="tag-row">
+                    <span class="tag">Beginner Friendly</span>
+                    <span class="tag">Q&A</span>
+                </div>
+            </a>
+            <a href="senior-interview.html" class="section-card">
+                <h3>Senior Interview (5+ YOE)</h3>
+                <p>Simulate senior-level rounds covering architecture, leadership, design, and complex scenario thinking.</p>
+                <div class="tag-row">
+                    <span class="tag">Senior</span>
+                    <span class="tag">Scenario</span>
+                </div>
+            </a>
+            <a href="interview-experience.html" class="section-card">
+                <h3>Interview Prep Guide</h3>
+                <p>Read structured answer templates, interview frameworks, and language for Salesforce technical discussions.</p>
+                <div class="tag-row">
+                    <span class="tag">Templates</span>
+                    <span class="tag">Tips</span>
+                </div>
+            </a>
+            <a href="interview-experience.html#tcs-experience" class="section-card">
+                <h3>TCS Interview Experience</h3>
+                <p>Review a dedicated TCS path with real interview questions, response style, and company-specific preparation notes.</p>
+                <div class="tag-row">
+                    <span class="tag">TCS</span>
+                    <span class="tag">Experience</span>
+                </div>
+            </a>
+        </div>
+        <div class="note-box">
+            <strong>Tip:</strong> Use this page when you want a clean interview menu before jumping into any individual set of questions.
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+        }
+    </script>
+</body>
+</html>
