@@ -250,16 +250,43 @@
         lastTap = now;
     });
 
+    function getInitialSlideFromHash() {
+        const hash = window.location.hash.slice(1);
+        if (!hash) return null;
+        const params = new URLSearchParams(hash.replace(/^#/, ''));
+        if (params.has('slide')) {
+            const idx = parseInt(params.get('slide'), 10);
+            return Number.isFinite(idx) ? idx : null;
+        }
+        if (params.has('section')) {
+            const section = params.get('section').toLowerCase();
+            const map = {
+                foundations: 0,
+                core: 6,
+                intermediate: 15,
+                architecture: 19,
+                advanced: 26,
+                mastery: 35,
+                qanda: 52,
+                overview: 0
+            };
+            return map[section] ?? null;
+        }
+        return null;
+    }
+
     // ===== INITIALIZE =====
     buildMenu();
     showSlide(0);
     highlightCode();
 
-    // Restore saved slide position
     const pageKey = document.body.dataset.page || 'default';
     const savedSlide = localStorage.getItem('study-slide-' + pageKey);
-    if (savedSlide && parseInt(savedSlide) < totalSlides) {
-        showSlide(parseInt(savedSlide));
+    const initialSlide = getInitialSlideFromHash();
+    if (initialSlide !== null && initialSlide >= 0 && initialSlide < totalSlides) {
+        showSlide(initialSlide);
+    } else if (savedSlide && parseInt(savedSlide, 10) < totalSlides) {
+        showSlide(parseInt(savedSlide, 10));
     }
 
     // ===== PUBLIC API =====
